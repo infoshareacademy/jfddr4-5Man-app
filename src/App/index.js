@@ -1,11 +1,7 @@
-
+import BarGraph from "../Components/BarGraph./BarGraph";
 
 const App = () => {
-    return (
-        <div>
-        hello World
-        </div>
-    )
-}
+  return <BarGraph></BarGraph>;
+};
 
-export default App
+export default App;
