@@ -1,0 +1,82 @@
+$registerMainBgc: #212121;
+$registerSecondaryBgc: #474747;
+$registerFontColor: #EEEEEE;
+$registerGoldColor: #ffd600;
+
+.registerMainDiv{
+    width:100vw;
+    height: 100vh;
+
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    background-color: $registerMainBgc;
+    color: $registerFontColor;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+
+    .registerDirectDiv{
+        width:350px;
+        height:600px;
+        margin:10px;
+
+        display:flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+
+        background-color: $registerSecondaryBgc;
+        border-radius: 20px;
+
+        .registerHeader{
+            color: $registerFontColor;
+            font-size: 36px;
+            span{
+                color: $registerGoldColor;
+                text-decoration: underline;
+            }
+        }
+
+        .registerForm{
+            display:flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+
+            .registerFormEmail, .registerFormPassword, .registerFormPasswordRepeat{
+                margin:7px;
+                color: $registerFontColor;
+            }
+
+            .registerFormButton{
+                margin:7px;
+                color: $registerFontColor;
+                font-weight: 700;
+            }
+        }
+
+        .registerGoogle{
+            padding:3px 20px;
+            border: 2px solid $registerGoldColor;
+            color: $registerGoldColor;
+        }
+    }
+
+    .goToLoginDiv{
+        width:350px;
+        height:80px;
+        margin:10px;
+
+        display:flex;
+        justify-content: center;
+        align-items: center;
+
+        background-color: $registerSecondaryBgc;
+        border-radius: 20px;
+
+        a{
+            color: $registerGoldColor;
+        }
+    }
+}
