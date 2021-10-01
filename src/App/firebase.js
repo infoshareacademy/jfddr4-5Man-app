@@ -16,11 +16,22 @@ const db = getFirestore();
 export const fetchCategories = (userName) => {
   const c = collection(db, `${userName} - categories`);
   const q = query(c, orderBy("createdAt"));
-  const array = [];
-  const querySnapshot = getDocs(q).then((response) => {
+  return getDocs(q).then((response) => {
+    const returnArray = [];
     response.forEach((doc) => {
-      array.push(doc.data());
+      returnArray.push(doc.data());
     });
+    return returnArray;
   });
-  return array;
+};
+
+export const fetchTransactions = (userName) => {
+  const c = collection(db, `${userName} - transactions`);
+  return getDocs(c).then((response) => {
+    const returnArray = [];
+    response.forEach((doc) => {
+      returnArray.push(doc.data());
+    });
+    return returnArray;
+  });
 };

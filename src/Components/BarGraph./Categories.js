@@ -2,8 +2,6 @@ import styled from "styled-components";
 import { myDatabase } from "./db";
 import { useContext } from "react";
 import { outcomeSumContext } from "./SummaryContext";
-import { UserContext } from "../UserContext";
-import { fetchCategories } from "../../App/firebase";
 
 const OneCategory = styled.div`
   display: flex;
@@ -47,8 +45,6 @@ const moneyImage = (
 
 const Categories = () => {
   const outcomeSum = useContext(outcomeSumContext);
-  const currentUser = useContext(UserContext);
-  fetchCategories(currentUser);
 
   return (
     <CategoriesWrapper>
