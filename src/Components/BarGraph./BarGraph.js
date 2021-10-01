@@ -1,12 +1,9 @@
-import { myDatabase } from "./db";
-import Category from "./Category";
+import Categories from "./Categories";
 import styled from "styled-components";
-import Bars from "./Bar";
+import Bars from "./Bars";
+import Summary from "./Summary";
 
 const Wrapper = styled.div`
-  display: flex;
-`;
-const Categories = styled.div`
   display: flex;
 `;
 
@@ -14,20 +11,10 @@ const BarGraph = () => {
   return (
     <Wrapper>
       <div>
-        <Categories>
-          {myDatabase.map((category) => {
-            return (
-              <Category
-                key={category.name.toString()}
-                name={category.name}
-                color={category.color}
-              ></Category>
-            );
-          })}
-        </Categories>
+        <Categories></Categories>
         <Bars></Bars>
       </div>
-      {/* <Summary></Summary> */}
+      <Summary></Summary>
     </Wrapper>
   );
 };
