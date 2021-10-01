@@ -45,8 +45,24 @@ $registerGoldColor: #ffd600;
             flex-direction: column;
 
             .registerFormEmail, .registerFormPassword, .registerFormPasswordRepeat{
-                margin:7px;
+                font-size: 20px;
+                width:220px;
+                padding:10px;
+                background-color: $registerSecondaryBgc;
                 color: $registerFontColor;
+                border: 2px solid $registerFontColor;
+                border-radius: 8px;
+            }
+
+            .registerFormEmail:focus, .registerFormPassword:focus, .registerFormPasswordRepeat:focus{
+                outline:none;
+                border:2px solid $registerGoldColor;
+            }
+
+            .registerParError{
+                margin: 3px 0 12px 0;
+                color: red;
+                font-size: 12px;;
             }
 
             .registerFormButton{
