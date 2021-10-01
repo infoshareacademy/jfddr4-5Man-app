@@ -1,4 +1,5 @@
-import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
+import { Account } from '../account/Account';
 import './contentMain.css'
 
 export function ContentMain() {
@@ -30,9 +31,7 @@ export function ContentMain() {
                 </section>
             </Route>
             <Route exact path='/main/account'>
-                <section className="contentMainSection">
-                    account
-                </section>
+                <Account/>
             </Route>
         </Switch>
     )
