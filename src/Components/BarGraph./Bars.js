@@ -9,39 +9,15 @@ const BarsWrapper = styled.div`
 `;
 
 const Bars = () => {
+  const days = [
+    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
+    22, 23, 24, 25, 26, 27, 28, 29, 30, 31,
+  ];
   return (
     <BarsWrapper>
-      <OneBar index={0}></OneBar>
-      <OneBar index={1}></OneBar>
-      <OneBar index={2}></OneBar>
-      <OneBar index={3}></OneBar>
-      <OneBar index={4}></OneBar>
-      <OneBar index={5}></OneBar>
-      <OneBar index={6}></OneBar>
-      <OneBar index={7}></OneBar>
-      <OneBar index={8}></OneBar>
-      <OneBar index={9}></OneBar>
-      <OneBar index={10}></OneBar>
-      <OneBar index={11}></OneBar>
-      <OneBar index={12}></OneBar>
-      <OneBar index={13}></OneBar>
-      <OneBar index={14}></OneBar>
-      <OneBar index={15}></OneBar>
-      <OneBar index={16}></OneBar>
-      <OneBar index={17}></OneBar>
-      <OneBar index={18}></OneBar>
-      <OneBar index={19}></OneBar>
-      <OneBar index={20}></OneBar>
-      <OneBar index={21}></OneBar>
-      <OneBar index={22}></OneBar>
-      <OneBar index={23}></OneBar>
-      <OneBar index={24}></OneBar>
-      <OneBar index={25}></OneBar>
-      <OneBar index={26}></OneBar>
-      <OneBar index={27}></OneBar>
-      <OneBar index={28}></OneBar>
-      <OneBar index={29}></OneBar>
-      <OneBar index={30}></OneBar>
+      {days.map((data) => {
+        return <OneBar key={data} day={data}></OneBar>;
+      })}
     </BarsWrapper>
   );
 };

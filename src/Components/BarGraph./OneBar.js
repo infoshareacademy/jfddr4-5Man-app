@@ -1,7 +1,18 @@
 import { useContext } from "react";
 import styled from "styled-components";
+import { CurrencyContext } from "../CurrencyContext";
 import { myDatabase } from "./db";
-import { maxValueContext, daysMaxValuesContext } from "./GraphContext";
+import {
+  getDailyMaxValue,
+  getMaxValue,
+  setBarHeight,
+  setBarTitle,
+  setBorder,
+  setMarginBottom,
+  setMinHeight,
+  setOrder,
+  setSegmentHeight,
+} from "./utils";
 
 const BarWrapper = styled.div`
   display: flex;
@@ -23,67 +34,31 @@ const SegmentDate = styled.div`
 `;
 
 const OneBar = (props) => {
-  const maxValue = useContext(maxValueContext);
-  const daysMaxValues = useContext(daysMaxValuesContext);
+  const currency = useContext(CurrencyContext);
+  const maxValue = getMaxValue(myDatabase);
+  const daysMaxValues = getDailyMaxValue(myDatabase);
 
   return (
     <BarWrapper
-      style={{ height: `${(daysMaxValues[props.index] / maxValue) * 100}%` }}
+      style={{ height: `${setBarHeight(daysMaxValues, props.day, maxValue)}%` }}
     >
       {myDatabase.map((data) => {
         return (
           <OneSegment
             style={{
               backgroundColor: data.color,
-              height: `${
-                data.name === "Income"
-                  ? data.dataPoints[props.index] !== undefined
-                    ? data.dataPoints[props.index].y !== 0
-                      ? 10
-                      : 0
-                    : 0
-                  : data.dataPoints.length !== 0
-                  ? (data.dataPoints[props.index] !== undefined
-                      ? data.dataPoints[props.index].y /
-                        daysMaxValues[props.index]
-                      : 0) * 100
-                  : 0
-              }%`,
-              marginBottom: `${
-                data.dataPoints[props.index] !== undefined
-                  ? data.dataPoints[props.index].y !== 0
-                    ? "3px"
-                    : 0
-                  : 0
-              }`,
-              minHeight: `${
-                data.dataPoints[props.index] !== undefined
-                  ? data.dataPoints[props.index].y !== 0
-                    ? "7.5px"
-                    : 0
-                  : 0
-              }`,
-              order: `${data.name === "Income" ? 98 : props.index}`,
-              border: `${
-                data.name === "Income"
-                  ? data.dataPoints[props.index] !== undefined
-                    ? data.dataPoints[props.index].y !== 0
-                      ? "3px dashed darkred"
-                      : 0
-                    : 0
-                  : 0
-              }`,
+              height: `${setSegmentHeight(data, props.day, daysMaxValues)}%`,
+              marginBottom: setMarginBottom(data, props.day),
+              minHeight: setMinHeight(data, props.day),
+              order: setOrder(data, props.day),
+              border: setBorder(data, props.day),
             }}
             key={data.name.toString()}
-            title={
-              data.dataPoints[props.index] !== undefined
-                ? `${data.dataPoints[props.index].y} PLN`
-                : ""
-            }
+            title={`${setBarTitle(data, props.day)} ${currency}`}
           ></OneSegment>
         );
       })}
-      <SegmentDate>{props.index + 1}</SegmentDate>
+      <SegmentDate>{props.day}</SegmentDate>
     </BarWrapper>
   );
 };
