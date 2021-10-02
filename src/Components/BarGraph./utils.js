@@ -125,7 +125,9 @@ export const setBarTitle = (dataSet, day) => {
   ) {
     return "";
   } else {
-    return dataSet.dataPoints.find((dataPoint) => dataPoint.x === day).y;
+    return dataSet.dataPoints
+      .find((dataPoint) => dataPoint.x === day)
+      .y.toFixed(2);
   }
 };
 
@@ -206,7 +208,8 @@ export const setCategoryTitle = (dataSet) => {
   } else {
     return dataSet.dataPoints
       .map((data) => data.y)
-      .reduce((data1, data2) => data1 + data2);
+      .reduce((data1, data2) => data1 + data2)
+      .toFixed(2);
   }
 };
 
