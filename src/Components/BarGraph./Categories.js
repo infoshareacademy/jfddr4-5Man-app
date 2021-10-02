@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import { myDatabase } from "./db";
 import { useContext } from "react";
-import { outcomeSumContext } from "./SummaryContext";
+import { getOutcomeSum, setCategoryInside, setCategoryTitle } from "./utils";
+import { CurrencyContext } from "../CurrencyContext";
 
 const OneCategory = styled.div`
   display: flex;
@@ -28,7 +28,10 @@ const CategoryName = styled.p``;
 const CategoriesWrapper = styled.div`
   display: flex;
   margin-bottom: 40px;
+  height: 50px;
+  width: fit-content;
 `;
+
 const moneyImage = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -43,43 +46,22 @@ const moneyImage = (
   </svg>
 );
 
-const Categories = () => {
-  const outcomeSum = useContext(outcomeSumContext);
+const Categories = (props) => {
+  const currency = useContext(CurrencyContext);
+  const outcomeSum = getOutcomeSum(props.database);
 
   return (
     <CategoriesWrapper>
-      {myDatabase.map((category) => {
+      {props.database.map((category) => {
         return (
           <OneCategory key={category.name.toString()}>
             <CategoryColor
               style={{ backgroundColor: category.color }}
-              title={
-                category.dataPoints[0] !== undefined
-                  ? `${category.dataPoints
-                      .map((data) => {
-                        return data.y;
-                      })
-                      .reduce((data1, data2) => {
-                        return data1 + data2;
-                      })} PLN`
-                  : "0 PLN"
-              }
+              title={`${setCategoryTitle(category)} ${currency}`}
             >
               {category.name === "Income"
                 ? moneyImage
-                : `${Math.round(
-                    category.dataPoints[0] !== undefined
-                      ? (category.dataPoints
-                          .map((data) => {
-                            return data.y;
-                          })
-                          .reduce((data1, data2) => {
-                            return data1 + data2;
-                          }) /
-                          outcomeSum) *
-                          100
-                      : 0
-                  )}%`}
+                : `${setCategoryInside(category, outcomeSum)}%`}
             </CategoryColor>
             <CategoryName>{category.name}</CategoryName>
           </OneCategory>

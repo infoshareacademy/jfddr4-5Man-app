@@ -3,18 +3,20 @@ import styled from "styled-components";
 import Bars from "./Bars";
 import Summary from "./Summary";
 
-const Wrapper = styled.div`
+const Wrapper = styled.div``;
+const BarsAndSummaryWrapper = styled.div`
   display: flex;
+  width: fit-content;
 `;
 
-const BarGraph = () => {
+const BarGraph = (props) => {
   return (
     <Wrapper>
-      <div>
-        <Categories></Categories>
-        <Bars></Bars>
-      </div>
-      <Summary></Summary>
+      <Categories database={props.database}></Categories>
+      <BarsAndSummaryWrapper>
+        <Bars database={props.database}></Bars>
+        <Summary database={props.database}></Summary>
+      </BarsAndSummaryWrapper>
     </Wrapper>
   );
 };

@@ -1,7 +1,6 @@
 import { useContext } from "react";
 import styled from "styled-components";
 import { CurrencyContext } from "../CurrencyContext";
-import { myDatabase } from "./db";
 import {
   getDailyMaxValue,
   getMaxValue,
@@ -19,6 +18,7 @@ const BarWrapper = styled.div`
   flex-direction: column;
   justify-content: flex-end;
   margin-right: 15px;
+  width: 20px;
   align-items: center;
 `;
 
@@ -35,14 +35,14 @@ const SegmentDate = styled.div`
 
 const OneBar = (props) => {
   const currency = useContext(CurrencyContext);
-  const maxValue = getMaxValue(myDatabase);
-  const daysMaxValues = getDailyMaxValue(myDatabase);
+  const maxValue = getMaxValue(props.database);
+  const daysMaxValues = getDailyMaxValue(props.database);
 
   return (
     <BarWrapper
       style={{ height: `${setBarHeight(daysMaxValues, props.day, maxValue)}%` }}
     >
-      {myDatabase.map((data) => {
+      {props.database.map((data) => {
         return (
           <OneSegment
             style={{

@@ -20,20 +20,19 @@ const App = () => {
   useEffect(() => {
     fetchTransactions(currentUser).then(setTransactions);
   }, [currentUser]);
-  let x = compileDatabase(
+  const compiledDatabase = compileDatabase(
     categories,
     transactions,
     monthToDisplay,
     yearToDisplay
   );
-  console.log(x);
 
   return (
     <UserContext.Provider value={currentUser}>
       <CurrencyContext.Provider value={currentCurrency}>
         <MonthContext.Provider value={monthToDisplay}>
           <YearContext.Provider value={yearToDisplay}>
-            <BarGraph></BarGraph>
+            <BarGraph database={compiledDatabase}></BarGraph>
           </YearContext.Provider>
         </MonthContext.Provider>
       </CurrencyContext.Provider>

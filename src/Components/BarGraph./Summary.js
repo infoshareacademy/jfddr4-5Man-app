@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import styled from "styled-components";
-import { incomeSumContext, outcomeSumContext } from "./SummaryContext";
+import { CurrencyContext } from "../CurrencyContext";
+import { getIncomeSum, getOutcomeSum } from "./utils";
 
 const SummaryWrapper = styled.div`
   display: flex;
@@ -26,26 +27,27 @@ const SummaryAmount = styled.div`
 `;
 const SummaryCurrency = styled.div``;
 
-const Summary = () => {
-  const incomeSum = useContext(incomeSumContext);
-  const outcomeSum = useContext(outcomeSumContext);
+const Summary = (props) => {
+  const currency = useContext(CurrencyContext);
+  const outcomeSum = getOutcomeSum(props.database).toFixed(2);
+  const incomeSum = getIncomeSum(props.database).toFixed(2);
 
   return (
     <SummaryWrapper>
       <SummaryItem title={incomeSum}>
         <SummaryTitle>Income:</SummaryTitle>
         <SummaryAmount>{incomeSum}</SummaryAmount>
-        <SummaryCurrency> PLN</SummaryCurrency>
+        <SummaryCurrency>{currency}</SummaryCurrency>
       </SummaryItem>
       <SummaryItem title={outcomeSum}>
         <SummaryTitle>Outcome:</SummaryTitle>
         <SummaryAmount>{outcomeSum}</SummaryAmount>
-        <SummaryCurrency>PLN</SummaryCurrency>
+        <SummaryCurrency>{currency}</SummaryCurrency>
       </SummaryItem>
       <SummaryItem title={incomeSum - outcomeSum}>
         <SummaryTitle>Savings:</SummaryTitle>
-        <SummaryAmount>{incomeSum - outcomeSum}</SummaryAmount>
-        <SummaryCurrency>PLN</SummaryCurrency>
+        <SummaryAmount>{(incomeSum - outcomeSum).toFixed(2)}</SummaryAmount>
+        <SummaryCurrency>{currency}</SummaryCurrency>
       </SummaryItem>
     </SummaryWrapper>
   );
