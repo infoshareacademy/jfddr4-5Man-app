@@ -10,11 +10,12 @@ const HomeWrapper = styled.div`
 
 const HomeUpper = styled.div`
   height: 60%;
+  min-height: 608px;
   border-bottom: 1px solid #d0d0d0;
   display: flex;
   flex-direction: column;
-  align-items: stretch;
   justify-content: space-between;
+  min-width: 1375px;
 `;
 const HomeLower = styled.div`
   height: 40%;
@@ -34,7 +35,6 @@ const PanelWrapper = styled.div`
 const GraphWrapper = styled.div`
   display: flex;
   justify-content: center;
-  min-width: 1440px;
 `;
 
 export const Home = (props) => {
