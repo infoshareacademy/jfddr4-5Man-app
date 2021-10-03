@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import styled from "styled-components";
-import { CurrencyContext } from "../CurrencyContext";
+import { CurrencyContext } from "../../CurrencyContext";
 import { getIncomeSum, getOutcomeSum } from "./utils";
 
 const SummaryWrapper = styled.div`

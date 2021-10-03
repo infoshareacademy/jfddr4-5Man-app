@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { useContext } from "react";
 import { getOutcomeSum, setCategoryInside, setCategoryTitle } from "./utils";
-import { CurrencyContext } from "../CurrencyContext";
+import { CurrencyContext } from "../../CurrencyContext";
 
 const OneCategory = styled.div`
   display: flex;
