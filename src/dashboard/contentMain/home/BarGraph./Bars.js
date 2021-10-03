@@ -3,7 +3,7 @@ import OneBar from "./OneBar";
 
 const BarsWrapper = styled.div`
   display: flex;
-  height: 500px;
+  height: 425px;
   align-items: flex-end;
   margin-right: 20px;
 `;

@@ -3,7 +3,10 @@ import styled from "styled-components";
 import Bars from "./Bars";
 import Summary from "./Summary";
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+  margin: 15px;
+  width: fit-content;
+`;
 const BarsAndSummaryWrapper = styled.div`
   display: flex;
   width: fit-content;

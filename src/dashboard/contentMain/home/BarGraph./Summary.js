@@ -7,6 +7,7 @@ const SummaryWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  margin-left: 15px;
 `;
 const SummaryItem = styled.div`
   margin-bottom: 30px;

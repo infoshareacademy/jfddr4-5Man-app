@@ -110,6 +110,8 @@ export const setMinHeight = (dataSet, day) => {
     dataSet.dataPoints.find((dataPoint) => dataPoint.x === day) === undefined
   ) {
     return 0;
+  } else if (dataSet.name === "Income") {
+    return "15px";
   } else if (
     dataSet.dataPoints.find((dataPoint) => dataPoint.x === day).y !== 0
   ) {

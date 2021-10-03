@@ -27,7 +27,7 @@ const CategoryColor = styled.div`
 const CategoryName = styled.p``;
 const CategoriesWrapper = styled.div`
   display: flex;
-  margin-bottom: 40px;
+  margin-bottom: 30px;
   height: 50px;
   width: fit-content;
 `;
