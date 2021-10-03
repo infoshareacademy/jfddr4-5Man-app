@@ -46,7 +46,24 @@ $loginGoldColor: #ffd600;
 
             .loginFormEmail, .loginFormPassword{
                 margin:7px;
+                font-size: 20px;
+                width:220px;
+                padding:10px;
+                background-color: $loginSecondaryBgc;
                 color: $loginFontColor;
+                border: 2px solid $loginFontColor;
+                border-radius: 8px;
+            }
+
+            .loginFormEmail:focus, .loginFormPassword:focus{
+                outline:none;
+                border:2px solid $loginGoldColor;
+            }
+
+            .loginParError{
+                margin: 3px 0 12px 0;
+                color: red;
+                font-size: 12px;;
             }
 
             .loginFormButton{
