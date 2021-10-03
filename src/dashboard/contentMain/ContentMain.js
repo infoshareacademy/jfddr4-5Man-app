@@ -2,13 +2,13 @@ import { useContext, useEffect, useState } from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 import { Account } from "./account/Account";
 import "./contentMain.css";
-import { compileDatabase } from "./home/BarGraph./utils";
+import { compileGraphDatabase, compileHistoryDatabase } from "./utils";
 import { CurrencyContext } from "./CurrencyContext";
 import { MonthContext } from "./MonthContext";
 import { YearContext } from "./YearContext";
 import { fetchCategories, fetchTransactions } from "../../firebase";
 import { UserContext } from "../../UserContext";
-import { Home } from "./home/home";
+import { Home } from "./home/Home";
 
 export function ContentMain() {
   const [currentCurrency, changeCurrentCurrency] = useState("PLN");
@@ -26,11 +26,16 @@ export function ContentMain() {
     fetchTransactions(currentUser).then(setTransactions);
   }, [currentUser]);
 
-  const compiledDatabase = compileDatabase(
+  const compiledGraphDatabase = compileGraphDatabase(
     categories,
     transactions,
     monthToDisplay,
     yearToDisplay
+  );
+
+  const compiledHistoryDatabase = compileHistoryDatabase(
+    categories,
+    transactions
   );
 
   return (
@@ -45,7 +50,8 @@ export function ContentMain() {
             </Route>
             <Route path="/main/home">
               <Home
-                database={compiledDatabase}
+                graphDatabase={compiledGraphDatabase}
+                historyDatabase={compiledHistoryDatabase}
                 setMonthToDisplay={setMonthToDisplay}
                 setYearToDisplay={setYearToDisplay}
               ></Home>

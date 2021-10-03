@@ -4,6 +4,7 @@ import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import { useContext, useState } from "react";
 import { MonthContext } from "../../MonthContext";
 import { YearContext } from "../../YearContext";
+import "./graphNav.scss";
 
 const GraphNavWrapper = styled.div`
   display: flex;

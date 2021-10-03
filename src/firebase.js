@@ -19,7 +19,7 @@ export const fetchCategories = (userName) => {
   return getDocs(q).then((response) => {
     const returnArray = [];
     response.forEach((doc) => {
-      returnArray.push(doc.data());
+      returnArray.push({ ...doc.data(), id: doc.id });
     });
     return returnArray;
   });
@@ -30,7 +30,7 @@ export const fetchTransactions = (userName) => {
   return getDocs(c).then((response) => {
     const returnArray = [];
     response.forEach((doc) => {
-      returnArray.push(doc.data());
+      returnArray.push({ ...doc.data(), id: doc.id });
     });
     return returnArray;
   });

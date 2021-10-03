@@ -2,6 +2,7 @@ import { Redirect, Route, Switch } from "react-router";
 import styled from "styled-components";
 import BarGraph from "./BarGraph./BarGraph";
 import { GraphNav } from "./GraphNav/GraphNav";
+import { Recent } from "./Recent/Recent";
 
 const HomeWrapper = styled.div`
   width: calc(100% - 283px);
@@ -20,12 +21,6 @@ const HomeUpper = styled.div`
 const HomeLower = styled.div`
   height: 40%;
   display: flex;
-`;
-const RecentWrapper = styled.div`
-  width: 50%;
-  height: 100%;
-  border-right: 1px solid #d0d0d0;
-  min-width: 670px;
 `;
 const PanelWrapper = styled.div`
   width: 50%;
@@ -54,13 +49,13 @@ export const Home = (props) => {
               piechart placeholder
             </Route>
             <Route exact path="/main/home/barchart">
-              <BarGraph database={props.database}></BarGraph>
+              <BarGraph database={props.graphDatabase}></BarGraph>
             </Route>
           </Switch>
         </GraphWrapper>
       </HomeUpper>
       <HomeLower>
-        <RecentWrapper>recent placeholder</RecentWrapper>
+        <Recent database={props.historyDatabase}></Recent>
         <PanelWrapper>panel placeholder</PanelWrapper>
       </HomeLower>
     </HomeWrapper>

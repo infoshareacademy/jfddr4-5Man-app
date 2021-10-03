@@ -10,23 +10,29 @@ const SummaryWrapper = styled.div`
   margin-left: 15px;
 `;
 const SummaryItem = styled.div`
-  margin-bottom: 30px;
+  margin-bottom: 40px;
   font-size: 20px;
   display: flex;
   cursor: default;
+  :last-of-type {
+    margin-bottom: 0px;
+  }
 `;
-const SummaryTitle = styled.div`
-  margin-right: 5px;
+const SummaryTitle = styled.span`
+  margin-right: 15px;
   width: 85px;
 `;
-const SummaryAmount = styled.div`
+const SummaryAmount = styled.span`
   margin-right: 5px;
   min-width: 85px;
   max-width: 100px;
   overflow: hidden;
   text-overflow: ellipsis;
+  :hover {
+    opacity: 0.75;
+  }
 `;
-const SummaryCurrency = styled.div``;
+const SummaryCurrency = styled.span``;
 
 const Summary = (props) => {
   const currency = useContext(CurrencyContext);
@@ -35,17 +41,17 @@ const Summary = (props) => {
 
   return (
     <SummaryWrapper>
-      <SummaryItem title={incomeSum}>
+      <SummaryItem title={`${incomeSum} ${currency}`}>
         <SummaryTitle>Income:</SummaryTitle>
         <SummaryAmount>{incomeSum}</SummaryAmount>
         <SummaryCurrency>{currency}</SummaryCurrency>
       </SummaryItem>
-      <SummaryItem title={outcomeSum}>
+      <SummaryItem title={`${outcomeSum} ${currency}`}>
         <SummaryTitle>Outcome:</SummaryTitle>
         <SummaryAmount>{outcomeSum}</SummaryAmount>
         <SummaryCurrency>{currency}</SummaryCurrency>
       </SummaryItem>
-      <SummaryItem title={incomeSum - outcomeSum}>
+      <SummaryItem title={`${(incomeSum - outcomeSum).toFixed(2)} ${currency}`}>
         <SummaryTitle>Savings:</SummaryTitle>
         <SummaryAmount>{(incomeSum - outcomeSum).toFixed(2)}</SummaryAmount>
         <SummaryCurrency>{currency}</SummaryCurrency>
