@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import { useContext, useState } from "react";
 import { DateContext } from "../../DateContext";
-import "./graphNav.scss";
 
 const GraphNavWrapper = styled.div`
   display: flex;

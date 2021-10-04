@@ -1,6 +1,12 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
-import { query, collection, orderBy, getDocs } from "firebase/firestore";
+import {
+  query,
+  collection,
+  orderBy,
+  getDocs,
+  addDoc,
+} from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAuW15Qk3tMLE-2sAEFXay41S1puJ-i_Pk",
@@ -44,5 +50,20 @@ export const fetchUserInfo = (userName) => {
       returnArray.push({ ...doc.data(), id: doc.id });
     });
     return returnArray;
+  });
+};
+
+export const addTransaction = (
+  userName,
+  amount,
+  description,
+  category,
+  goBackHandler
+) => {
+  addDoc(collection(db, `${userName} - transactions`), {
+    amount: +amount,
+    category: category,
+    description: description,
+    date: +new Date(),
   });
 };

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import TextField from "@mui/material/TextField";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import {
   Button,
   FormControl,
@@ -9,6 +9,8 @@ import {
   Select,
 } from "@mui/material";
 import { yellow, red } from "@mui/material/colors";
+import { UserContext } from "../../../../UserContext";
+import { addTransaction } from "../../../../firebase";
 
 const FormWrapper = styled.div`
   padding: 20px;
@@ -26,6 +28,8 @@ export const TransactionForm = (props) => {
   const [category, chooseCategory] = useState("");
   const [amount, setAmount] = useState("");
   const [description, setDescription] = useState("");
+  const currentUser = useContext(UserContext);
+
   const setCategoryMenuItems = (categories) => {
     return categories.map((data) => {
       return (
@@ -35,6 +39,15 @@ export const TransactionForm = (props) => {
       );
     });
   };
+
+  const goBackHandler = () => {
+    setAmount("");
+    setDescription("");
+    chooseCategory("");
+    document.querySelector(".opaquePanel").classList.remove("displayed");
+    document.querySelector(".coverPanel").classList.remove("displayed");
+  };
+
   return (
     <FormWrapper>
       <TextField
@@ -67,20 +80,21 @@ export const TransactionForm = (props) => {
         </Select>
       </FormControl>
       <ButtonsWrapper>
-        <Button variant="outlined" sx={{ color: yellow[500], fontSize: 20 }}>
+        <Button
+          variant="outlined"
+          sx={{ color: yellow[500], fontSize: 20 }}
+          onClick={() => {
+            addTransaction(currentUser, amount, description, category);
+            goBackHandler();
+          }}
+        >
           SEND
         </Button>
         <Button
           variant="outlined"
           sx={{ color: red[500], fontSize: 20 }}
           onClick={() => {
-            setAmount("");
-            setDescription("");
-            chooseCategory("");
-            document
-              .querySelector(".opaquePanel")
-              .classList.remove("displayed");
-            document.querySelector(".coverPanel").classList.remove("displayed");
+            goBackHandler();
           }}
         >
           GO BACK

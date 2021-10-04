@@ -37,7 +37,7 @@ const OneBar = (props) => {
   const currency = useContext(CurrencyContext);
   const maxValue = getMaxValue(props.database);
   const daysMaxValues = getDailyMaxValue(props.database);
-
+  console.log(props.database);
   return (
     <BarWrapper
       style={{ height: `${setBarHeight(daysMaxValues, props.day, maxValue)}%` }}
