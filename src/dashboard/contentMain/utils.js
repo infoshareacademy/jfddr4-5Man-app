@@ -13,12 +13,17 @@ export const compileGraphDatabase = (categories, transactions, date) =>
             year: date.getFullYear(),
           },
           y: transaction.amount,
+          date: transaction.date,
         };
       })
       .filter((transaction) => transaction.x.month === date.month)
       .filter((transaction) => transaction.x.year === date.year)
       .map((transaction) => {
-        return { x: transaction.x.day, y: transaction.y };
+        return {
+          x: transaction.x.day,
+          y: transaction.y,
+          date: transaction.date,
+        };
       }),
   }));
 

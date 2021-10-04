@@ -70,11 +70,21 @@ export const setBorder = (dataSet, database, day) => {
   }
 };
 
-export const setOrder = (database, day) => {
-  if (database.name === "Income") {
-    return 98;
+export const setOrder = (database, dataSet, day) => {
+  if (dataSet === undefined) {
+    return;
+  } else if (database.name === "Income") {
+    return 2;
   } else {
-    return day;
+    const date = new Date(dataSet.date);
+    return (
+      +date.getFullYear() +
+      (+date.getMonth() + 1) +
+      +date.getDate() +
+      +date.getHours() +
+      +date.getMinutes() +
+      +date.getSeconds()
+    );
   }
 };
 

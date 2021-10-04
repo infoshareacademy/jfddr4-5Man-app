@@ -7,6 +7,7 @@ import { useContext } from "react";
 import { CurrencyContext } from "../../CurrencyContext";
 import "./TransactionPanel.scss";
 import { TransactionForm } from "./TransactionForm";
+import { useState } from "react";
 
 const MainWrapper = styled.div`
   width: 50%;
@@ -65,6 +66,7 @@ const OpaquePanel = styled.div`
 
 export const TransactionPanel = (props) => {
   const currency = useContext(CurrencyContext);
+  const [transactionType, setTransactionType] = useState("");
   return (
     <MainWrapper>
       <ButtonsWrapper>
@@ -72,6 +74,7 @@ export const TransactionPanel = (props) => {
           <ButtonsTitle>Add income</ButtonsTitle>
           <IconButton
             onClick={() => {
+              setTransactionType("income");
               document.querySelector(".opaquePanel").classList.add("displayed");
               document.querySelector(".coverPanel").classList.add("displayed");
             }}
@@ -81,7 +84,13 @@ export const TransactionPanel = (props) => {
         </ButtonWrapper>
         <ButtonWrapper>
           <ButtonsTitle>Add outcome </ButtonsTitle>
-          <IconButton>
+          <IconButton
+            onClick={() => {
+              setTransactionType("outcome");
+              document.querySelector(".opaquePanel").classList.add("displayed");
+              document.querySelector(".coverPanel").classList.add("displayed");
+            }}
+          >
             <RemoveCircleIcon sx={{ color: yellow[500], fontSize: 80 }} />
           </IconButton>
         </ButtonWrapper>
@@ -91,7 +100,10 @@ export const TransactionPanel = (props) => {
         <BudgetDisplay>{`${props.totalBudget} ${currency}`}</BudgetDisplay>
       </BudgetWrapper>
       <CoverPanel className="coverPanel">
-        <TransactionForm categories={props.categories}></TransactionForm>
+        <TransactionForm
+          categories={props.categories}
+          type={transactionType}
+        ></TransactionForm>
       </CoverPanel>
       <OpaquePanel className="opaquePanel"></OpaquePanel>
     </MainWrapper>

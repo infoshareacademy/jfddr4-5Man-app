@@ -19,7 +19,10 @@ import { Home } from "./home/Home";
 
 export function ContentMain() {
   const [currentCurrency, changeCurrentCurrency] = useState("");
-  const [dateToDisplay, setDateToDisplay] = useState({ month: 10, year: 2021 });
+  const [dateToDisplay, setDateToDisplay] = useState({
+    month: new Date().getMonth() + 1,
+    year: new Date().getFullYear(),
+  });
   const [categories, setCategories] = useState([]);
   const [transactions, setTransactions] = useState([]);
   const [userInfo, setUserInfo] = useState([]);

@@ -55,8 +55,12 @@ export const GraphNav = (props) => {
   };
 
   const setMonthMenuItems = () => {
-    const months = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
-    return months.map((data) => {
+    const currentMonth = new Date().getMonth() + 1;
+    const months = [];
+    for (let i = 1; i <= currentMonth; i++) {
+      months.push(i);
+    }
+    return months.reverse().map((data) => {
       return (
         <MenuItem key={data} value={data}>
           {data < 10 ? `0${data}` : data}

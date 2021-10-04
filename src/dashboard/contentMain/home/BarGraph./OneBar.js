@@ -16,8 +16,8 @@ import { v4 as uuidv4 } from "uuid";
 
 const BarWrapper = styled.div`
   display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
+  flex-direction: column-reverse;
+  justify-content: flex-start;
   margin-right: 15px;
   width: 20px;
   align-items: center;
@@ -31,7 +31,7 @@ const OneSegment = styled.div`
 `;
 const SegmentDate = styled.div`
   margin-top: 5px;
-  order: 99;
+  order: 1;
 `;
 
 const OneBar = (props) => {
@@ -56,7 +56,7 @@ const OneBar = (props) => {
                 )}%`,
                 marginBottom: setMarginBottom(data2, props.day),
                 minHeight: setMinHeight(data2, data1, props.day),
-                order: setOrder(data1, props.day),
+                order: setOrder(data1, data2, props.day),
                 border: setBorder(data2, data1, props.day),
               }}
               title={`${setSegmentTitle(data2, props.day)} ${currency}`}

@@ -23,19 +23,82 @@ const FormWrapper = styled.div`
 const ButtonsWrapper = styled.div`
   display: flex;
 `;
-const DateWrapper = styled.div``;
+const DateWrapper = styled.div`
+  display: flex;
+`;
 
 export const TransactionForm = (props) => {
   const [category, chooseCategory] = useState("");
   const [amount, setAmount] = useState("");
   const [description, setDescription] = useState("");
+  const [date, setDate] = useState({
+    day: new Date().getDate(),
+    month: new Date().getMonth() + 1,
+    year: new Date().getFullYear(),
+  });
   const currentUser = useContext(UserContext);
 
   const setCategoryMenuItems = (categories) => {
     return categories.map((data) => {
-      return (
+      return data.id !== "Income" ? (
         <MenuItem key={data.id} value={data.id}>
           {data.id}
+        </MenuItem>
+      ) : (
+        ""
+      );
+    });
+  };
+
+  const setYearMenuItems = () => {
+    const currentYear = new Date().getFullYear();
+    const arrayToReturn = [
+      currentYear,
+      currentYear - 1,
+      currentYear - 2,
+      currentYear - 3,
+      currentYear - 4,
+      currentYear - 5,
+      currentYear - 6,
+      currentYear - 7,
+      currentYear - 8,
+      currentYear - 9,
+      currentYear - 10,
+    ];
+    return arrayToReturn.map((data) => {
+      return (
+        <MenuItem key={data} value={data}>
+          {data}
+        </MenuItem>
+      );
+    });
+  };
+
+  const setMonthMenuItems = () => {
+    const currentMonth = new Date().getMonth() + 1;
+    const months = [];
+    for (let i = 1; i <= currentMonth; i++) {
+      months.push(i);
+    }
+    return months.reverse().map((data) => {
+      return (
+        <MenuItem key={data} value={data}>
+          {data < 10 ? `0${data}` : data}
+        </MenuItem>
+      );
+    });
+  };
+
+  const setDayMenuItems = () => {
+    const currentDay = new Date().getDate();
+    const days = [];
+    for (let i = 1; i <= currentDay; i++) {
+      days.push(i);
+    }
+    return days.reverse().map((data) => {
+      return (
+        <MenuItem key={data} value={data}>
+          {data < 10 ? `0${data}` : data}
         </MenuItem>
       );
     });
@@ -66,30 +129,93 @@ export const TransactionForm = (props) => {
           setDescription(event.target.value);
         }}
       ></TextField>
-      <FormControl>
-        <InputLabel id="categorySelect">Category</InputLabel>
-        <Select
-          labelId="categorySelect"
-          label="Category"
-          value={category}
-          onChange={(event) => {
-            chooseCategory(event.target.value);
-          }}
-        >
-          {props.categories.length !== 0 &&
-            setCategoryMenuItems(props.categories)}
-        </Select>
-      </FormControl>
+      <DateWrapper>
+        <FormControl>
+          <InputLabel id="daySelect">Day</InputLabel>
+          <Select
+            labelId="daySelect"
+            label="Day"
+            value={date.day}
+            onChange={(event) => {
+              setDate({
+                day: event.target.value,
+                month: date.month,
+                year: date.year,
+              });
+            }}
+          >
+            {setDayMenuItems()}
+          </Select>
+        </FormControl>
+        <FormControl>
+          <InputLabel id="monthSelect">Month</InputLabel>
+          <Select
+            labelId="monthSelect"
+            label="Month"
+            value={date.month}
+            onChange={(event) => {
+              setDate({
+                day: date.day,
+                month: event.target.value,
+                year: date.year,
+              });
+            }}
+          >
+            {setMonthMenuItems()}
+          </Select>
+        </FormControl>
+        <FormControl>
+          <InputLabel id="yearSelect">Category</InputLabel>
+          <Select
+            labelId="yeatSelect"
+            label="year"
+            value={date.year}
+            onChange={(event) => {
+              setDate({
+                day: date.day,
+                month: date.month,
+                year: event.target.value,
+              });
+            }}
+          >
+            {setYearMenuItems()}
+          </Select>
+        </FormControl>
+      </DateWrapper>
+      {props.type === "outcome" ? (
+        <FormControl>
+          <InputLabel id="categorySelect">Category</InputLabel>
+          <Select
+            labelId="categorySelect"
+            label="Category"
+            value={category}
+            onChange={(event) => {
+              chooseCategory(event.target.value);
+            }}
+          >
+            {props.categories.length !== 0 &&
+              setCategoryMenuItems(props.categories)}
+          </Select>
+        </FormControl>
+      ) : (
+        ""
+      )}
       <ButtonsWrapper>
         <Button
           variant="outlined"
           sx={{ color: yellow[500], fontSize: 20 }}
           onClick={() => {
-            addTransaction(currentUser, amount, description, category);
+            addTransaction(
+              currentUser,
+              amount,
+              description,
+              props.type === "outcome" ? category : "Income",
+              date
+            );
             goBackHandler();
           }}
         >
-          SEND
+          ADD
         </Button>
         <Button
           variant="outlined"

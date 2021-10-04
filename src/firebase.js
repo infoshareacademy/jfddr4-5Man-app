@@ -58,12 +58,16 @@ export const addTransaction = (
   amount,
   description,
   category,
-  goBackHandler
+  date
 ) => {
   addDoc(collection(db, `${userName} - transactions`), {
     amount: +amount,
     category: category,
     description: description,
-    date: +new Date(),
+    date: new Date(
+      `${date.year}.${date.month}.${
+        date.day
+      } ${new Date().getHours()}:${new Date().getMinutes()}:${new Date().getSeconds()}`
+    ).getTime(),
   });
 };
