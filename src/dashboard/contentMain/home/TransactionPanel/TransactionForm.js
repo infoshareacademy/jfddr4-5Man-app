@@ -23,6 +23,7 @@ const FormWrapper = styled.div`
 const ButtonsWrapper = styled.div`
   display: flex;
 `;
+const DateWrapper = styled.div``;
 
 export const TransactionForm = (props) => {
   const [category, chooseCategory] = useState("");
