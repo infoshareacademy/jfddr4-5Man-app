@@ -2,8 +2,7 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import { useContext, useState } from "react";
-import { MonthContext } from "../../MonthContext";
-import { YearContext } from "../../YearContext";
+import { DateContext } from "../../DateContext";
 import "./graphNav.scss";
 
 const GraphNavWrapper = styled.div`
@@ -16,7 +15,7 @@ export const GraphNav = (props) => {
   const initialChartSetter = () => {
     if (
       window.location.pathname === "/main/home" ||
-      window.location.pathname == "/main/home/piechart"
+      window.location.pathname === "/main/home/piechart"
     ) {
       return "piechart";
     } else {
@@ -30,8 +29,7 @@ export const GraphNav = (props) => {
     setChart(event.target.value);
   };
 
-  const monthToDisplay = useContext(MonthContext);
-  const yearToDisplay = useContext(YearContext);
+  const dateToDisplay = useContext(DateContext);
 
   const setYearMenuItems = () => {
     const currentYear = new Date().getFullYear();
@@ -91,9 +89,12 @@ export const GraphNav = (props) => {
         <Select
           labelId="monthSelect"
           label="Month"
-          value={monthToDisplay}
+          value={dateToDisplay.month}
           onChange={(event) => {
-            props.setMonthToDisplay(event.target.value);
+            props.setDateToDisplay({
+              month: event.target.value,
+              year: dateToDisplay.year,
+            });
           }}
         >
           {setMonthMenuItems()}
@@ -104,9 +105,12 @@ export const GraphNav = (props) => {
         <Select
           labelId="yearSelect"
           label="Year"
-          value={yearToDisplay}
+          value={dateToDisplay.year}
           onChange={(event) => {
-            props.setYearToDisplay(event.target.value);
+            props.setDateToDisplay({
+              month: dateToDisplay.month,
+              year: event.target.value,
+            });
           }}
         >
           {setYearMenuItems()}

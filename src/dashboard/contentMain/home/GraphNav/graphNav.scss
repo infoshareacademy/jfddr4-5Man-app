@@ -37,3 +37,19 @@
     }
   }
 }
+
+.MuiMenuItem-root {
+  position: relative;
+  height: 36px;
+}
+
+.MuiMenuItem-root > a {
+  position: absolute;
+  width: 114px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  right: 1px;
+  padding-right: 15px;
+}

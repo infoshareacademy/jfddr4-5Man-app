@@ -3,6 +3,7 @@ import styled from "styled-components";
 import BarGraph from "./BarGraph./BarGraph";
 import { GraphNav } from "./GraphNav/GraphNav";
 import { Recent } from "./Recent/Recent";
+import { TransactionPanel } from "./TransactionPanel/TransactionPanel";
 
 const HomeWrapper = styled.div`
   width: calc(100% - 283px);
@@ -22,10 +23,6 @@ const HomeLower = styled.div`
   height: 40%;
   display: flex;
 `;
-const PanelWrapper = styled.div`
-  width: 50%;
-  min-width: 670px;
-`;
 
 const GraphWrapper = styled.div`
   display: flex;
@@ -36,10 +33,7 @@ export const Home = (props) => {
   return (
     <HomeWrapper>
       <HomeUpper>
-        <GraphNav
-          setMonthToDisplay={props.setMonthToDisplay}
-          setYearToDisplay={props.setYearToDisplay}
-        ></GraphNav>
+        <GraphNav setDateToDisplay={props.setDateToDisplay}></GraphNav>
         <GraphWrapper>
           <Switch>
             <Route exact path="/main/home">
@@ -56,7 +50,10 @@ export const Home = (props) => {
       </HomeUpper>
       <HomeLower>
         <Recent database={props.historyDatabase}></Recent>
-        <PanelWrapper>panel placeholder</PanelWrapper>
+        <TransactionPanel
+          totalBudget={props.totalBudget}
+          categories={props.categories}
+        ></TransactionPanel>
       </HomeLower>
     </HomeWrapper>
   );

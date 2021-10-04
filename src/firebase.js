@@ -35,3 +35,14 @@ export const fetchTransactions = (userName) => {
     return returnArray;
   });
 };
+
+export const fetchUserInfo = (userName) => {
+  const c = collection(db, `${userName} - data`);
+  return getDocs(c).then((response) => {
+    const returnArray = [];
+    response.forEach((doc) => {
+      returnArray.push({ ...doc.data(), id: doc.id });
+    });
+    return returnArray;
+  });
+};

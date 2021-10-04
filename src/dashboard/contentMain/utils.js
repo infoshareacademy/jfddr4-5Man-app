@@ -1,4 +1,4 @@
-export const compileGraphDatabase = (categories, transactions, month, year) =>
+export const compileGraphDatabase = (categories, transactions, date) =>
   categories.map((category) => ({
     name: category.name,
     color: category.color,
@@ -15,8 +15,8 @@ export const compileGraphDatabase = (categories, transactions, month, year) =>
           y: transaction.amount,
         };
       })
-      .filter((transaction) => transaction.x.month === month)
-      .filter((transaction) => transaction.x.year === year)
+      .filter((transaction) => transaction.x.month === date.month)
+      .filter((transaction) => transaction.x.year === date.year)
       .map((transaction) => {
         return { x: transaction.x.day, y: transaction.y };
       }),
@@ -29,4 +29,12 @@ export const compileHistoryDatabase = (categories, transactions) => {
       color: categories.find((data2) => data2.name === data1.category).color,
     };
   });
+};
+
+export const getTotalBudget = (userData) => {
+  return userData.length === 0
+    ? 0
+    : userData.find((data) => {
+        return data.id === "TotalBudget";
+      }).amount;
 };

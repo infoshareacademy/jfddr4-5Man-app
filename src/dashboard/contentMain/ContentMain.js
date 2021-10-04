@@ -2,20 +2,27 @@ import { useContext, useEffect, useState } from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 import { Account } from "./account/Account";
 import "./contentMain.css";
-import { compileGraphDatabase, compileHistoryDatabase } from "./utils";
+import {
+  compileGraphDatabase,
+  compileHistoryDatabase,
+  getTotalBudget,
+} from "./utils";
 import { CurrencyContext } from "./CurrencyContext";
-import { MonthContext } from "./MonthContext";
-import { YearContext } from "./YearContext";
-import { fetchCategories, fetchTransactions } from "../../firebase";
+import { DateContext } from "./DateContext";
+import {
+  fetchCategories,
+  fetchTransactions,
+  fetchUserInfo,
+} from "../../firebase";
 import { UserContext } from "../../UserContext";
 import { Home } from "./home/Home";
 
 export function ContentMain() {
-  const [currentCurrency, changeCurrentCurrency] = useState("PLN");
-  const [monthToDisplay, setMonthToDisplay] = useState(10);
-  const [yearToDisplay, setYearToDisplay] = useState(2021);
+  const [currentCurrency, changeCurrentCurrency] = useState("");
+  const [dateToDisplay, setDateToDisplay] = useState({ month: 10, year: 2021 });
   const [categories, setCategories] = useState([]);
   const [transactions, setTransactions] = useState([]);
+  const [userInfo, setUserInfo] = useState([]);
 
   const currentUser = useContext(UserContext);
 
@@ -25,12 +32,25 @@ export function ContentMain() {
   useEffect(() => {
     fetchTransactions(currentUser).then(setTransactions);
   }, [currentUser]);
+  useEffect(() => {
+    fetchUserInfo(currentUser).then(setUserInfo);
+  }, [currentUser]);
+  useEffect(() => {
+    changeCurrentCurrency(
+      userInfo.find((data) => {
+        return data.id === "Currency";
+      })
+        ? userInfo.find((data) => {
+            return data.id === "Currency";
+          }).currency
+        : ""
+    );
+  }, [userInfo]);
 
   const compiledGraphDatabase = compileGraphDatabase(
     categories,
     transactions,
-    monthToDisplay,
-    yearToDisplay
+    dateToDisplay
   );
 
   const compiledHistoryDatabase = compileHistoryDatabase(
@@ -38,39 +58,40 @@ export function ContentMain() {
     transactions
   );
 
+  const totalBudget = getTotalBudget(userInfo);
+
   return (
     <CurrencyContext.Provider value={currentCurrency}>
-      <MonthContext.Provider value={monthToDisplay}>
-        <YearContext.Provider value={yearToDisplay}>
-          <Switch>
-            <Route exact path="/main">
-              <section className="contentMainSection">
-                <Redirect to="/main/home" />
-              </section>
-            </Route>
-            <Route path="/main/home">
-              <Home
-                graphDatabase={compiledGraphDatabase}
-                historyDatabase={compiledHistoryDatabase}
-                setMonthToDisplay={setMonthToDisplay}
-                setYearToDisplay={setYearToDisplay}
-              ></Home>
-            </Route>
-            <Route exact path="/main/budget">
-              <section className="contentMainSection">budget</section>
-            </Route>
-            <Route exact path="/main/history">
-              <section className="contentMainSection">history</section>
-            </Route>
-            <Route exact path="/main/settings">
-              <section className="contentMainSection">setting</section>
-            </Route>
-            <Route exact path="/main/account">
-              <Account />
-            </Route>
-          </Switch>
-        </YearContext.Provider>
-      </MonthContext.Provider>
+      <DateContext.Provider value={dateToDisplay}>
+        <Switch>
+          <Route exact path="/main">
+            <section className="contentMainSection">
+              <Redirect to="/main/home" />
+            </section>
+          </Route>
+          <Route path="/main/home">
+            <Home
+              graphDatabase={compiledGraphDatabase}
+              historyDatabase={compiledHistoryDatabase}
+              setDateToDisplay={setDateToDisplay}
+              totalBudget={totalBudget}
+              categories={categories}
+            ></Home>
+          </Route>
+          <Route exact path="/main/budget">
+            <section className="contentMainSection">budget</section>
+          </Route>
+          <Route exact path="/main/history">
+            <section className="contentMainSection">history</section>
+          </Route>
+          <Route exact path="/main/settings">
+            <section className="contentMainSection">setting</section>
+          </Route>
+          <Route exact path="/main/account">
+            <Account />
+          </Route>
+        </Switch>
+      </DateContext.Provider>
     </CurrencyContext.Provider>
   );
 }
