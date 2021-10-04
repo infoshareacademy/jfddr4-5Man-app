@@ -1,38 +1,76 @@
-import { Route, Switch, Redirect } from 'react-router-dom';
-import { Account } from '../account/Account';
-import './contentMain.css'
+import { useContext, useEffect, useState } from "react";
+import { Route, Switch, Redirect } from "react-router-dom";
+import { Account } from "./account/Account";
+import "./contentMain.css";
+import { compileGraphDatabase, compileHistoryDatabase } from "./utils";
+import { CurrencyContext } from "./CurrencyContext";
+import { MonthContext } from "./MonthContext";
+import { YearContext } from "./YearContext";
+import { fetchCategories, fetchTransactions } from "../../firebase";
+import { UserContext } from "../../UserContext";
+import { Home } from "./home/Home";
 
 export function ContentMain() {
-    return (
-        <Switch>
-            <Route exact path='/main'>
-                <section className="contentMainSection">
-                    <Redirect to='/main/home' />
-                </section>
+  const [currentCurrency, changeCurrentCurrency] = useState("PLN");
+  const [monthToDisplay, setMonthToDisplay] = useState(10);
+  const [yearToDisplay, setYearToDisplay] = useState(2021);
+  const [categories, setCategories] = useState([]);
+  const [transactions, setTransactions] = useState([]);
+
+  const currentUser = useContext(UserContext);
+
+  useEffect(() => {
+    fetchCategories(currentUser).then(setCategories);
+  }, [currentUser]);
+  useEffect(() => {
+    fetchTransactions(currentUser).then(setTransactions);
+  }, [currentUser]);
+
+  const compiledGraphDatabase = compileGraphDatabase(
+    categories,
+    transactions,
+    monthToDisplay,
+    yearToDisplay
+  );
+
+  const compiledHistoryDatabase = compileHistoryDatabase(
+    categories,
+    transactions
+  );
+
+  return (
+    <CurrencyContext.Provider value={currentCurrency}>
+      <MonthContext.Provider value={monthToDisplay}>
+        <YearContext.Provider value={yearToDisplay}>
+          <Switch>
+            <Route exact path="/main">
+              <section className="contentMainSection">
+                <Redirect to="/main/home" />
+              </section>
             </Route>
-            <Route exact path='/main/home'>
-                <section className="contentMainSection">
-                    home
-                </section>
+            <Route path="/main/home">
+              <Home
+                graphDatabase={compiledGraphDatabase}
+                historyDatabase={compiledHistoryDatabase}
+                setMonthToDisplay={setMonthToDisplay}
+                setYearToDisplay={setYearToDisplay}
+              ></Home>
             </Route>
-            <Route exact path='/main/budget'>
-                <section className="contentMainSection">
-                    budget
-                </section>
+            <Route exact path="/main/budget">
+              <section className="contentMainSection">budget</section>
             </Route>
-            <Route exact path='/main/history'>
-                <section className="contentMainSection">
-                    history
-                </section>
+            <Route exact path="/main/history">
+              <section className="contentMainSection">history</section>
             </Route>
-            <Route exact path='/main/settings'>
-                <section className="contentMainSection">
-                    setting
-                </section>
+            <Route exact path="/main/settings">
+              <section className="contentMainSection">setting</section>
             </Route>
-            <Route exact path='/main/account'>
-                <Account/>
+            <Route exact path="/main/account">
+              <Account />
             </Route>
-        </Switch>
-    )
+          </Switch>
+        </YearContext.Provider>
+      </MonthContext.Provider>
+    </CurrencyContext.Provider>
+  );
 }

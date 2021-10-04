@@ -1,0 +1,39 @@
+.MuiFormControl-root {
+  .MuiOutlinedInput-root {
+    margin-right: 20px;
+  }
+  .MuiOutlinedInput-root:hover {
+    fieldset {
+      border-color: #b49600;
+    }
+  }
+  .Mui-focused {
+    fieldset {
+      border-color: #b49600 !important;
+    }
+  }
+  fieldset {
+    border-color: #ffd500;
+  }
+  label {
+    &.Mui-focused {
+      color: #b49600;
+    }
+  }
+}
+
+.MuiFormControl-root:last-of-type {
+  .MuiOutlinedInput-root {
+    margin-right: 0;
+  }
+}
+
+.MuiModal-root {
+  .MuiPaper-root {
+    .MuiList-root {
+      .Mui-selected {
+        background-color: #ffd50083;
+      }
+    }
+  }
+}
