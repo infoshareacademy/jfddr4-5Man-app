@@ -5,13 +5,14 @@ import {
   getDailyMaxValue,
   getMaxValue,
   setBarHeight,
-  setBarTitle,
+  setSegmentTitle,
   setBorder,
   setMarginBottom,
   setMinHeight,
   setOrder,
   setSegmentHeight,
 } from "./utils";
+import { v4 as uuidv4 } from "uuid";
 
 const BarWrapper = styled.div`
   display: flex;
@@ -37,26 +38,32 @@ const OneBar = (props) => {
   const currency = useContext(CurrencyContext);
   const maxValue = getMaxValue(props.database);
   const daysMaxValues = getDailyMaxValue(props.database);
-  console.log(props.database);
   return (
     <BarWrapper
       style={{ height: `${setBarHeight(daysMaxValues, props.day, maxValue)}%` }}
     >
-      {props.database.map((data) => {
-        return (
-          <OneSegment
-            style={{
-              backgroundColor: data.color,
-              height: `${setSegmentHeight(data, props.day, daysMaxValues)}%`,
-              marginBottom: setMarginBottom(data, props.day),
-              minHeight: setMinHeight(data, props.day),
-              order: setOrder(data, props.day),
-              border: setBorder(data, props.day),
-            }}
-            key={data.name.toString()}
-            title={`${setBarTitle(data, props.day)} ${currency}`}
-          ></OneSegment>
-        );
+      {props.database.map((data1) => {
+        return data1.dataPoints.map((data2) => {
+          return (
+            <OneSegment
+              style={{
+                backgroundColor: data1.color,
+                height: `${setSegmentHeight(
+                  data2,
+                  data1,
+                  props.day,
+                  daysMaxValues
+                )}%`,
+                marginBottom: setMarginBottom(data2, props.day),
+                minHeight: setMinHeight(data2, data1, props.day),
+                order: setOrder(data1, props.day),
+                border: setBorder(data2, data1, props.day),
+              }}
+              title={`${setSegmentTitle(data2, props.day)} ${currency}`}
+              key={uuidv4()}
+            ></OneSegment>
+          );
+        });
       })}
       <SegmentDate>{props.day}</SegmentDate>
     </BarWrapper>
