@@ -41,6 +41,7 @@ const BudgetTitle = styled.h3`
 `;
 const BudgetDisplay = styled.h2`
   font-size: 40px;
+  text-align: center;
 `;
 const CoverPanel = styled.div`
   position: absolute;
@@ -98,7 +99,11 @@ export const TransactionPanel = (props) => {
       </ButtonsWrapper>
       <BudgetWrapper>
         <BudgetTitle>Total Budget</BudgetTitle>
-        <BudgetDisplay>{`${totalBudget.toFixed(2)} ${currency}`}</BudgetDisplay>
+        <BudgetDisplay title={`${totalBudget.toFixed(2)} ${currency}`}>{`${
+          totalBudget.toFixed(2).toString().length < 11
+            ? totalBudget.toFixed(2)
+            : "9999999999+"
+        } ${currency}`}</BudgetDisplay>
       </BudgetWrapper>
       <CoverPanel className="coverPanel">
         <TransactionForm

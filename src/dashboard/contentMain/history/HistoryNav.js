@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import styled from "styled-components";
 import { DateContext } from "../DateContext";
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
@@ -65,14 +65,15 @@ export const HistoryNav = (props) => {
   };
 
   const setCategoryMenuItems = (categories) => {
+    const changedCategories = categories;
     if (
-      categories.find((data) => {
+      changedCategories.find((data) => {
         return data.id === "All";
       }) === undefined
     ) {
-      categories.unshift({ id: "All" });
+      changedCategories.unshift({ id: "All" });
     }
-    return categories.map((data) => {
+    return changedCategories.map((data) => {
       return (
         <MenuItem key={data.id} value={data.id}>
           {data.id}
@@ -80,6 +81,10 @@ export const HistoryNav = (props) => {
       );
     });
   };
+
+  useEffect(() => {
+    props.chooseCategory("All");
+  }, []);
 
   return (
     <HistoryNavWrapper>

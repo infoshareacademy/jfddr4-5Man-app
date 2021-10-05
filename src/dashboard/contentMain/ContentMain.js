@@ -62,8 +62,6 @@ export function ContentMain() {
     transactions
   );
 
-  console.log(compiledHistoryDatabase);
-
   const totalBudget = getTotalBudget(userInfo);
 
   return (

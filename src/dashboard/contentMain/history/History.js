@@ -2,16 +2,40 @@ import { useState } from "react";
 import styled from "styled-components";
 import { HistoryList } from "./HistoryList";
 import { HistoryNav } from "./HistoryNav";
+import "./history.scss";
+import { EditForm } from "./EditForm";
 
 const HistoryWrapper = styled.div`
   width: 100%;
   height: 100%;
   padding: 30px;
 `;
+const CoverPanel = styled.div`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  display: none;
+  z-index: 9;
+`;
+const OpaquePanel = styled.div`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  display: none;
+  z-index: 8;
+  background-color: #b5b5b5;
+  opacity: 0.9;
+`;
 
 export const History = (props) => {
   const [sortOrder, setSortOrder] = useState("newest");
-  const [category, chooseCategory] = useState("All");
+  const [category, chooseCategory] = useState("");
+  const [transactionData, setTransactionData] = useState("");
+
   return (
     <HistoryWrapper>
       <HistoryNav
@@ -26,7 +50,16 @@ export const History = (props) => {
         database={props.historyDatabase}
         sortOrder={sortOrder}
         category={category}
+        setTransactionData={setTransactionData}
       ></HistoryList>
+      <CoverPanel className="coverPanel">
+        <EditForm
+          transactionData={transactionData}
+          setTransactionData={setTransactionData}
+          categories={props.categories}
+        ></EditForm>
+      </CoverPanel>
+      <OpaquePanel className="opaquePanel"></OpaquePanel>
     </HistoryWrapper>
   );
 };

@@ -12,6 +12,10 @@ const ListItem = styled.div`
   align-items: center;
   justify-content: space-between;
   padding: 0 15px;
+  cursor: pointer;
+  :hover {
+    opacity: 0.8;
+  }
 `;
 const ListItemCategory = styled.span`
   font-size: 35px;
@@ -36,6 +40,9 @@ const ListItemDate = styled.span`
 const ListItemDescription = styled.span`
   font-size: 25px;
   color: black;
+`;
+const ListItemId = styled.span`
+  display: none;
 `;
 
 export const HistoryList = (props) => {
@@ -85,14 +92,28 @@ export const HistoryList = (props) => {
         date
       ).map((data) => {
         return (
-          <ListItem key={data.id} style={{ backgroundColor: data.color }}>
-            {" "}
+          <ListItem
+            key={data.id}
+            style={{ backgroundColor: data.color }}
+            onClick={(event) => {
+              props.setTransactionData({
+                category: event.currentTarget.childNodes[0].outerText,
+                description: event.currentTarget.childNodes[1].outerText,
+                amount:
+                  +event.currentTarget.childNodes[2].outerText.split(" ")[0],
+                id: event.currentTarget.childNodes[4].outerText,
+              });
+              document.querySelector(".opaquePanel").classList.add("displayed");
+              document.querySelector(".coverPanel").classList.add("displayed");
+            }}
+          >
             <ListItemCategory>{data.category}</ListItemCategory>
             <ListItemDescription>{data.description}</ListItemDescription>
             <ListItemAmount>{`${
               data.amount && data.amount.toFixed(2)
             } ${currency}`}</ListItemAmount>
             <ListItemDate>{getDate(data.date)}</ListItemDate>
+            <ListItemId>{data.id}</ListItemId>
           </ListItem>
         );
       })}
