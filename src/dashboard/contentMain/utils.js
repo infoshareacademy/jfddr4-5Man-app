@@ -29,10 +29,13 @@ export const compileGraphDatabase = (categories, transactions, date) =>
 
 export const compileHistoryDatabase = (categories, transactions) => {
   return transactions.map((data1) => {
-    return {
-      ...data1,
-      color: categories.find((data2) => data2.name === data1.category).color,
-    };
+    return categories.find((data2) => data2.name === data1.category)
+      ? {
+          ...data1,
+          color: categories.find((data2) => data2.name === data1.category)
+            .color,
+        }
+      : { ...data1, color: "white" };
   });
 };
 

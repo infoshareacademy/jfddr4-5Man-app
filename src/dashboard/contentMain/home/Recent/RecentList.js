@@ -56,9 +56,9 @@ export const RecentList = (props) => {
         return (
           <ListItem key={data.id} style={{ backgroundColor: data.color }}>
             <ListItemCategory>{data.category}</ListItemCategory>
-            <ListItemAmount>{`${data.amount.toFixed(
-              2
-            )} ${currency}`}</ListItemAmount>
+            <ListItemAmount>{`${
+              data.amount && data.amount.toFixed(2)
+            } ${currency}`}</ListItemAmount>
             <ListItemDate>{getDate(data.date)}</ListItemDate>
           </ListItem>
         );

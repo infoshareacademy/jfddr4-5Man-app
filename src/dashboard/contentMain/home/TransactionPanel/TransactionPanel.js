@@ -67,6 +67,7 @@ const OpaquePanel = styled.div`
 export const TransactionPanel = (props) => {
   const currency = useContext(CurrencyContext);
   const [transactionType, setTransactionType] = useState("");
+  const totalBudget = props.totalBudget;
   return (
     <MainWrapper>
       <ButtonsWrapper>
@@ -97,12 +98,13 @@ export const TransactionPanel = (props) => {
       </ButtonsWrapper>
       <BudgetWrapper>
         <BudgetTitle>Total Budget</BudgetTitle>
-        <BudgetDisplay>{`${props.totalBudget} ${currency}`}</BudgetDisplay>
+        <BudgetDisplay>{`${totalBudget.toFixed(2)} ${currency}`}</BudgetDisplay>
       </BudgetWrapper>
       <CoverPanel className="coverPanel">
         <TransactionForm
           categories={props.categories}
           type={transactionType}
+          totalBudget={props.totalBudget}
         ></TransactionForm>
       </CoverPanel>
       <OpaquePanel className="opaquePanel"></OpaquePanel>

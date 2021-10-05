@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 import { yellow, red } from "@mui/material/colors";
 import { UserContext } from "../../../../UserContext";
-import { addTransaction } from "../../../../firebase";
+import { addTransaction, updateBudget } from "../../../../firebase";
 
 const FormWrapper = styled.div`
   padding: 20px;
@@ -26,6 +26,13 @@ const ButtonsWrapper = styled.div`
 const DateWrapper = styled.div`
   display: flex;
 `;
+const ErrorWrapper = styled.div`
+  width: 200px;
+  height: 15px;
+  font-size: 15px;
+  color: red;
+  margin-bottom: 20px;
+`;
 
 export const TransactionForm = (props) => {
   const [category, chooseCategory] = useState("");
@@ -36,6 +43,7 @@ export const TransactionForm = (props) => {
     month: new Date().getMonth() + 1,
     year: new Date().getFullYear(),
   });
+  const [errorMessage, setErrorMessage] = useState("");
   const currentUser = useContext(UserContext);
 
   const setCategoryMenuItems = (categories) => {
@@ -112,8 +120,26 @@ export const TransactionForm = (props) => {
     document.querySelector(".coverPanel").classList.remove("displayed");
   };
 
+  const validate = () => {
+    let valid = true;
+    if (amount <= 0) {
+      setErrorMessage("Invalid amount");
+      valid = false;
+      return valid;
+    }
+    if (props.type === "outcome") {
+      if (category === "") {
+        setErrorMessage("Please choose category");
+        valid = false;
+        return valid;
+      }
+    }
+    return valid;
+  };
+
   return (
     <FormWrapper>
+      <ErrorWrapper>{errorMessage}</ErrorWrapper>
       <TextField
         label="Amount"
         type="number"
@@ -126,7 +152,9 @@ export const TransactionForm = (props) => {
         label="Description"
         value={description}
         onChange={(event) => {
-          setDescription(event.target.value);
+          if (event.target.value.length < 30) {
+            setDescription(event.target.value);
+          }
         }}
       ></TextField>
       <DateWrapper>
@@ -205,14 +233,21 @@ export const TransactionForm = (props) => {
           variant="outlined"
           sx={{ color: yellow[500], fontSize: 20 }}
           onClick={() => {
-            addTransaction(
-              currentUser,
-              amount,
-              description,
-              props.type === "outcome" ? category : "Income",
-              date
-            );
-            goBackHandler();
+            if (validate() === true) {
+              addTransaction(
+                currentUser,
+                amount,
+                description,
+                props.type === "outcome" ? category : "Income",
+                date
+              );
+              updateBudget(
+                currentUser,
+                props.totalBudget,
+                props.type === "outcome" ? -amount : +amount
+              );
+              goBackHandler();
+            }
           }}
         >
           ADD

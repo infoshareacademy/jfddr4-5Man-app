@@ -6,6 +6,8 @@ import {
   orderBy,
   getDocs,
   addDoc,
+  updateDoc,
+  doc,
 } from "firebase/firestore";
 
 const firebaseConfig = {
@@ -70,4 +72,9 @@ export const addTransaction = (
       } ${new Date().getHours()}:${new Date().getMinutes()}:${new Date().getSeconds()}`
     ).getTime(),
   });
+};
+
+export const updateBudget = (userName, currentBudget, changedAmount) => {
+  const c = doc(db, `${userName} - data`, "TotalBudget");
+  updateDoc(c, { amount: +currentBudget + +changedAmount });
 };
