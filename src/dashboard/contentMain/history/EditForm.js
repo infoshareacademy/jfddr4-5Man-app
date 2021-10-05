@@ -11,6 +11,7 @@ import styled from "styled-components";
 import { yellow, red } from "@mui/material/colors";
 import { UserContext } from "../../../UserContext";
 import {
+  deleteTransaction,
   updateBudgetForExistingTransaction,
   updateTransaction,
 } from "../../../firebase";
@@ -165,6 +166,16 @@ export const EditForm = (props) => {
             }}
           >
             GO BACK
+          </Button>
+          <Button
+            variant="outlined"
+            sx={{ color: red[500], fontSize: 20 }}
+            onClick={() => {
+              deleteTransaction();
+              goBackHandler();
+            }}
+          >
+            DELETE
           </Button>
         </ButtonsWrapper>
       </FormWrapper>

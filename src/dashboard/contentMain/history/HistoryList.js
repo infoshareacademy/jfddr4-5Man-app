@@ -26,11 +26,10 @@ const ListItemAmount = styled.span`
   font-size: 30px;
   font-weight: bold;
   color: black;
-  max-width: 300px;
+  width: 300px;
   overflow: hidden;
   text-overflow: ellipsis;
   text-align: center;
-  width: 276px;
 `;
 const ListItemDate = styled.span`
   font-size: 25px;
@@ -40,6 +39,8 @@ const ListItemDate = styled.span`
 const ListItemDescription = styled.span`
   font-size: 25px;
   color: black;
+  width: 405px;
+  text-align: center;
 `;
 const ListItemId = styled.span`
   display: none;

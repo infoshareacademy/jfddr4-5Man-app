@@ -108,3 +108,5 @@ export const updateBudgetForExistingTransaction = (
   const amount = +changedAmount - +initialAmount;
   updateDoc(c, { amount: currentBudget + amount });
 };
+
+export const deleteTransaction = () => {};
