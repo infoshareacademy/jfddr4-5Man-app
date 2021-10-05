@@ -90,6 +90,7 @@ export function ContentMain() {
               historyDatabase={compiledHistoryDatabase}
               setDateToDisplay={setDateToDisplay}
               categories={categories}
+              totalBudget={totalBudget}
             ></History>
           </Route>
           <Route exact path="/main/settings">

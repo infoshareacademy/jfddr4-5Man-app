@@ -10,7 +10,10 @@ import {
 } from "@mui/material";
 import { yellow, red } from "@mui/material/colors";
 import { UserContext } from "../../../../UserContext";
-import { addTransaction, updateBudget } from "../../../../firebase";
+import {
+  addTransaction,
+  updateBudgetForNewTransaction,
+} from "../../../../firebase";
 
 const FormWrapper = styled.div`
   padding: 20px;
@@ -286,7 +289,7 @@ export const TransactionForm = (props) => {
                 props.type === "outcome" ? category : "Income",
                 date
               );
-              updateBudget(
+              updateBudgetForNewTransaction(
                 currentUser,
                 props.totalBudget,
                 props.type === "outcome" ? -amount : +amount

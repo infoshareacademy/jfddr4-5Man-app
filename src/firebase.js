@@ -74,7 +74,37 @@ export const addTransaction = (
   });
 };
 
-export const updateBudget = (userName, currentBudget, changedAmount) => {
+export const updateBudgetForNewTransaction = (
+  userName,
+  currentBudget,
+  changedAmount
+) => {
   const c = doc(db, `${userName} - data`, "TotalBudget");
   updateDoc(c, { amount: +currentBudget + +changedAmount });
+};
+
+export const updateTransaction = (
+  userName,
+  amount,
+  description,
+  category,
+  id
+) => {
+  const c = doc(db, `${userName} - transactions`, `${id}`);
+  updateDoc(c, {
+    amount: +amount,
+    description: description,
+    category: category,
+  });
+};
+
+export const updateBudgetForExistingTransaction = (
+  userName,
+  currentBudget,
+  changedAmount,
+  initialAmount
+) => {
+  const c = doc(db, `${userName} - data`, "TotalBudget");
+  const amount = +changedAmount - +initialAmount;
+  updateDoc(c, { amount: currentBudget + amount });
 };

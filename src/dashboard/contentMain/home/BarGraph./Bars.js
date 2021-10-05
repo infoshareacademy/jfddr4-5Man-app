@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import OneBar from "./OneBar";
+import { v4 as uuidv4 } from "uuid";
 
 const BarsWrapper = styled.div`
   display: flex;
@@ -17,7 +18,7 @@ const Bars = (props) => {
     <BarsWrapper>
       {days.map((data) => {
         return (
-          <OneBar key={data} day={data} database={props.database}></OneBar>
+          <OneBar key={uuidv4()} day={data} database={props.database}></OneBar>
         );
       })}
     </BarsWrapper>

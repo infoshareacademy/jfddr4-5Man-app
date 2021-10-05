@@ -1,12 +1,19 @@
 import {
+  Button,
   FormControl,
   InputLabel,
   MenuItem,
   Select,
   TextField,
 } from "@mui/material";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import styled from "styled-components";
+import { yellow, red } from "@mui/material/colors";
+import { UserContext } from "../../../UserContext";
+import {
+  updateBudgetForExistingTransaction,
+  updateTransaction,
+} from "../../../firebase";
 
 const FormWrapper = styled.div`
   padding: 20px;
@@ -21,7 +28,7 @@ const ButtonsWrapper = styled.div`
 `;
 const ErrorWrapper = styled.div`
   width: 235px;
-  height: fit-content;
+  height: 15px;
   font-size: 15px;
   color: red;
   margin-bottom: 20px;
@@ -30,6 +37,7 @@ const ErrorWrapper = styled.div`
 
 export const EditForm = (props) => {
   const [errorMessage, setErrorMessage] = useState("");
+  const currentUser = useContext(UserContext);
 
   const setCategoryMenuItems = (categories) => {
     return categories.map((data) => {
@@ -41,10 +49,26 @@ export const EditForm = (props) => {
     });
   };
 
+  const goBackHandler = () => {
+    props.setTransactionData("");
+    document.querySelector(".opaquePanel").classList.remove("displayed");
+    document.querySelector(".coverPanel").classList.remove("displayed");
+  };
+
+  const validate = () => {
+    let valid = true;
+    if (props.transactionData.amount <= 0) {
+      setErrorMessage("Invalid amount");
+      valid = false;
+      return valid;
+    }
+    return valid;
+  };
+
   return (
     props.transactionData && (
       <FormWrapper>
-        <ErrorWrapper></ErrorWrapper>
+        <ErrorWrapper>{errorMessage}</ErrorWrapper>
         <TextField
           label="Amount"
           type="number"
@@ -68,6 +92,7 @@ export const EditForm = (props) => {
                 description: props.transactionData.description,
                 amount: event.target.value,
                 id: props.transactionData.id,
+                initialAmount: props.transactionData.initialAmount,
               });
             }
           }}
@@ -82,6 +107,7 @@ export const EditForm = (props) => {
                 description: event.target.value,
                 amount: props.transactionData.amount,
                 id: props.transactionData.id,
+                initialAmount: props.transactionData.initialAmount,
               });
             }
           }}
@@ -98,6 +124,7 @@ export const EditForm = (props) => {
                 description: props.transactionData.description,
                 amount: props.transactionData.amount,
                 id: props.transactionData.id,
+                initialAmount: props.transactionData.initialAmount,
               });
             }}
           >
@@ -105,6 +132,41 @@ export const EditForm = (props) => {
               setCategoryMenuItems(props.categories)}
           </Select>
         </FormControl>
+        <ButtonsWrapper>
+          <Button
+            variant="outlined"
+            sx={{ color: yellow[500], fontSize: 20 }}
+            onClick={() => {
+              if (validate() === true) {
+                updateTransaction(
+                  currentUser,
+                  props.transactionData.amount,
+                  props.transactionData.description,
+                  props.transactionData.category,
+                  props.transactionData.id
+                );
+                updateBudgetForExistingTransaction(
+                  currentUser,
+                  props.totalBudget,
+                  props.transactionData.amount,
+                  props.transactionData.initialAmount
+                );
+                goBackHandler();
+              }
+            }}
+          >
+            ADD
+          </Button>
+          <Button
+            variant="outlined"
+            sx={{ color: red[500], fontSize: 20 }}
+            onClick={() => {
+              goBackHandler();
+            }}
+          >
+            GO BACK
+          </Button>
+        </ButtonsWrapper>
       </FormWrapper>
     )
   );

@@ -33,7 +33,7 @@ const OpaquePanel = styled.div`
 
 export const History = (props) => {
   const [sortOrder, setSortOrder] = useState("newest");
-  const [category, chooseCategory] = useState("");
+  const [category, chooseCategory] = useState("All");
   const [transactionData, setTransactionData] = useState("");
 
   return (
@@ -57,6 +57,7 @@ export const History = (props) => {
           transactionData={transactionData}
           setTransactionData={setTransactionData}
           categories={props.categories}
+          totalBudget={props.totalBudget}
         ></EditForm>
       </CoverPanel>
       <OpaquePanel className="opaquePanel"></OpaquePanel>

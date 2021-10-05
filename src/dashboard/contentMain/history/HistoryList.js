@@ -102,6 +102,8 @@ export const HistoryList = (props) => {
                 amount:
                   +event.currentTarget.childNodes[2].outerText.split(" ")[0],
                 id: event.currentTarget.childNodes[4].outerText,
+                initialAmount:
+                  +event.currentTarget.childNodes[2].outerText.split(" ")[0],
               });
               document.querySelector(".opaquePanel").classList.add("displayed");
               document.querySelector(".coverPanel").classList.add("displayed");

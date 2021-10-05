@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import styled from "styled-components";
 import { DateContext } from "../DateContext";
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
@@ -65,15 +65,7 @@ export const HistoryNav = (props) => {
   };
 
   const setCategoryMenuItems = (categories) => {
-    const changedCategories = categories;
-    if (
-      changedCategories.find((data) => {
-        return data.id === "All";
-      }) === undefined
-    ) {
-      changedCategories.unshift({ id: "All" });
-    }
-    return changedCategories.map((data) => {
+    return categories.map((data) => {
       return (
         <MenuItem key={data.id} value={data.id}>
           {data.id}
@@ -82,72 +74,84 @@ export const HistoryNav = (props) => {
     });
   };
 
-  useEffect(() => {
-    props.chooseCategory("All");
-  }, []);
+  const setChangedCategories = (initialCategories) => {
+    let returnArray = initialCategories;
+    if (
+      returnArray.find((data) => {
+        return data.id === "All";
+      }) === undefined
+    ) {
+      returnArray = [{ id: "All" }, ...returnArray];
+    }
+    return returnArray;
+  };
+
+  const changedCategories = setChangedCategories(props.categories);
 
   return (
-    <HistoryNavWrapper>
-      <FormControl>
-        <InputLabel id="monthSelect">Month</InputLabel>
-        <Select
-          labelId="monthSelect"
-          label="Month"
-          value={dateToDisplay.month}
-          onChange={(event) => {
-            props.setDateToDisplay({
-              month: event.target.value,
-              year: dateToDisplay.year,
-            });
-          }}
-        >
-          {setMonthMenuItems()}
-        </Select>
-      </FormControl>
-      <FormControl>
-        <InputLabel id="yearSelect">Year</InputLabel>
-        <Select
-          labelId="yearSelect"
-          label="Year"
-          value={dateToDisplay.year}
-          onChange={(event) => {
-            props.setDateToDisplay({
-              month: dateToDisplay.month,
-              year: event.target.value,
-            });
-          }}
-        >
-          {setYearMenuItems()}
-        </Select>
-      </FormControl>
-      <FormControl sx={{ width: 150 }}>
-        <InputLabel id="categorySelect">Category</InputLabel>
-        <Select
-          labelId="categorySelect"
-          label="Category"
-          value={props.category}
-          onChange={(event) => {
-            props.chooseCategory(event.target.value);
-          }}
-        >
-          {props.categories.length !== 0 &&
-            setCategoryMenuItems(props.categories)}
-        </Select>
-      </FormControl>
-      <FormControl>
-        <InputLabel id="orderSelect">Sort by</InputLabel>
-        <Select
-          labelId="orderSelect"
-          label="Sort by"
-          value={props.sortOrder}
-          onChange={(event) => {
-            props.setSortOrder(event.target.value);
-          }}
-        >
-          <MenuItem value={"newest"}>{"Newest"}</MenuItem>
-          <MenuItem value={"oldest"}>{"Oldest"}</MenuItem>
-        </Select>
-      </FormControl>
-    </HistoryNavWrapper>
+    changedCategories && (
+      <HistoryNavWrapper>
+        <FormControl>
+          <InputLabel id="monthSelect">Month</InputLabel>
+          <Select
+            labelId="monthSelect"
+            label="Month"
+            value={dateToDisplay.month}
+            onChange={(event) => {
+              props.setDateToDisplay({
+                month: event.target.value,
+                year: dateToDisplay.year,
+              });
+            }}
+          >
+            {setMonthMenuItems()}
+          </Select>
+        </FormControl>
+        <FormControl>
+          <InputLabel id="yearSelect">Year</InputLabel>
+          <Select
+            labelId="yearSelect"
+            label="Year"
+            value={dateToDisplay.year}
+            onChange={(event) => {
+              props.setDateToDisplay({
+                month: dateToDisplay.month,
+                year: event.target.value,
+              });
+            }}
+          >
+            {setYearMenuItems()}
+          </Select>
+        </FormControl>
+        <FormControl sx={{ width: 150 }}>
+          <InputLabel id="categorySelect">Category</InputLabel>
+          <Select
+            labelId="categorySelect"
+            label="Category"
+            value={props.category}
+            onChange={(event) => {
+              props.chooseCategory(event.target.value);
+            }}
+          >
+            {props.categories.length !== 0 &&
+              setCategoryMenuItems(changedCategories)}
+          </Select>
+        </FormControl>
+        <FormControl>
+          <InputLabel id="orderSelect">Sort by</InputLabel>
+          <Select
+            labelId="orderSelect"
+            label="Sort by"
+            value={props.sortOrder}
+            onChange={(event) => {
+              props.setSortOrder(event.target.value);
+            }}
+          >
+            <MenuItem value={"newest"}>{"Newest"}</MenuItem>
+            <MenuItem value={"oldest"}>{"Oldest"}</MenuItem>
+          </Select>
+        </FormControl>
+      </HistoryNavWrapper>
+    )
   );
 };
