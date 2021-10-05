@@ -14,12 +14,17 @@ const ListItem = styled.div`
 const ListItemCategory = styled.span`
   font-size: 25px;
   color: white;
-  width: 100px;
+  width: 120px;
 `;
 const ListItemAmount = styled.span`
   font-size: 25px;
   font-weight: bold;
   color: white;
+  max-width: 300px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  position: relative;
+  right: 10px;
 `;
 const ListItemDate = styled.span`
   font-size: 25px;

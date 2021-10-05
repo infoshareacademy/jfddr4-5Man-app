@@ -27,11 +27,12 @@ const DateWrapper = styled.div`
   display: flex;
 `;
 const ErrorWrapper = styled.div`
-  width: 200px;
-  height: 15px;
+  width: 235px;
+  height: fit-content;
   font-size: 15px;
   color: red;
   margin-bottom: 20px;
+  text-align: center;
 `;
 
 export const TransactionForm = (props) => {
@@ -43,7 +44,9 @@ export const TransactionForm = (props) => {
     month: new Date().getMonth() + 1,
     year: new Date().getFullYear(),
   });
-  const [errorMessage, setErrorMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState(
+    "Please make sure that you set the right date"
+  );
   const currentUser = useContext(UserContext);
 
   const setCategoryMenuItems = (categories) => {
@@ -84,32 +87,60 @@ export const TransactionForm = (props) => {
 
   const setMonthMenuItems = () => {
     const currentMonth = new Date().getMonth() + 1;
-    const months = [];
-    for (let i = 1; i <= currentMonth; i++) {
-      months.push(i);
+    const currentYear = new Date().getFullYear();
+    if (currentYear === date.year) {
+      const months = [];
+      for (let i = 1; i <= currentMonth; i++) {
+        months.push(i);
+      }
+      return months.reverse().map((data) => {
+        return (
+          <MenuItem key={data} value={data}>
+            {data < 10 ? `0${data}` : data}
+          </MenuItem>
+        );
+      });
+    } else {
+      const months = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+      return months.reverse().map((data) => {
+        return (
+          <MenuItem key={data} value={data}>
+            {data < 10 ? `0${data}` : data}
+          </MenuItem>
+        );
+      });
     }
-    return months.reverse().map((data) => {
-      return (
-        <MenuItem key={data} value={data}>
-          {data < 10 ? `0${data}` : data}
-        </MenuItem>
-      );
-    });
   };
 
   const setDayMenuItems = () => {
     const currentDay = new Date().getDate();
-    const days = [];
-    for (let i = 1; i <= currentDay; i++) {
-      days.push(i);
+    const currentMonth = new Date().getMonth() + 1;
+    const currentYear = new Date().getFullYear();
+    if (currentYear === date.year && currentMonth === date.month) {
+      const days = [];
+      for (let i = 1; i <= currentDay; i++) {
+        days.push(i);
+      }
+      return days.reverse().map((data) => {
+        return (
+          <MenuItem key={data} value={data}>
+            {data < 10 ? `0${data}` : data}
+          </MenuItem>
+        );
+      });
+    } else {
+      const days = [
+        1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
+        21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31,
+      ];
+      return days.reverse().map((data) => {
+        return (
+          <MenuItem key={data} value={data}>
+            {data < 10 ? `0${data}` : data}
+          </MenuItem>
+        );
+      });
     }
-    return days.reverse().map((data) => {
-      return (
-        <MenuItem key={data} value={data}>
-          {data < 10 ? `0${data}` : data}
-        </MenuItem>
-      );
-    });
   };
 
   const goBackHandler = () => {
@@ -145,7 +176,21 @@ export const TransactionForm = (props) => {
         type="number"
         value={amount}
         onChange={(event) => {
-          setAmount(event.target.value);
+          const decimalValidation = (value) => {
+            let validate = true;
+            if ((value + "").search(/[.]/g) !== -1) {
+              if ((value + "").split(".")[1].length > 2) {
+                validate = false;
+              }
+            }
+            return validate;
+          };
+          if (
+            event.target.value.length < 15 &&
+            decimalValidation(event.target.value)
+          ) {
+            setAmount(event.target.value);
+          }
         }}
       ></TextField>
       <TextField

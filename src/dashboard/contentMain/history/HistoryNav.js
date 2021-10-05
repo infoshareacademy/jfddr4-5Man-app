@@ -1,33 +1,16 @@
+import { useContext } from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { DateContext } from "../DateContext";
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
-import { useContext, useState } from "react";
-import { DateContext } from "../../DateContext";
 
-const GraphNavWrapper = styled.div`
+const HistoryNavWrapper = styled.div`
+  width: 100%;
   display: flex;
   justify-content: center;
-  margin-top: 20px;
+  margin-bottom: 30px;
 `;
 
-export const GraphNav = (props) => {
-  const initialChartSetter = () => {
-    if (
-      window.location.pathname === "/main/home" ||
-      window.location.pathname === "/main/home/piechart"
-    ) {
-      return "piechart";
-    } else {
-      return "barchart";
-    }
-  };
-
-  const [chart, setChart] = useState(initialChartSetter());
-
-  const chartChanger = (event) => {
-    setChart(event.target.value);
-  };
-
+export const HistoryNav = (props) => {
   const dateToDisplay = useContext(DateContext);
 
   const setYearMenuItems = () => {
@@ -81,24 +64,25 @@ export const GraphNav = (props) => {
     }
   };
 
+  const setCategoryMenuItems = (categories) => {
+    if (
+      categories.find((data) => {
+        return data.id === "All";
+      }) === undefined
+    ) {
+      categories.unshift({ id: "All" });
+    }
+    return categories.map((data) => {
+      return (
+        <MenuItem key={data.id} value={data.id}>
+          {data.id}
+        </MenuItem>
+      );
+    });
+  };
+
   return (
-    <GraphNavWrapper>
-      <FormControl>
-        <InputLabel id="chartSelect">Chart</InputLabel>
-        <Select
-          labelId="chartSelect"
-          label="Chart"
-          value={chart}
-          onChange={chartChanger}
-        >
-          <MenuItem value="piechart">
-            <Link to="/main/home/piechart">Pie Chart</Link>
-          </MenuItem>
-          <MenuItem value="barchart">
-            <Link to="/main/home/barchart">Bar Chart</Link>
-          </MenuItem>
-        </Select>
-      </FormControl>
+    <HistoryNavWrapper>
       <FormControl>
         <InputLabel id="monthSelect">Month</InputLabel>
         <Select
@@ -131,6 +115,34 @@ export const GraphNav = (props) => {
           {setYearMenuItems()}
         </Select>
       </FormControl>
-    </GraphNavWrapper>
+      <FormControl sx={{ width: 150 }}>
+        <InputLabel id="categorySelect">Category</InputLabel>
+        <Select
+          labelId="categorySelect"
+          label="Category"
+          value={props.category}
+          onChange={(event) => {
+            props.chooseCategory(event.target.value);
+          }}
+        >
+          {props.categories.length !== 0 &&
+            setCategoryMenuItems(props.categories)}
+        </Select>
+      </FormControl>
+      <FormControl>
+        <InputLabel id="orderSelect">Sort by</InputLabel>
+        <Select
+          labelId="orderSelect"
+          label="Sort by"
+          value={props.sortOrder}
+          onChange={(event) => {
+            props.setSortOrder(event.target.value);
+          }}
+        >
+          <MenuItem value={"newest"}>{"Newest"}</MenuItem>
+          <MenuItem value={"oldest"}>{"Oldest"}</MenuItem>
+        </Select>
+      </FormControl>
+    </HistoryNavWrapper>
   );
 };

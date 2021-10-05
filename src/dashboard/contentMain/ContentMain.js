@@ -16,6 +16,7 @@ import {
 } from "../../firebase";
 import { UserContext } from "../../UserContext";
 import { Home } from "./home/Home";
+import { History } from "./history/History";
 
 export function ContentMain() {
   const [currentCurrency, changeCurrentCurrency] = useState("");
@@ -61,6 +62,8 @@ export function ContentMain() {
     transactions
   );
 
+  console.log(compiledHistoryDatabase);
+
   const totalBudget = getTotalBudget(userInfo);
 
   return (
@@ -85,7 +88,11 @@ export function ContentMain() {
             <section className="contentMainSection">budget</section>
           </Route>
           <Route exact path="/main/history">
-            <section className="contentMainSection">history</section>
+            <History
+              historyDatabase={compiledHistoryDatabase}
+              setDateToDisplay={setDateToDisplay}
+              categories={categories}
+            ></History>
           </Route>
           <Route exact path="/main/settings">
             <section className="contentMainSection">setting</section>

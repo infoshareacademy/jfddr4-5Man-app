@@ -44,25 +44,33 @@ const OneBar = (props) => {
     >
       {props.database.map((data1) => {
         return data1.dataPoints.map((data2) => {
-          return (
-            <OneSegment
-              style={{
-                backgroundColor: data1.color,
-                height: `${setSegmentHeight(
-                  data2,
-                  data1,
-                  props.day,
-                  daysMaxValues
-                )}%`,
-                marginBottom: setMarginBottom(data2, props.day),
-                minHeight: setMinHeight(data2, data1, props.day),
-                order: setOrder(data1, data2, props.day),
-                border: setBorder(data2, data1, props.day),
-              }}
-              title={`${setSegmentTitle(data2, props.day)} ${currency}`}
-              key={uuidv4()}
-            ></OneSegment>
-          );
+          if (data2 === undefined) {
+            return "";
+          } else if (data2.x !== props.day) {
+            return "";
+          } else if (data2.y === 0) {
+            return "";
+          } else {
+            return (
+              <OneSegment
+                style={{
+                  backgroundColor: data1.color,
+                  height: `${setSegmentHeight(
+                    data2,
+                    data1,
+                    props.day,
+                    daysMaxValues
+                  )}%`,
+                  marginBottom: setMarginBottom(data2, props.day),
+                  minHeight: setMinHeight(data2, data1, props.day),
+                  order: setOrder(data1, data2, props.day),
+                  border: setBorder(data2, data1, props.day),
+                }}
+                title={`${setSegmentTitle(data2, props.day)} ${currency}`}
+                key={uuidv4()}
+              ></OneSegment>
+            );
+          }
         });
       })}
       <SegmentDate>{props.day}</SegmentDate>

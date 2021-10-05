@@ -54,7 +54,7 @@ const Categories = (props) => {
     <CategoriesWrapper>
       {props.database.map((category) => {
         return (
-          <OneCategory key={category.name.toString()}>
+          <OneCategory key={category.name}>
             <CategoryColor
               style={{ backgroundColor: category.color }}
               title={`${setCategoryTitle(category)} ${currency}`}
