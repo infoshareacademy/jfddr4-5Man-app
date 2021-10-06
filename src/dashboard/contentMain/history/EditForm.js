@@ -28,12 +28,19 @@ const ButtonsWrapper = styled.div`
   display: flex;
 `;
 const ErrorWrapper = styled.div`
-  width: 235px;
+  width: 320px;
   height: 15px;
   font-size: 15px;
   color: red;
   margin-bottom: 20px;
   text-align: center;
+`;
+const ConfirmWrapper = styled.div`
+  display: none;
+  margin-top: 10px;
+`;
+const ConfirmMessage = styled.span`
+  color: red;
 `;
 
 export const EditForm = (props) => {
@@ -166,21 +173,51 @@ export const EditForm = (props) => {
             variant="outlined"
             sx={{ color: red[500], fontSize: 20 }}
             onClick={() => {
-              deleteTransaction(currentUser, props.transactionData.id);
-              updateBudgetForExistingTransaction(
-                currentUser,
-                props.totalBudget,
-                0,
-                props.transactionData.initialAmount,
-                props.transactionData.category,
-                props.transactionData.initialCategory
-              );
-              goBackHandler();
+              document
+                .querySelector(".confirmWrapper")
+                .classList.add("displayed");
             }}
           >
             DELETE
           </Button>
         </ButtonsWrapper>
+        <ConfirmWrapper className="confirmWrapper">
+          <ConfirmMessage>Are you sure ?</ConfirmMessage>
+          <ButtonsWrapper>
+            <Button
+              variant="outlined"
+              sx={{ color: red[500], fontSize: 20 }}
+              onClick={() => {
+                deleteTransaction(currentUser, props.transactionData.id);
+                updateBudgetForExistingTransaction(
+                  currentUser,
+                  props.totalBudget,
+                  0,
+                  props.transactionData.initialAmount,
+                  props.transactionData.category,
+                  props.transactionData.initialCategory
+                );
+                document
+                  .querySelector(".confirmWrapper")
+                  .classList.remove("displayed");
+                goBackHandler();
+              }}
+            >
+              YES
+            </Button>
+            <Button
+              variant="outlined"
+              sx={{ color: red[500], fontSize: 20 }}
+              onClick={() => {
+                document
+                  .querySelector(".confirmWrapper")
+                  .classList.remove("displayed");
+              }}
+            >
+              NO
+            </Button>
+          </ButtonsWrapper>
+        </ConfirmWrapper>
       </FormWrapper>
     )
   );
