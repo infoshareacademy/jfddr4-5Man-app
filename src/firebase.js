@@ -158,3 +158,22 @@ export const deleteTransaction = (userName, id) => {
   const c = doc(db, `${userName} - transactions`, id);
   deleteDoc(c);
 };
+
+export const updateCategory = (userName, color, name, id) => {
+  const c = doc(db, `${userName} - categories`, `${id}`);
+  updateDoc(c, { color: color, name: name });
+};
+
+export const updateTransactionsForCategoryChange = (
+  userName,
+  oldCategory,
+  newCategory,
+  transactions
+) => {
+  transactions.forEach((transaction) => {
+    transaction.category === oldCategory &&
+      updateDoc(doc(db, `${userName} - transactions`, transaction.id), {
+        category: newCategory,
+      });
+  });
+};

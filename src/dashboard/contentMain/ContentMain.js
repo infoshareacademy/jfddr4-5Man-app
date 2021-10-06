@@ -84,7 +84,10 @@ export function ContentMain() {
             ></Home>
           </Route>
           <Route exact path="/main/budget">
-            <Budget></Budget>
+            <Budget
+              categories={categories}
+              transactions={transactions}
+            ></Budget>
           </Route>
           <Route exact path="/main/history">
             <History
