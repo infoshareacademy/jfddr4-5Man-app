@@ -13,6 +13,7 @@ import {
   setSegmentHeight,
 } from "./utils";
 
+
 const BarWrapper = styled.div`
   display: flex;
   flex-direction: column;

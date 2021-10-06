@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { CurrencyContext } from "../../CurrencyContext";
 import { getIncomeSum, getOutcomeSum } from "./utils";
 
+
 const SummaryWrapper = styled.div`
   display: flex;
   flex-direction: column;

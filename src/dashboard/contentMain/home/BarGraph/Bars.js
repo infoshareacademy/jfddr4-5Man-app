@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import OneBar from "./OneBar";
 
+
 const BarsWrapper = styled.div`
   display: flex;
   height: 425px;
