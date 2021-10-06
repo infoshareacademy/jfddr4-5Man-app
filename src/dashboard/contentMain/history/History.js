@@ -9,6 +9,20 @@ const HistoryWrapper = styled.div`
   width: 100%;
   height: 100%;
   padding: 30px;
+  min-width: 1100px;
+  overflow-y: scroll;
+  ::-webkit-scrollbar {
+    width: 15px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #b49600;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #ffd600;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #ffd500a2;
+  }
 `;
 const CoverPanel = styled.div`
   position: absolute;

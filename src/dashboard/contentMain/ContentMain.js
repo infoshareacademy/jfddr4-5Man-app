@@ -17,6 +17,7 @@ import {
 import { UserContext } from "../../UserContext";
 import { Home } from "./home/Home";
 import { History } from "./history/History";
+import { Budget } from "./budget/Budget";
 
 export function ContentMain() {
   const [currentCurrency, changeCurrentCurrency] = useState("");
@@ -83,7 +84,7 @@ export function ContentMain() {
             ></Home>
           </Route>
           <Route exact path="/main/budget">
-            <section className="contentMainSection">budget</section>
+            <Budget></Budget>
           </Route>
           <Route exact path="/main/history">
             <History
