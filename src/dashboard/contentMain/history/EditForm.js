@@ -94,6 +94,7 @@ export const EditForm = (props) => {
                 amount: event.target.value,
                 id: props.transactionData.id,
                 initialAmount: props.transactionData.initialAmount,
+                initialCategory: props.transactionData.initialCategory,
               });
             }
           }}
@@ -109,6 +110,7 @@ export const EditForm = (props) => {
                 amount: props.transactionData.amount,
                 id: props.transactionData.id,
                 initialAmount: props.transactionData.initialAmount,
+                initialCategory: props.transactionData.initialCategory,
               });
             }
           }}
@@ -126,6 +128,7 @@ export const EditForm = (props) => {
                 amount: props.transactionData.amount,
                 id: props.transactionData.id,
                 initialAmount: props.transactionData.initialAmount,
+                initialCategory: props.transactionData.initialCategory,
               });
             }}
           >
@@ -150,13 +153,15 @@ export const EditForm = (props) => {
                   currentUser,
                   props.totalBudget,
                   props.transactionData.amount,
-                  props.transactionData.initialAmount
+                  props.transactionData.initialAmount,
+                  props.transactionData.category,
+                  props.transactionData.initialCategory
                 );
                 goBackHandler();
               }
             }}
           >
-            ADD
+            EDIT
           </Button>
           <Button
             variant="outlined"
@@ -171,7 +176,15 @@ export const EditForm = (props) => {
             variant="outlined"
             sx={{ color: red[500], fontSize: 20 }}
             onClick={() => {
-              deleteTransaction();
+              deleteTransaction(currentUser, props.transactionData.id);
+              updateBudgetForExistingTransaction(
+                currentUser,
+                props.totalBudget,
+                0,
+                props.transactionData.initialAmount,
+                props.transactionData.category,
+                props.transactionData.initialCategory
+              );
               goBackHandler();
             }}
           >

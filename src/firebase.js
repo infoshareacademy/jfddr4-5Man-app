@@ -8,6 +8,7 @@ import {
   addDoc,
   updateDoc,
   doc,
+  deleteDoc,
 } from "firebase/firestore";
 
 const firebaseConfig = {
@@ -102,11 +103,58 @@ export const updateBudgetForExistingTransaction = (
   userName,
   currentBudget,
   changedAmount,
-  initialAmount
+  initialAmount,
+  changedCategory,
+  initialCategory
 ) => {
   const c = doc(db, `${userName} - data`, "TotalBudget");
-  const amount = +changedAmount - +initialAmount;
+  const categoryComparison = compareCategories(
+    changedCategory,
+    initialCategory
+  );
+  const amount = computeAmount(
+    categoryComparison,
+    +changedAmount,
+    +initialAmount,
+    initialCategory
+  );
+
   updateDoc(c, { amount: currentBudget + amount });
 };
 
-export const deleteTransaction = () => {};
+const compareCategories = (changedCategory, initialCategory) => {
+  if (initialCategory === changedCategory) {
+    return "noChange";
+  }
+  if (initialCategory === "Income" && changedCategory !== "Income") {
+    return "IncomeToOutcome";
+  }
+  if (initialCategory !== "Income" && changedCategory === "Income") {
+    return "OutcomeToIncome";
+  }
+};
+
+const computeAmount = (
+  categoryComparison,
+  changedAmount,
+  initialAmount,
+  initialCategory
+) => {
+  if (categoryComparison === "noChange" && initialCategory === "Income") {
+    return changedAmount - initialAmount;
+  }
+  if (categoryComparison === "noChange" && initialCategory !== "Income") {
+    return initialAmount - changedAmount;
+  }
+  if (categoryComparison === "IncomeToOutcome") {
+    return -initialAmount * 2 - (changedAmount - initialAmount);
+  }
+  if (categoryComparison === "OutcomeToIncome") {
+    return initialAmount * 2 + (changedAmount - initialAmount);
+  }
+};
+
+export const deleteTransaction = (userName, id) => {
+  const c = doc(db, `${userName} - transactions`, id);
+  deleteDoc(c);
+};
