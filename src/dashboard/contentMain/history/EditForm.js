@@ -2,7 +2,6 @@ import {
   Button,
   FormControl,
   InputLabel,
-  MenuItem,
   Select,
   TextField,
 } from "@mui/material";
@@ -15,6 +14,7 @@ import {
   updateBudgetForExistingTransaction,
   updateTransaction,
 } from "../../../firebase";
+import { setCategoryMenuItems } from "./utils";
 
 const FormWrapper = styled.div`
   padding: 20px;
@@ -39,16 +39,6 @@ const ErrorWrapper = styled.div`
 export const EditForm = (props) => {
   const [errorMessage, setErrorMessage] = useState("");
   const currentUser = useContext(UserContext);
-
-  const setCategoryMenuItems = (categories) => {
-    return categories.map((data) => {
-      return (
-        <MenuItem key={data.id} value={data.id}>
-          {data.id}
-        </MenuItem>
-      );
-    });
-  };
 
   const goBackHandler = () => {
     props.setTransactionData("");

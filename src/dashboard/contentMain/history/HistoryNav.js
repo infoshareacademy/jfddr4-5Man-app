@@ -2,6 +2,12 @@ import { useContext } from "react";
 import styled from "styled-components";
 import { DateContext } from "../DateContext";
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
+import {
+  setCategoryMenuItems,
+  setChangedCategories,
+  setMonthMenuItems,
+  setYearMenuItems,
+} from "./utils";
 
 const HistoryNavWrapper = styled.div`
   width: 100%;
@@ -12,79 +18,6 @@ const HistoryNavWrapper = styled.div`
 
 export const HistoryNav = (props) => {
   const dateToDisplay = useContext(DateContext);
-
-  const setYearMenuItems = () => {
-    const currentYear = new Date().getFullYear();
-    const arrayToReturn = [
-      currentYear,
-      currentYear - 1,
-      currentYear - 2,
-      currentYear - 3,
-      currentYear - 4,
-      currentYear - 5,
-      currentYear - 6,
-      currentYear - 7,
-      currentYear - 8,
-      currentYear - 9,
-      currentYear - 10,
-    ];
-    return arrayToReturn.map((data) => {
-      return (
-        <MenuItem key={data} value={data}>
-          {data}
-        </MenuItem>
-      );
-    });
-  };
-
-  const setMonthMenuItems = () => {
-    const currentMonth = new Date().getMonth() + 1;
-    const currentYear = new Date().getFullYear();
-    if (currentYear === dateToDisplay.year) {
-      const months = [];
-      for (let i = 1; i <= currentMonth; i++) {
-        months.push(i);
-      }
-      return months.reverse().map((data) => {
-        return (
-          <MenuItem key={data} value={data}>
-            {data < 10 ? `0${data}` : data}
-          </MenuItem>
-        );
-      });
-    } else {
-      const months = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
-      return months.reverse().map((data) => {
-        return (
-          <MenuItem key={data} value={data}>
-            {data < 10 ? `0${data}` : data}
-          </MenuItem>
-        );
-      });
-    }
-  };
-
-  const setCategoryMenuItems = (categories) => {
-    return categories.map((data) => {
-      return (
-        <MenuItem key={data.id} value={data.id}>
-          {data.id}
-        </MenuItem>
-      );
-    });
-  };
-
-  const setChangedCategories = (initialCategories) => {
-    let returnArray = initialCategories;
-    if (
-      returnArray.find((data) => {
-        return data.id === "All";
-      }) === undefined
-    ) {
-      returnArray = [{ id: "All" }, ...returnArray];
-    }
-    return returnArray;
-  };
 
   const changedCategories = setChangedCategories(props.categories);
 
@@ -104,7 +37,7 @@ export const HistoryNav = (props) => {
               });
             }}
           >
-            {setMonthMenuItems()}
+            {setMonthMenuItems(dateToDisplay.year)}
           </Select>
         </FormControl>
         <FormControl>

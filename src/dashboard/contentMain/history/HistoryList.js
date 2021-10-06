@@ -2,6 +2,7 @@ import { useContext } from "react";
 import styled from "styled-components";
 import { CurrencyContext } from "../CurrencyContext";
 import { DateContext } from "../DateContext";
+import { getDate, orderAndFilterData } from "./utils";
 
 const HistoryListWrapper = styled.div``;
 const ListItem = styled.div`
@@ -49,40 +50,6 @@ const ListItemId = styled.span`
 export const HistoryList = (props) => {
   const currency = useContext(CurrencyContext);
   const date = useContext(DateContext);
-
-  const orderAndFilterData = (database, order, category, date) => {
-    if (database.length === 0) {
-      return [];
-    } else {
-      const sortedDatabase = database
-        .map((data1) => {
-          const date = new Date(data1.date);
-          return {
-            ...data1,
-            month: date.getMonth() + 1,
-            year: date.getFullYear(),
-          };
-        })
-        .filter((data2) => data2.year === date.year)
-        .filter((data3) => data3.month === date.month)
-        .filter((data4) =>
-          category === "All" ? data4 === data4 : data4.category === category
-        )
-        .sort((data5, data6) => {
-          return order === "newest"
-            ? data6.date - data5.date
-            : data5.date - data6.date;
-        });
-      return sortedDatabase;
-    }
-  };
-
-  const getDate = (timestamp) => {
-    const date = new Date(timestamp);
-    return `${date.getDate() < 10 ? `0${date.getDate()}` : date.getDate()}.${
-      date.getMonth() + 1 < 10 ? `0${date.getMonth() + 1}` : date.getMonth() + 1
-    }.${date.getFullYear()}`;
-  };
 
   return (
     <HistoryListWrapper>
