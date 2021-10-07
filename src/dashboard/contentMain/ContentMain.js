@@ -32,13 +32,13 @@ export function ContentMain() {
   const currentUser = useContext(UserContext);
 
   useEffect(() => {
-    fetchCategories(currentUser).then(setCategories);
+    fetchCategories(currentUser, setCategories);
   }, [currentUser]);
   useEffect(() => {
-    fetchTransactions(currentUser).then(setTransactions);
+    fetchTransactions(currentUser, setTransactions);
   }, [currentUser]);
   useEffect(() => {
-    fetchUserInfo(currentUser).then(setUserInfo);
+    fetchUserInfo(currentUser, setUserInfo);
   }, [currentUser]);
   useEffect(() => {
     changeCurrentCurrency(

@@ -152,8 +152,10 @@ export const CategoryForm = (props) => {
           </ButtonsWrapper>
           <ConfirmWrapper className="confirmWrapper">
             <ConfirmMessage>
-              Are you sure ?<br /> This will delete all the transactions for the
-              given category.
+              Are you sure ?<br />
+              This will delete all the transactions for the given category,
+              <br />
+              but will not update your budget.
             </ConfirmMessage>
             <ButtonsWrapper>
               <Button

@@ -9,6 +9,7 @@ import {
   updateDoc,
   doc,
   deleteDoc,
+  onSnapshot,
 } from "firebase/firestore";
 
 const firebaseConfig = {
@@ -22,37 +23,37 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore();
 
-export const fetchCategories = (userName) => {
+export const fetchCategories = (userName, setCategories) => {
   const c = collection(db, `${userName} - categories`);
   const q = query(c, orderBy("createdAt"));
-  return getDocs(q).then((response) => {
+  return onSnapshot(q, (response) => {
     const returnArray = [];
     response.forEach((doc) => {
       returnArray.push({ ...doc.data(), id: doc.id });
     });
-    return returnArray;
+    setCategories(returnArray);
   });
 };
 
-export const fetchTransactions = (userName) => {
+export const fetchTransactions = (userName, setTransactions) => {
   const c = collection(db, `${userName} - transactions`);
-  return getDocs(c).then((response) => {
+  return onSnapshot(c, (response) => {
     const returnArray = [];
     response.forEach((doc) => {
       returnArray.push({ ...doc.data(), id: doc.id });
     });
-    return returnArray;
+    setTransactions(returnArray);
   });
 };
 
-export const fetchUserInfo = (userName) => {
+export const fetchUserInfo = (userName, setUserInfo) => {
   const c = collection(db, `${userName} - data`);
-  return getDocs(c).then((response) => {
+  return onSnapshot(c, (response) => {
     const returnArray = [];
     response.forEach((doc) => {
       returnArray.push({ ...doc.data(), id: doc.id });
     });
-    return returnArray;
+    setUserInfo(returnArray);
   });
 };
 
