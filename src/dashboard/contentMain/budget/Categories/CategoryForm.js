@@ -12,7 +12,7 @@ import {
 } from "../../../../firebase";
 import { UserContext } from "../../../../UserContext";
 
-const FormWrapper = styled.div`
+const CategoryFormInsideWrapper = styled.div`
   padding: 20px;
   background-color: white;
   border-radius: 25px;
@@ -75,7 +75,7 @@ export const CategoryForm = (props) => {
   };
 
   return (
-    <FormWrapper>
+    <CategoryFormInsideWrapper>
       {props.categoryData.initialName !== "" ? (
         <>
           <ErrorWrapper>{errorMessage}</ErrorWrapper>
@@ -252,6 +252,6 @@ export const CategoryForm = (props) => {
           </ButtonsWrapper>
         </>
       )}
-    </FormWrapper>
+    </CategoryFormInsideWrapper>
   );
 };

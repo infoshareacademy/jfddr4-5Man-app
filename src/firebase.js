@@ -203,3 +203,8 @@ export const addCategory = (userName, name, color) => {
     createdAt: +new Date(),
   });
 };
+
+export const updateBudget = (userName, currentBudget, changedAmount) => {
+  const c = doc(db, `${userName} - data`, "TotalBudget");
+  updateDoc(c, { amount: +currentBudget + +changedAmount });
+};

@@ -6,6 +6,7 @@ import { CategoryForm } from "./Categories/CategoryForm";
 import { useState } from "react";
 import { ColorPicker } from "./Categories/ColorPicker";
 import "./budget.scss";
+import { TotalBudgetForm } from "./TotalBudgetPanel/TotalBudgetForm";
 
 const BudgetWrapper = styled.div`
   width: 100%;
@@ -45,7 +46,16 @@ const ColorPickerOutsideWrapper = styled.div`
   width: 100%;
   height: 100%;
 `;
-const CategoryFromOutsideWrapper = styled.div`
+const CategoryFormOutsideWrapper = styled.div`
+  display: none;
+  z-index: 10;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+`;
+const TotalBudgetFormOutsideWrapper = styled.div`
   display: none;
   z-index: 10;
   position: absolute;
@@ -57,6 +67,7 @@ const CategoryFromOutsideWrapper = styled.div`
 
 export const Budget = (props) => {
   const [categoryData, setCategoryData] = useState("");
+  const [operationType, setOperationType] = useState("");
   return (
     <BudgetWrapper>
       <Categories
@@ -64,18 +75,27 @@ export const Budget = (props) => {
         setCategoryData={setCategoryData}
       ></Categories>
       <BudgetWrapperRight>
-        <TotalBudgetPanel totalBudget={props.totalBudget}></TotalBudgetPanel>
+        <TotalBudgetPanel
+          totalBudget={props.totalBudget}
+          setOperationType={setOperationType}
+        ></TotalBudgetPanel>
         <Planner></Planner>
       </BudgetWrapperRight>
       <CoverPanel className="coverPanel">
-        <CategoryFromOutsideWrapper className="categoryForm">
+        <CategoryFormOutsideWrapper className="categoryForm">
           <CategoryForm
             categoryData={categoryData}
             categories={props.categories}
             setCategoryData={setCategoryData}
             transactions={props.transactions}
           ></CategoryForm>
-        </CategoryFromOutsideWrapper>
+        </CategoryFormOutsideWrapper>
+        <TotalBudgetFormOutsideWrapper className="budgetForm">
+          <TotalBudgetForm
+            operationType={operationType}
+            totalBudget={props.totalBudget}
+          ></TotalBudgetForm>
+        </TotalBudgetFormOutsideWrapper>
         <ColorPickerOutsideWrapper className="colorPicker">
           <ColorPicker
             setCategoryData={setCategoryData}

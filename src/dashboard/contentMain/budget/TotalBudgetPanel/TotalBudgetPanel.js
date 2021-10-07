@@ -19,10 +19,16 @@ const TotalBudgetDisplay = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 0 20px;
+  margin: 0 35px;
 `;
-const TotalBudgetText = styled.h3``;
-const TotalBudgetAmount = styled.h2``;
+const TotalBudgetText = styled.h3`
+  font-weight: normal;
+  font-size: 30px;
+  margin-bottom: 15px;
+`;
+const TotalBudgetAmount = styled.h2`
+  font-size: 40px;
+`;
 
 export const TotalBudgetPanel = (props) => {
   const currency = useContext(CurrencyContext);
@@ -30,7 +36,14 @@ export const TotalBudgetPanel = (props) => {
     <TotalBudgetPanelWrapper>
       {props.totalBudget && (
         <>
-          <IconButton>
+          <IconButton
+            onClick={() => {
+              props.setOperationType("add");
+              document.querySelector(".opaquePanel").classList.add("displayed");
+              document.querySelector(".coverPanel").classList.add("displayed");
+              document.querySelector(".budgetForm").classList.add("displayed");
+            }}
+          >
             <AddCircleIcon sx={{ color: yellow[500], fontSize: 80 }} />
           </IconButton>
           <TotalBudgetDisplay>
@@ -39,7 +52,14 @@ export const TotalBudgetPanel = (props) => {
               2
             )} ${currency}`}</TotalBudgetAmount>
           </TotalBudgetDisplay>
-          <IconButton>
+          <IconButton
+            onClick={() => {
+              props.setOperationType("subtract");
+              document.querySelector(".opaquePanel").classList.add("displayed");
+              document.querySelector(".coverPanel").classList.add("displayed");
+              document.querySelector(".budgetForm").classList.add("displayed");
+            }}
+          >
             <RemoveCircleIcon sx={{ color: yellow[500], fontSize: 80 }} />
           </IconButton>
         </>
