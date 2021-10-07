@@ -193,3 +193,12 @@ export const deleteTransactionsForCategoryDelete = (
       deleteDoc(doc(db, `${userName} - transactions`, transaction.id));
   });
 };
+
+export const addCategory = (userName, name, color) => {
+  addDoc(collection(db, `${userName} - categories`), {
+    name: name,
+    color: color,
+    planner: 0,
+    createdAt: +new Date(),
+  });
+};

@@ -87,6 +87,7 @@ export function ContentMain() {
             <Budget
               categories={categories}
               transactions={transactions}
+              totalBudget={totalBudget}
             ></Budget>
           </Route>
           <Route exact path="/main/history">

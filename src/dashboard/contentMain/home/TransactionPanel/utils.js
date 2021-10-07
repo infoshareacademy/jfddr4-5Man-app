@@ -3,8 +3,8 @@ import { MenuItem } from "@mui/material";
 export const setCategoryMenuItems = (categories) => {
   return categories.map((data) => {
     return data.id !== "Income" ? (
-      <MenuItem key={data.id} value={data.id}>
-        {data.id}
+      <MenuItem key={data.id} value={data.name}>
+        {data.name}
       </MenuItem>
     ) : (
       ""

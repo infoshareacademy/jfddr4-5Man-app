@@ -1,4 +1,3 @@
-import { Category } from "@mui/icons-material";
 import styled from "styled-components";
 import AddIcon from "@mui/icons-material/Add";
 import { grey } from "@mui/material/colors";
@@ -81,6 +80,9 @@ export const Categories = (props) => {
                 document
                   .querySelector(".coverPanel")
                   .classList.add("displayed");
+                document
+                  .querySelector(".categoryForm")
+                  .classList.add("displayed");
               }}
             >
               <CategoryCircle
@@ -93,12 +95,19 @@ export const Categories = (props) => {
           );
         }
       })}
-      {props.categories.length < 9 && (
+      {props.categories.length < 8 && (
         <OneCategory
           key="addCategory"
           onClick={() => {
+            props.setCategoryData({
+              name: "",
+              initialName: "",
+              id: "",
+              color: "",
+            });
             document.querySelector(".opaquePanel").classList.add("displayed");
             document.querySelector(".coverPanel").classList.add("displayed");
+            document.querySelector(".categoryForm").classList.add("displayed");
           }}
         >
           <CategoryCircle style={{ backgroundColor: "#1C31E3" }}>

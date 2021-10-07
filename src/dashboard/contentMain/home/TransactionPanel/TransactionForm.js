@@ -56,6 +56,7 @@ export const TransactionForm = (props) => {
     setAmount("");
     setDescription("");
     chooseCategory("");
+    setErrorMessage("Please make sure that you set the right date");
     document.querySelector(".opaquePanel").classList.remove("displayed");
     document.querySelector(".coverPanel").classList.remove("displayed");
   };
