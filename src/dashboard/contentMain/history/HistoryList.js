@@ -21,13 +21,13 @@ const ListItem = styled.div`
 const ListItemCategory = styled.span`
   font-size: 35px;
   color: black;
-  width: 170px;
+  width: 270px;
 `;
 const ListItemAmount = styled.span`
   font-size: 30px;
   font-weight: bold;
   color: black;
-  width: 300px;
+  width: 400px;
   overflow: hidden;
   text-overflow: ellipsis;
   text-align: center;

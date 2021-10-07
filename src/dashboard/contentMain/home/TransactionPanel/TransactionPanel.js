@@ -102,7 +102,9 @@ export const TransactionPanel = (props) => {
         <BudgetDisplay title={`${totalBudget.toFixed(2)} ${currency}`}>{`${
           totalBudget.toFixed(2).toString().length < 11
             ? totalBudget.toFixed(2)
-            : "9999999999+"
+            : totalBudget > 0
+            ? "9999999999..."
+            : "-9999999999..."
         } ${currency}`}</BudgetDisplay>
       </BudgetWrapper>
       <CoverPanel className="coverPanel">

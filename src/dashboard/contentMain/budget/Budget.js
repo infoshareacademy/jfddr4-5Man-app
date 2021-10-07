@@ -12,6 +12,7 @@ const BudgetWrapper = styled.div`
   width: 100%;
   height: 100%;
   display: flex;
+  min-width: 1240px;
 `;
 const BudgetWrapperRight = styled.div`
   width: 100%;
@@ -79,7 +80,10 @@ export const Budget = (props) => {
           totalBudget={props.totalBudget}
           setOperationType={setOperationType}
         ></TotalBudgetPanel>
-        <Planner></Planner>
+        <Planner
+          categories={props.categories}
+          setOperationType={setOperationType}
+        ></Planner>
       </BudgetWrapperRight>
       <CoverPanel className="coverPanel">
         <CategoryFormOutsideWrapper className="categoryForm">

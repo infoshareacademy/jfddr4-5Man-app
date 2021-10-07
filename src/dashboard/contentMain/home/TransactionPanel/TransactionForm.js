@@ -96,7 +96,7 @@ export const TransactionForm = (props) => {
             return validate;
           };
           if (
-            event.target.value.length < 15 &&
+            event.target.value.length < 11 &&
             decimalValidation(event.target.value)
           ) {
             setAmount(event.target.value);

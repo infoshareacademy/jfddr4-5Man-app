@@ -9,7 +9,7 @@ const HistoryWrapper = styled.div`
   width: 100%;
   height: 100%;
   padding: 30px;
-  min-width: 1100px;
+  min-width: 1290px;
   overflow-y: scroll;
   ::-webkit-scrollbar {
     width: 15px;

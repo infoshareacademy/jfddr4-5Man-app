@@ -82,7 +82,7 @@ export const EditForm = (props) => {
               return validate;
             };
             if (
-              event.target.value.length < 15 &&
+              event.target.value.length < 11 &&
               decimalValidation(event.target.value)
             ) {
               props.setTransactionData({

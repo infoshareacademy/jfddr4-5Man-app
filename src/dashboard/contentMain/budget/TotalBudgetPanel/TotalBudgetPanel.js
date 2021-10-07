@@ -32,6 +32,7 @@ const TotalBudgetAmount = styled.h2`
 
 export const TotalBudgetPanel = (props) => {
   const currency = useContext(CurrencyContext);
+  const totalBudget = props.totalBudget;
   return (
     <TotalBudgetPanelWrapper>
       {props.totalBudget && (
@@ -48,9 +49,15 @@ export const TotalBudgetPanel = (props) => {
           </IconButton>
           <TotalBudgetDisplay>
             <TotalBudgetText>Total Budget</TotalBudgetText>
-            <TotalBudgetAmount>{`${props.totalBudget.toFixed(
-              2
-            )} ${currency}`}</TotalBudgetAmount>
+            <TotalBudgetAmount
+              title={`${totalBudget.toFixed(2)} ${currency}`}
+            >{`${
+              totalBudget.toFixed(2).toString().length < 11
+                ? totalBudget.toFixed(2)
+                : totalBudget > 0
+                ? "9999999999..."
+                : "-9999999999..."
+            } ${currency}`}</TotalBudgetAmount>
           </TotalBudgetDisplay>
           <IconButton
             onClick={() => {
