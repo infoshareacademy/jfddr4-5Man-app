@@ -4,6 +4,8 @@ import { useState } from "react";
 import { useContext } from "react";
 import styled from "styled-components";
 import {
+  deleteCategory,
+  deleteTransactionsForCategoryDelete,
   updateCategory,
   updateTransactionsForCategoryChange,
 } from "../../../../firebase";
@@ -128,7 +130,11 @@ export const CategoryForm = (props) => {
         <Button
           variant="outlined"
           sx={{ color: red[500], fontSize: 20 }}
-          onClick={() => {}}
+          onClick={() => {
+            document
+              .querySelector(".confirmWrapper")
+              .classList.add("displayed");
+          }}
         >
           DELETE
         </Button>
@@ -139,14 +145,29 @@ export const CategoryForm = (props) => {
           <Button
             variant="outlined"
             sx={{ color: red[500], fontSize: 20 }}
-            onClick={() => {}}
+            onClick={() => {
+              deleteCategory(currentUser, props.categoryData.id);
+              deleteTransactionsForCategoryDelete(
+                currentUser,
+                props.categoryData.initialName,
+                props.transactions
+              );
+              document
+                .querySelector(".confirmWrapper")
+                .classList.remove("displayed");
+              goBackHandler();
+            }}
           >
             YES
           </Button>
           <Button
             variant="outlined"
             sx={{ color: red[500], fontSize: 20 }}
-            onClick={() => {}}
+            onClick={() => {
+              document
+                .querySelector(".confirmWrapper")
+                .classList.remove("displayed");
+            }}
           >
             NO
           </Button>

@@ -160,7 +160,7 @@ export const deleteTransaction = (userName, id) => {
 };
 
 export const updateCategory = (userName, color, name, id) => {
-  const c = doc(db, `${userName} - categories`, `${id}`);
+  const c = doc(db, `${userName} - categories`, id);
   updateDoc(c, { color: color, name: name });
 };
 
@@ -175,5 +175,21 @@ export const updateTransactionsForCategoryChange = (
       updateDoc(doc(db, `${userName} - transactions`, transaction.id), {
         category: newCategory,
       });
+  });
+};
+
+export const deleteCategory = (userName, id) => {
+  const c = doc(db, `${userName} - categories`, id);
+  deleteDoc(c);
+};
+
+export const deleteTransactionsForCategoryDelete = (
+  userName,
+  category,
+  transactions
+) => {
+  transactions.forEach((transaction) => {
+    transaction.category === category &&
+      deleteDoc(doc(db, `${userName} - transactions`, transaction.id));
   });
 };
