@@ -58,7 +58,20 @@ export const Planner = (props) => {
               >
                 <PlannerItemTitle>{category.name}</PlannerItemTitle>
                 <PlannerItemPanelWrapper>
-                  <IconButton>
+                  <IconButton
+                    onClick={(event) => {
+                      props.setOperationType("add");
+                      document
+                        .querySelector(".opaquePanel")
+                        .classList.add("displayed");
+                      document
+                        .querySelector(".coverPanel")
+                        .classList.add("displayed");
+                      document
+                        .querySelector(".planerForm")
+                        .classList.add("displayed");
+                    }}
+                  >
                     <AddCircleIcon sx={{ color: yellow[500], fontSize: 45 }} />
                   </IconButton>
                   <PlannerItemPanelAmount>
@@ -70,7 +83,20 @@ export const Planner = (props) => {
                         : "-9999999999..."
                     } ${currency}`}
                   </PlannerItemPanelAmount>
-                  <IconButton>
+                  <IconButton
+                    onClick={() => {
+                      props.setOperationType("subtract");
+                      document
+                        .querySelector(".opaquePanel")
+                        .classList.add("displayed");
+                      document
+                        .querySelector(".coverPanel")
+                        .classList.add("displayed");
+                      document
+                        .querySelector(".planerForm")
+                        .classList.add("displayed");
+                    }}
+                  >
                     <RemoveCircleIcon
                       sx={{ color: yellow[500], fontSize: 45 }}
                     />

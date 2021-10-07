@@ -7,6 +7,7 @@ import { useState } from "react";
 import { ColorPicker } from "./Categories/ColorPicker";
 import "./budget.scss";
 import { TotalBudgetForm } from "./TotalBudgetPanel/TotalBudgetForm";
+import { PlannerForm } from "./Planner/PlannerForm";
 
 const BudgetWrapper = styled.div`
   width: 100%;
@@ -65,10 +66,21 @@ const TotalBudgetFormOutsideWrapper = styled.div`
   width: 100%;
   height: 100%;
 `;
+const PlannerFormOutsideWrapper = styled.div`
+  display: none;
+  z-index: 10;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+`;
 
 export const Budget = (props) => {
   const [categoryData, setCategoryData] = useState("");
   const [operationType, setOperationType] = useState("");
+  const [plannerData, setPlannerData] = useState("");
+  console.log(plannerData);
   return (
     <BudgetWrapper>
       <Categories
@@ -83,6 +95,7 @@ export const Budget = (props) => {
         <Planner
           categories={props.categories}
           setOperationType={setOperationType}
+          setPlannerData={setPlannerData}
         ></Planner>
       </BudgetWrapperRight>
       <CoverPanel className="coverPanel">
@@ -100,6 +113,9 @@ export const Budget = (props) => {
             totalBudget={props.totalBudget}
           ></TotalBudgetForm>
         </TotalBudgetFormOutsideWrapper>
+        <PlannerFormOutsideWrapper className="planerForm">
+          <PlannerForm></PlannerForm>
+        </PlannerFormOutsideWrapper>
         <ColorPickerOutsideWrapper className="colorPicker">
           <ColorPicker
             setCategoryData={setCategoryData}
