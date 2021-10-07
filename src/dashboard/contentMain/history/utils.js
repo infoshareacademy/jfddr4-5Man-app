@@ -89,7 +89,9 @@ export const orderAndFilterData = (database, order, category, date) => {
       .filter((data2) => data2.year === date.year)
       .filter((data3) => data3.month === date.month)
       .filter((data4) =>
-        category === "All" ? data4 === data4 : data4.category === category
+        category === "All"
+          ? data4.category.length > 0
+          : data4.category === category
       )
       .sort((data5, data6) => {
         return order === "newest"

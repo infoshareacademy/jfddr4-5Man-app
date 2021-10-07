@@ -11,7 +11,7 @@ const TotalBudgetPanelWrapper = styled.div`
   height: 20%;
   border-bottom: 1px solid #d0d0d0;
   display: flex;
-  padding: 10px;
+  padding: 0 10px;
   justify-content: center;
   align-items: center;
 `;

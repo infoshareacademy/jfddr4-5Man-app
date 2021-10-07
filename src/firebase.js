@@ -4,7 +4,6 @@ import {
   query,
   collection,
   orderBy,
-  getDocs,
   addDoc,
   updateDoc,
   doc,
@@ -207,4 +206,9 @@ export const addCategory = (userName, name, color) => {
 export const updateBudget = (userName, currentBudget, changedAmount) => {
   const c = doc(db, `${userName} - data`, "TotalBudget");
   updateDoc(c, { amount: +currentBudget + +changedAmount });
+};
+
+export const updatePlanner = (userName, id, amount) => {
+  const c = doc(db, `${userName} - categories`, id);
+  updateDoc(c, { planner: +amount });
 };

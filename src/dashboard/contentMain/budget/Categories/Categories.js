@@ -4,8 +4,8 @@ import { grey } from "@mui/material/colors";
 
 const CategoriesWrapper = styled.div`
   height: 100%;
-  width: 450px;
-  min-width: 450px;
+  width: 500px;
+  min-width: 500px;
   border-right: 1px solid #d0d0d0;
   display: flex;
   flex-direction: column;

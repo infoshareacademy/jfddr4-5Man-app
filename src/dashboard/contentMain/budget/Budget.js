@@ -80,7 +80,6 @@ export const Budget = (props) => {
   const [categoryData, setCategoryData] = useState("");
   const [operationType, setOperationType] = useState("");
   const [plannerData, setPlannerData] = useState("");
-  console.log(plannerData);
   return (
     <BudgetWrapper>
       <Categories
@@ -94,7 +93,6 @@ export const Budget = (props) => {
         ></TotalBudgetPanel>
         <Planner
           categories={props.categories}
-          setOperationType={setOperationType}
           setPlannerData={setPlannerData}
         ></Planner>
       </BudgetWrapperRight>
@@ -113,8 +111,11 @@ export const Budget = (props) => {
             totalBudget={props.totalBudget}
           ></TotalBudgetForm>
         </TotalBudgetFormOutsideWrapper>
-        <PlannerFormOutsideWrapper className="planerForm">
-          <PlannerForm></PlannerForm>
+        <PlannerFormOutsideWrapper className="plannerForm">
+          <PlannerForm
+            plannerData={plannerData}
+            setPlannerData={setPlannerData}
+          ></PlannerForm>
         </PlannerFormOutsideWrapper>
         <ColorPickerOutsideWrapper className="colorPicker">
           <ColorPicker

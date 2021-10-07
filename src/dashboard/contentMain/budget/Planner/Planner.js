@@ -1,8 +1,4 @@
-import { IconButton } from "@mui/material";
 import styled from "styled-components";
-import AddCircleIcon from "@mui/icons-material/AddCircle";
-import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
-import { yellow } from "@mui/material/colors";
 import { useContext } from "react";
 import { CurrencyContext } from "../../CurrencyContext";
 
@@ -20,23 +16,25 @@ const PlannerItemWrapper = styled.div`
   align-items: center;
   padding: 10px;
   margin-bottom: 15px;
+  cursor: pointer;
+  height: 75px;
   justify-content: space-between;
+  :hover {
+    opacity: 0.8;
+  }
 `;
 const PlannerItemTitle = styled.span`
   font-size: 30px;
   font-weight: bold;
   width: 230px;
+  margin-left: 15px;
 `;
-const PlannerItemPanelWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  margin-right: 20px;
-`;
-const PlannerItemPanelAmount = styled.span`
+const PlannerItemAmount = styled.span`
   width: 310px;
   text-align: center;
   font-size: 25px;
   font-weight: bold;
+  margin-right: 30px;
 `;
 const PlannerItemId = styled.div`
   display: none;
@@ -55,53 +53,33 @@ export const Planner = (props) => {
                 key={category.id}
                 title={`${category.planner.toFixed(2)} ${currency}`}
                 style={{ backgroundColor: category.color }}
+                onClick={(event) => {
+                  props.setPlannerData({
+                    id: event.currentTarget.childNodes[2].outerText,
+                    amount:
+                      event.currentTarget.childNodes[1].outerText.split(" ")[0],
+                  });
+                  document
+                    .querySelector(".opaquePanel")
+                    .classList.add("displayed");
+                  document
+                    .querySelector(".coverPanel")
+                    .classList.add("displayed");
+                  document
+                    .querySelector(".plannerForm")
+                    .classList.add("displayed");
+                }}
               >
                 <PlannerItemTitle>{category.name}</PlannerItemTitle>
-                <PlannerItemPanelWrapper>
-                  <IconButton
-                    onClick={(event) => {
-                      props.setOperationType("add");
-                      document
-                        .querySelector(".opaquePanel")
-                        .classList.add("displayed");
-                      document
-                        .querySelector(".coverPanel")
-                        .classList.add("displayed");
-                      document
-                        .querySelector(".planerForm")
-                        .classList.add("displayed");
-                    }}
-                  >
-                    <AddCircleIcon sx={{ color: yellow[500], fontSize: 45 }} />
-                  </IconButton>
-                  <PlannerItemPanelAmount>
-                    {`${
-                      category.planner.toFixed(2).toString().length < 11
-                        ? category.planner.toFixed(2)
-                        : category.planner > 0
-                        ? "9999999999..."
-                        : "-9999999999..."
-                    } ${currency}`}
-                  </PlannerItemPanelAmount>
-                  <IconButton
-                    onClick={() => {
-                      props.setOperationType("subtract");
-                      document
-                        .querySelector(".opaquePanel")
-                        .classList.add("displayed");
-                      document
-                        .querySelector(".coverPanel")
-                        .classList.add("displayed");
-                      document
-                        .querySelector(".planerForm")
-                        .classList.add("displayed");
-                    }}
-                  >
-                    <RemoveCircleIcon
-                      sx={{ color: yellow[500], fontSize: 45 }}
-                    />
-                  </IconButton>
-                </PlannerItemPanelWrapper>
+                <PlannerItemAmount>
+                  {`${
+                    category.planner.toFixed(2).toString().length < 11
+                      ? category.planner.toFixed(2)
+                      : category.planner > 0
+                      ? "9999999999..."
+                      : "-9999999999..."
+                  } ${currency}`}
+                </PlannerItemAmount>
                 <PlannerItemId>{category.id}</PlannerItemId>
               </PlannerItemWrapper>
             )
