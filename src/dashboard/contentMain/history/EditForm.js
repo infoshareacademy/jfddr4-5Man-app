@@ -140,21 +140,21 @@ export const EditForm = (props) => {
             sx={{ color: yellow[500], fontSize: 20 }}
             onClick={() => {
               if (validate() === true) {
-                // updateTransaction(
-                //   currentUser,
-                //   props.transactionData.amount,
-                //   props.transactionData.description,
-                //   props.transactionData.category,
-                //   props.transactionData.id
-                // );
-                // updateBudgetForExistingTransaction(
-                //   currentUser,
-                //   props.totalBudget,
-                //   props.transactionData.amount,
-                //   props.transactionData.initialAmount,
-                //   props.transactionData.category,
-                //   props.transactionData.initialCategory
-                // );
+                updateTransaction(
+                  currentUser,
+                  props.transactionData.amount,
+                  props.transactionData.description,
+                  props.transactionData.category,
+                  props.transactionData.id
+                );
+                updateBudgetForExistingTransaction(
+                  currentUser,
+                  props.totalBudget,
+                  props.transactionData.amount,
+                  props.transactionData.initialAmount,
+                  props.transactionData.category,
+                  props.transactionData.initialCategory
+                );
                 updatePlannerForTransactionChange(
                   currentUser,
                   props.transactionData.initialCategory === "Income"
@@ -162,7 +162,7 @@ export const EditForm = (props) => {
                     : props.categories.find((category) => {
                         return (
                           category.name ===
-                          props.transactionData.Initialcategory
+                          props.transactionData.initialCategory
                         );
                       }).planner,
                   props.transactionData.category === "Income"
@@ -175,7 +175,7 @@ export const EditForm = (props) => {
                     : props.categories.find((category) => {
                         return (
                           category.name ===
-                          props.transactionData.Initialcategory
+                          props.transactionData.initialCategory
                         );
                       }).plannerOn,
                   props.transactionData.category === "Income"
@@ -188,15 +188,15 @@ export const EditForm = (props) => {
                   props.transactionData.initialCategory,
                   props.transactionData.category,
                   props.transactionData.initialCategory === "Income"
-                    ? "noData"
+                    ? "Income"
                     : props.categories.find((category) => {
                         return (
                           category.name ===
-                          props.transactionData.Initialcategory
+                          props.transactionData.initialCategory
                         );
                       }).id,
                   props.transactionData.category === "Income"
-                    ? "noData"
+                    ? "Icome"
                     : props.categories.find((category) => {
                         return category.name === props.transactionData.category;
                       }).id

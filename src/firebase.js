@@ -108,21 +108,21 @@ export const updateBudgetForExistingTransaction = (
   initialCategory
 ) => {
   const c = doc(db, `${userName} - data`, "TotalBudget");
-  const categoryComparison = compareCategories(
+  const categoryComparison = compareCategoriesForBudget(
     changedCategory,
     initialCategory
   );
-  const amount = computeAmount(
+  const amount = computeAmountForBudget(
     categoryComparison,
     +changedAmount,
     +initialAmount,
     initialCategory
   );
 
-  updateDoc(c, { amount: currentBudget + amount });
+  updateDoc(c, { amount: +currentBudget + amount });
 };
 
-const compareCategories = (changedCategory, initialCategory) => {
+const compareCategoriesForBudget = (changedCategory, initialCategory) => {
   if (initialCategory === changedCategory) {
     return "noChange";
   }
@@ -132,9 +132,12 @@ const compareCategories = (changedCategory, initialCategory) => {
   if (initialCategory !== "Income" && changedCategory === "Income") {
     return "OutcomeToIncome";
   }
+  if (initialCategory !== "Income" && changedCategory !== "Income") {
+    return "OutcomeToOutcome";
+  }
 };
 
-const computeAmount = (
+const computeAmountForBudget = (
   categoryComparison,
   changedAmount,
   initialAmount,
@@ -151,6 +154,9 @@ const computeAmount = (
   }
   if (categoryComparison === "OutcomeToIncome") {
     return initialAmount * 2 + (changedAmount - initialAmount);
+  }
+  if (categoryComparison === "OutcomeToOutcome") {
+    return initialAmount - changedAmount;
   }
 };
 
@@ -242,17 +248,94 @@ export const updatePlannerForTransactionChange = (
   initialCategoryId,
   changedCategoryId
 ) => {
-  console.log(
-    userName,
-    plannerAmountforInitial,
-    plannerAmountforChanged,
-    plannerOnforInitial,
-    plannerOnforChanged,
-    initialAmount,
-    changedAmount,
+  const categoryComparison = compareCategoriesForPlanner(
     initialCategory,
-    changedCategory,
-    initialCategoryId,
-    changedCategoryId
+    changedCategory
   );
+  if (categoryComparison === "incomeToIncome") {
+    return;
+  }
+  if (categoryComparison === "outcomeToSameOutcome") {
+    if (plannerOnforInitial === "false") {
+      return;
+    }
+    if (+initialAmount === +changedAmount) {
+      return;
+    } else {
+      const amount =
+        +plannerAmountforInitial + (+initialAmount - +changedAmount);
+      updateDoc(doc(db, `${userName} - categories`, initialCategoryId), {
+        planner: amount,
+      });
+    }
+  }
+  if (categoryComparison === "incomeToOutcome") {
+    if (plannerOnforChanged === "false") {
+      return;
+    } else {
+      const amount = +plannerAmountforChanged - +changedAmount;
+      updateDoc(doc(db, `${userName} - categories`, changedCategoryId), {
+        planner: amount,
+      });
+    }
+  }
+  if (categoryComparison === "outcomeToIncome") {
+    if (plannerOnforInitial === "false") {
+      return;
+    } else {
+      const amount = +plannerAmountforInitial + +initialAmount;
+      updateDoc(doc(db, `${userName} - categories`, initialCategoryId), {
+        planner: amount,
+      });
+    }
+  }
+  if (categoryComparison === "outcomeToOutcome") {
+    if (plannerOnforInitial === "false" && plannerOnforChanged === "false") {
+      return;
+    }
+    if (plannerOnforInitial === "false" && plannerOnforChanged === "true") {
+      const amount = +plannerAmountforChanged - +changedAmount;
+      updateDoc(doc(db, `${userName} - categories`, changedCategoryId), {
+        planner: amount,
+      });
+    }
+    if (plannerOnforInitial === "true" && plannerOnforChanged === "false") {
+      const amount = +plannerAmountforInitial + +initialAmount;
+      updateDoc(doc(db, `${userName} - categories`, initialCategoryId), {
+        planner: amount,
+      });
+    }
+    if (plannerOnforInitial === "true" && plannerOnforChanged === "true") {
+      const amountForInitial = +plannerAmountforInitial + +initialAmount;
+      updateDoc(doc(db, `${userName} - categories`, initialCategoryId), {
+        planner: amountForInitial,
+      });
+      const amountForChanged = +plannerAmountforChanged - +changedAmount;
+      updateDoc(doc(db, `${userName} - categories`, changedCategoryId), {
+        planner: amountForChanged,
+      });
+    }
+  }
+};
+
+const compareCategoriesForPlanner = (initialCategory, changedCategory) => {
+  if (initialCategory === changedCategory && initialCategory === "Income") {
+    return "incomeToIncome";
+  }
+  if (initialCategory === changedCategory && initialCategory !== "Income") {
+    return "outcomeToSameOutcome";
+  }
+  if (
+    initialCategory !== changedCategory &&
+    initialCategory !== "Income" &&
+    changedCategory !== "Income"
+  ) {
+    return "outcomeToOutcome";
+  }
+  if (initialCategory !== changedCategory && initialCategory === "Income") {
+    return "incomeToOutcome";
+  }
+  if (initialCategory !== changedCategory && changedCategory === "Income") {
+    return "outcomeToIncome";
+  }
 };

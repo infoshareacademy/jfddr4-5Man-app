@@ -49,7 +49,6 @@ export const History = (props) => {
   const [sortOrder, setSortOrder] = useState("newest");
   const [category, chooseCategory] = useState("All");
   const [transactionData, setTransactionData] = useState("");
-
   return (
     <HistoryWrapper>
       <HistoryNav
