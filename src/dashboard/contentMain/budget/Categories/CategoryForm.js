@@ -1,4 +1,10 @@
-import { Button, TextField } from "@mui/material";
+import {
+  Button,
+  FormControlLabel,
+  FormGroup,
+  Switch,
+  TextField,
+} from "@mui/material";
 import { red, yellow } from "@mui/material/colors";
 import { useState } from "react";
 import { useContext } from "react";
@@ -48,6 +54,10 @@ const CategoryColor = styled.div`
   margin-left: 15px;
   cursor: pointer;
 `;
+const ColorAndPlannerWrapper = styled.div`
+  display: flex;
+  align-items: center;
+`;
 
 export const CategoryForm = (props) => {
   const [errorMessage, setErrorMessage] = useState("");
@@ -90,21 +100,45 @@ export const CategoryForm = (props) => {
                   initialName: props.categoryData.initialName,
                   id: props.categoryData.id,
                   color: props.categoryData.color,
+                  plannerOn: props.categoryData.plannerOn,
                 });
               }
             }}
           ></TextField>
-          <ColorWrapper>
-            Color:
-            <CategoryColor
-              style={{ backgroundColor: props.categoryData.color }}
-              onClick={() => {
-                document
-                  .querySelector(".colorPicker")
-                  .classList.add("displayed");
-              }}
-            ></CategoryColor>
-          </ColorWrapper>
+          <ColorAndPlannerWrapper>
+            <ColorWrapper>
+              Color:
+              <CategoryColor
+                style={{ backgroundColor: props.categoryData.color }}
+                onClick={() => {
+                  document
+                    .querySelector(".colorPicker")
+                    .classList.add("displayed");
+                }}
+              ></CategoryColor>
+            </ColorWrapper>
+            {props.categoryData && (
+              <FormGroup>
+                <FormControlLabel
+                  control={
+                    <Switch
+                      checked={props.categoryData.plannerOn}
+                      onChange={(event) => {
+                        props.setCategoryData({
+                          name: props.categoryData.name,
+                          initialName: props.categoryData.initialName,
+                          id: props.categoryData.id,
+                          color: props.categoryData.color,
+                          plannerOn: event.target.checked,
+                        });
+                      }}
+                    />
+                  }
+                  label="Planner"
+                />
+              </FormGroup>
+            )}
+          </ColorAndPlannerWrapper>
           <ButtonsWrapper>
             <Button
               variant="outlined"
@@ -115,7 +149,8 @@ export const CategoryForm = (props) => {
                     currentUser,
                     props.categoryData.color,
                     props.categoryData.name,
-                    props.categoryData.id
+                    props.categoryData.id,
+                    props.categoryData.plannerOn
                   );
                   updateTransactionsForCategoryChange(
                     currentUser,
@@ -204,25 +239,49 @@ export const CategoryForm = (props) => {
                   initialName: props.categoryData.initialName,
                   id: props.categoryData.id,
                   color: props.categoryData.color,
+                  plannerOn: props.categoryData.plannerOn,
                 });
               }
             }}
           ></TextField>
-          <ColorWrapper>
-            Color:
-            <CategoryColor
-              style={
-                props.categoryData.color !== ""
-                  ? { backgroundColor: props.categoryData.color }
-                  : { backgroundColor: "black" }
-              }
-              onClick={() => {
-                document
-                  .querySelector(".colorPicker")
-                  .classList.add("displayed");
-              }}
-            ></CategoryColor>
-          </ColorWrapper>
+          <ColorAndPlannerWrapper>
+            <ColorWrapper>
+              Color:
+              <CategoryColor
+                style={
+                  props.categoryData.color !== ""
+                    ? { backgroundColor: props.categoryData.color }
+                    : { backgroundColor: "black" }
+                }
+                onClick={() => {
+                  document
+                    .querySelector(".colorPicker")
+                    .classList.add("displayed");
+                }}
+              ></CategoryColor>
+            </ColorWrapper>
+            {props.categoryData && (
+              <FormGroup>
+                <FormControlLabel
+                  control={
+                    <Switch
+                      checked={props.categoryData.plannerOn}
+                      onChange={(event) => {
+                        props.setCategoryData({
+                          name: props.categoryData.name,
+                          initialName: props.categoryData.initialName,
+                          id: props.categoryData.id,
+                          color: props.categoryData.color,
+                          plannerOn: event.target.checked,
+                        });
+                      }}
+                    />
+                  }
+                  label="Planner"
+                />
+              </FormGroup>
+            )}
+          </ColorAndPlannerWrapper>
           <ButtonsWrapper>
             <Button
               variant="outlined"
@@ -232,7 +291,8 @@ export const CategoryForm = (props) => {
                   addCategory(
                     currentUser,
                     props.categoryData.name,
-                    props.categoryData.color
+                    props.categoryData.color,
+                    props.categoryData.plannerOn
                   );
                   goBackHandler();
                 }

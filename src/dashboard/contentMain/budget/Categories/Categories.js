@@ -48,6 +48,9 @@ const CategoryId = styled.div`
 const CategoryColor = styled.div`
   display: none;
 `;
+const CategoryPlanner = styled.div`
+  display: none;
+`;
 
 export const Categories = (props) => {
   return (
@@ -73,6 +76,10 @@ export const Categories = (props) => {
                   initialName: event.currentTarget.childNodes[1].outerText,
                   id: event.currentTarget.childNodes[2].outerText,
                   color: event.currentTarget.childNodes[3].outerText,
+                  plannerOn:
+                    event.currentTarget.childNodes[4].outerText === "true"
+                      ? true
+                      : false,
                 });
                 document
                   .querySelector(".opaquePanel")
@@ -91,6 +98,7 @@ export const Categories = (props) => {
               <CategoryName>{category.name}</CategoryName>
               <CategoryId>{category.id}</CategoryId>
               <CategoryColor>{category.color}</CategoryColor>
+              <CategoryPlanner>{category.plannerOn}</CategoryPlanner>
             </OneCategory>
           );
         }
@@ -104,6 +112,7 @@ export const Categories = (props) => {
               initialName: "",
               id: "",
               color: "",
+              plannerOn: false,
             });
             document.querySelector(".opaquePanel").classList.add("displayed");
             document.querySelector(".coverPanel").classList.add("displayed");

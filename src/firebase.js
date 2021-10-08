@@ -159,9 +159,13 @@ export const deleteTransaction = (userName, id) => {
   deleteDoc(c);
 };
 
-export const updateCategory = (userName, color, name, id) => {
+export const updateCategory = (userName, color, name, id, planner) => {
   const c = doc(db, `${userName} - categories`, id);
-  updateDoc(c, { color: color, name: name });
+  updateDoc(c, {
+    color: color,
+    name: name,
+    plannerOn: planner === true ? "true" : "false",
+  });
 };
 
 export const updateTransactionsForCategoryChange = (
@@ -194,12 +198,13 @@ export const deleteTransactionsForCategoryDelete = (
   });
 };
 
-export const addCategory = (userName, name, color) => {
+export const addCategory = (userName, name, color, planner) => {
   addDoc(collection(db, `${userName} - categories`), {
     name: name,
     color: color,
     planner: 0,
     createdAt: +new Date(),
+    plannerOn: planner === true ? "true" : "false",
   });
 };
 

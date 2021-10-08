@@ -16,12 +16,12 @@ const PlannerItemWrapper = styled.div`
   align-items: center;
   padding: 10px;
   margin-bottom: 15px;
-  cursor: pointer;
   height: 75px;
   justify-content: space-between;
   :hover {
     opacity: 0.8;
   }
+  position: relative;
 `;
 const PlannerItemTitle = styled.span`
   font-size: 30px;
@@ -52,22 +52,32 @@ export const Planner = (props) => {
               <PlannerItemWrapper
                 key={category.id}
                 title={`${category.planner.toFixed(2)} ${currency}`}
-                style={{ backgroundColor: category.color }}
+                style={
+                  category.plannerOn === "true"
+                    ? { backgroundColor: category.color, cursor: "pointer" }
+                    : { backgroundColor: "grey", cursor: "not-allowed" }
+                }
                 onClick={(event) => {
-                  props.setPlannerData({
-                    id: event.currentTarget.childNodes[2].outerText,
-                    amount:
-                      event.currentTarget.childNodes[1].outerText.split(" ")[0],
-                  });
-                  document
-                    .querySelector(".opaquePanel")
-                    .classList.add("displayed");
-                  document
-                    .querySelector(".coverPanel")
-                    .classList.add("displayed");
-                  document
-                    .querySelector(".plannerForm")
-                    .classList.add("displayed");
+                  category.plannerOn === "true" &&
+                    props.setPlannerData({
+                      id: event.currentTarget.childNodes[2].outerText,
+                      amount:
+                        event.currentTarget.childNodes[1].outerText.split(
+                          " "
+                        )[0],
+                    });
+                  category.plannerOn === "true" &&
+                    document
+                      .querySelector(".opaquePanel")
+                      .classList.add("displayed");
+                  category.plannerOn === "true" &&
+                    document
+                      .querySelector(".coverPanel")
+                      .classList.add("displayed");
+                  category.plannerOn === "true" &&
+                    document
+                      .querySelector(".plannerForm")
+                      .classList.add("displayed");
                 }}
               >
                 <PlannerItemTitle>{category.name}</PlannerItemTitle>
