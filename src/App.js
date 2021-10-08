@@ -15,10 +15,16 @@ const App = () => {
           <Redirect to="/login" />
         </Route>
         <Route exact path="/login">
-          <Login />
+          <Login
+            currentUser={currentUser}
+            changeCurrentUser={changeCurrentUser}
+          />
         </Route>
         <Route exact path="/register">
-          <Register />
+          <Register
+            currentUser={currentUser}
+            changeCurrentUser={changeCurrentUser}
+          />
         </Route>
         <Route path="/main">
           <Dashboard />

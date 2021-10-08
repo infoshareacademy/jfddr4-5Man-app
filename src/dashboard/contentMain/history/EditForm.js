@@ -12,6 +12,7 @@ import { UserContext } from "../../../UserContext";
 import {
   deleteTransaction,
   updateBudgetForExistingTransaction,
+  updatePlannerForTransactionChange,
   updateTransaction,
 } from "../../../firebase";
 import { setCategoryMenuItems } from "./utils";
@@ -139,20 +140,66 @@ export const EditForm = (props) => {
             sx={{ color: yellow[500], fontSize: 20 }}
             onClick={() => {
               if (validate() === true) {
-                updateTransaction(
+                // updateTransaction(
+                //   currentUser,
+                //   props.transactionData.amount,
+                //   props.transactionData.description,
+                //   props.transactionData.category,
+                //   props.transactionData.id
+                // );
+                // updateBudgetForExistingTransaction(
+                //   currentUser,
+                //   props.totalBudget,
+                //   props.transactionData.amount,
+                //   props.transactionData.initialAmount,
+                //   props.transactionData.category,
+                //   props.transactionData.initialCategory
+                // );
+                updatePlannerForTransactionChange(
                   currentUser,
-                  props.transactionData.amount,
-                  props.transactionData.description,
-                  props.transactionData.category,
-                  props.transactionData.id
-                );
-                updateBudgetForExistingTransaction(
-                  currentUser,
-                  props.totalBudget,
-                  props.transactionData.amount,
+                  props.transactionData.initialCategory === "Income"
+                    ? "noData"
+                    : props.categories.find((category) => {
+                        return (
+                          category.name ===
+                          props.transactionData.Initialcategory
+                        );
+                      }).planner,
+                  props.transactionData.category === "Income"
+                    ? "noData"
+                    : props.categories.find((category) => {
+                        return category.name === props.transactionData.category;
+                      }).planner,
+                  props.transactionData.initialCategory === "Income"
+                    ? "noData"
+                    : props.categories.find((category) => {
+                        return (
+                          category.name ===
+                          props.transactionData.Initialcategory
+                        );
+                      }).plannerOn,
+                  props.transactionData.category === "Income"
+                    ? "noData"
+                    : props.categories.find((category) => {
+                        return category.name === props.transactionData.category;
+                      }).plannerOn,
                   props.transactionData.initialAmount,
+                  props.transactionData.amount,
+                  props.transactionData.initialCategory,
                   props.transactionData.category,
-                  props.transactionData.initialCategory
+                  props.transactionData.initialCategory === "Income"
+                    ? "noData"
+                    : props.categories.find((category) => {
+                        return (
+                          category.name ===
+                          props.transactionData.Initialcategory
+                        );
+                      }).id,
+                  props.transactionData.category === "Income"
+                    ? "noData"
+                    : props.categories.find((category) => {
+                        return category.name === props.transactionData.category;
+                      }).id
                 );
                 goBackHandler();
               }

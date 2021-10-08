@@ -80,7 +80,6 @@ export const Budget = (props) => {
   const [categoryData, setCategoryData] = useState("");
   const [operationType, setOperationType] = useState("");
   const [plannerData, setPlannerData] = useState("");
-  console.log(categoryData);
   return (
     <BudgetWrapper>
       <Categories
