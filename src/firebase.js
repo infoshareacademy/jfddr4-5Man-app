@@ -339,3 +339,23 @@ const compareCategoriesForPlanner = (initialCategory, changedCategory) => {
     return "outcomeToIncome";
   }
 };
+
+export const updateCurrency = (userName, currency) => {
+  const c = doc(db, `${userName} - data`, "Currency");
+  updateDoc(c, { currency: currency });
+};
+
+export const updateNickname = (userName, nickname) => {
+  const c = doc(db, `${userName} - data`, "Nickname");
+  updateDoc(c, { nickname: nickname });
+};
+
+export const updateNightmode = (userName, isOn) => {
+  const c = doc(db, `${userName} - data`, "Nightmode");
+  updateDoc(c, { isOn: isOn });
+};
+
+export const updateCategoryColors = (userName, isOn) => {
+  const c = doc(db, `${userName} - data`, "CategoryColors");
+  updateDoc(c, { isOn: isOn });
+};

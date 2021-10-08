@@ -33,7 +33,6 @@ export function Register({ currentUser, changeCurrentUser }) {
 
   function registerEmailValidation(e) {
     setRegisterEmail(e.target.value);
-    console.log(registerEmail);
     if (e.target.value.match(mailRegex)) {
       setRegisterEmailError("");
       return true;
@@ -66,9 +65,6 @@ export function Register({ currentUser, changeCurrentUser }) {
   }
 
   function registerCreateUser() {
-    console.log(registerEmailError);
-    console.log(registerPassError);
-    console.log(registerPassRepeatError);
     if (
       (registerEmailError === "",
       registerPassError === "",
@@ -98,11 +94,23 @@ export function Register({ currentUser, changeCurrentUser }) {
           });
 
           setDoc(doc(db, user.uid + " - data", "NightMode"), {
-            isOn: true,
+            isOn: "true",
           });
 
           setDoc(doc(db, user.uid + " - data", "TotalBudget"), {
             amount: 0,
+          });
+
+          setDoc(doc(db, user.uid + " - data", "Nickname"), {
+            nickname: "",
+          });
+
+          setDoc(doc(db, user.uid + " - data", "Picture"), {
+            number: 1,
+          });
+
+          setDoc(doc(db, user.uid + " - data", "CategoryColors"), {
+            isOn: "true",
           });
 
           // TRANSACTION
@@ -115,7 +123,6 @@ export function Register({ currentUser, changeCurrentUser }) {
           });
 
           changeCurrentUser(user.uid);
-          console.log(currentUser);
 
           history.push("/main");
         })
@@ -185,12 +192,6 @@ export function Register({ currentUser, changeCurrentUser }) {
               Register
             </Button>
           </form>
-
-          <p> --- Or --- </p>
-
-          <div className="registerGoogle">
-            <p>Google</p>
-          </div>
         </section>
 
         <section className="goToLoginDiv">

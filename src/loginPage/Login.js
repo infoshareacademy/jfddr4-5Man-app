@@ -86,10 +86,6 @@ export function Login({ currentUser, changeCurrentUser }) {
               Login
             </Button>
           </form>
-          <p> --- Or --- </p>
-          <div className="loginGoogle">
-            <p>Google</p>
-          </div>
         </section>
         <section className="goToRegisterDiv">
           <p>

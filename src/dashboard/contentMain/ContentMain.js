@@ -1,6 +1,5 @@
 import { useContext, useEffect, useState } from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
-import { Account } from "./account/Account";
 import "./contentMain.css";
 import {
   compileGraphDatabase,
@@ -18,6 +17,7 @@ import { UserContext } from "../../UserContext";
 import { Home } from "./home/Home";
 import { History } from "./history/History";
 import { Budget } from "./budget/Budget";
+import { Setting } from "./settings/Settings";
 
 export function ContentMain() {
   const [currentCurrency, changeCurrentCurrency] = useState("");
@@ -99,10 +99,7 @@ export function ContentMain() {
             ></History>
           </Route>
           <Route exact path="/main/settings">
-            <section className="contentMainSection">setting</section>
-          </Route>
-          <Route exact path="/main/account">
-            <Account />
+            <Setting userInfo={userInfo}></Setting>
           </Route>
         </Switch>
       </DateContext.Provider>
