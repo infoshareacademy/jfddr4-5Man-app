@@ -7,6 +7,7 @@ import { UserContext } from "../../../../UserContext";
 import {
   addTransaction,
   updateBudgetForNewTransaction,
+  updatePlannerForTransactionAdd,
 } from "../../../../firebase";
 import {
   setCategoryMenuItems,
@@ -39,7 +40,7 @@ const ErrorWrapper = styled.div`
 `;
 
 export const TransactionForm = (props) => {
-  const [category, chooseCategory] = useState("");
+  const [chosenCategory, chooseCategory] = useState("");
   const [amount, setAmount] = useState("");
   const [description, setDescription] = useState("");
   const [date, setDate] = useState({
@@ -69,7 +70,7 @@ export const TransactionForm = (props) => {
       return valid;
     }
     if (props.type === "outcome") {
-      if (category === "") {
+      if (chosenCategory === "") {
         setErrorMessage("Please choose category");
         valid = false;
         return valid;
@@ -171,7 +172,7 @@ export const TransactionForm = (props) => {
           <Select
             labelId="categorySelect"
             label="Category"
-            value={category}
+            value={chosenCategory}
             onChange={(event) => {
               chooseCategory(event.target.value);
             }}
@@ -193,7 +194,7 @@ export const TransactionForm = (props) => {
                 currentUser,
                 amount,
                 description,
-                props.type === "outcome" ? category : "Income",
+                props.type === "outcome" ? chosenCategory : "Income",
                 date
               );
               updateBudgetForNewTransaction(
@@ -201,6 +202,20 @@ export const TransactionForm = (props) => {
                 props.totalBudget,
                 props.type === "outcome" ? -amount : +amount
               );
+              props.type === "outcome" &&
+                updatePlannerForTransactionAdd(
+                  currentUser,
+                  props.categories.find((category) => {
+                    return category.name === chosenCategory;
+                  }).planner,
+                  props.categories.find((category) => {
+                    return category.name === chosenCategory;
+                  }).plannerOn,
+                  amount,
+                  props.categories.find((category) => {
+                    return category.name === chosenCategory;
+                  }).id
+                );
               goBackHandler();
             }
           }}

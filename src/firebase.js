@@ -217,3 +217,14 @@ export const updatePlanner = (userName, id, amount) => {
   const c = doc(db, `${userName} - categories`, id);
   updateDoc(c, { planner: +amount });
 };
+
+export const updatePlannerForTransactionAdd = (
+  userName,
+  plannerAmount,
+  plannerOn,
+  amount,
+  category
+) => {
+  const c = doc(db, `${userName} - categories`, category);
+  plannerOn === "true" && updateDoc(c, { planner: plannerAmount - amount });
+};

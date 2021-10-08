@@ -69,6 +69,7 @@ export const ColorPicker = (props) => {
                   name: props.categoryData.name,
                   id: props.categoryData.id,
                   initialName: props.categoryData.initialName,
+                  plannerOn: props.categoryData.plannerOn,
                 });
                 document
                   .querySelector(".colorPicker")
