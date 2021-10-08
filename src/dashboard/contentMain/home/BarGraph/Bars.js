@@ -2,6 +2,7 @@ import styled from "styled-components";
 import OneBar from "./OneBar";
 import { v4 as uuidv4 } from "uuid";
 
+
 const BarsWrapper = styled.div`
   display: flex;
   height: 425px;

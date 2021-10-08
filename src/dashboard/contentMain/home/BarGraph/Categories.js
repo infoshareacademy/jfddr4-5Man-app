@@ -3,6 +3,7 @@ import { useContext } from "react";
 import { getOutcomeSum, setCategoryInside, setCategoryTitle } from "./utils";
 import { CurrencyContext } from "../../CurrencyContext";
 
+
 const OneCategory = styled.div`
   display: flex;
   align-items: center;

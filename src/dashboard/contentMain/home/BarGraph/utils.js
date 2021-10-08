@@ -53,6 +53,7 @@ export const getDailyMaxValue = (database) => {
   return daysMaxValues;
 };
 
+
 export const getMaxValue = (database) => {
   const maxValue = Math.max(...getDailyMaxValue(database));
   return maxValue;
