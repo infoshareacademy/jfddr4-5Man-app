@@ -359,3 +359,8 @@ export const updateCategoryColors = (userName, isOn) => {
   const c = doc(db, `${userName} - data`, "CategoryColors");
   updateDoc(c, { isOn: isOn });
 };
+
+export const updatePicture = (userName, number) => {
+  const c = doc(db, `${userName} - data`, "Picture");
+  updateDoc(c, { number: number });
+};

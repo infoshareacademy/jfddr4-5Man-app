@@ -5,7 +5,7 @@ import styled from "styled-components";
 import { updateCategoryColors, updateNightmode } from "../../../firebase";
 import { UserContext } from "../../../UserContext";
 
-const FormWrapper = styled.div`
+const OnOffFormInsideWrapper = styled.div`
   padding: 20px;
   background-color: white;
   border-radius: 25px;
@@ -30,7 +30,7 @@ export const OnOffForm = (props) => {
   return (
     <>
       {props.type === "nightmode" && (
-        <FormWrapper>
+        <OnOffFormInsideWrapper>
           <FormGroup>
             <FormControlLabel
               control={
@@ -67,11 +67,11 @@ export const OnOffForm = (props) => {
               GO BACK
             </Button>
           </ButtonsWrapper>
-        </FormWrapper>
+        </OnOffFormInsideWrapper>
       )}
 
       {props.type === "categoryColors" && (
-        <FormWrapper>
+        <OnOffFormInsideWrapper>
           <FormGroup>
             <FormControlLabel
               control={
@@ -108,7 +108,7 @@ export const OnOffForm = (props) => {
               GO BACK
             </Button>
           </ButtonsWrapper>
-        </FormWrapper>
+        </OnOffFormInsideWrapper>
       )}
     </>
   );

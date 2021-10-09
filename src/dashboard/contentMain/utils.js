@@ -46,3 +46,20 @@ export const getTotalBudget = (userData) => {
         return data.id === "TotalBudget";
       }).amount;
 };
+
+export const getSidebarInfo = (userData) => {
+  return {
+    picture:
+      userData.length === 0
+        ? 0
+        : userData.find((data) => {
+            return data.id === "Picture";
+          }).number,
+    name:
+      userData.length === 0
+        ? 0
+        : userData.find((data) => {
+            return data.id === "Nickname";
+          }).nickname,
+  };
+};

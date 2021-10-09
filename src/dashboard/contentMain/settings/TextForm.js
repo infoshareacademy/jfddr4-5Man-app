@@ -13,7 +13,7 @@ const ErrorWrapper = styled.div`
   margin-bottom: 20px;
   text-align: center;
 `;
-const FormWrapper = styled.div`
+const TextFormInsideWrapper = styled.div`
   padding: 20px;
   background-color: white;
   border-radius: 25px;
@@ -59,7 +59,7 @@ export const TextForm = (props) => {
   return (
     <>
       {props.type === "currency" && (
-        <FormWrapper>
+        <TextFormInsideWrapper>
           <ErrorWrapper>{errorMessage}</ErrorWrapper>
           <TextField
             label="Currency"
@@ -94,11 +94,11 @@ export const TextForm = (props) => {
               GO BACK
             </Button>
           </ButtonsWrapper>
-        </FormWrapper>
+        </TextFormInsideWrapper>
       )}
 
       {props.type === "nickname" && (
-        <FormWrapper>
+        <TextFormInsideWrapper>
           <ErrorWrapper>{errorMessage}</ErrorWrapper>
           <TextField
             label="Nickname"
@@ -133,7 +133,7 @@ export const TextForm = (props) => {
               GO BACK
             </Button>
           </ButtonsWrapper>
-        </FormWrapper>
+        </TextFormInsideWrapper>
       )}
     </>
   );

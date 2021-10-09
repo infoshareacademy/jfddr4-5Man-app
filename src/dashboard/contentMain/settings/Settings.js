@@ -3,7 +3,7 @@ import { useState } from "react";
 import styled from "styled-components";
 import { ConfirmForm } from "./ConfirmForm";
 import { OnOffForm } from "./OnOffForm";
-import { PicturePicker } from "./PicturePicker";
+import { PicturePicker, picturesToDisplay } from "./PicturePicker";
 import { TextForm } from "./TextForm";
 
 const SettingsWrapper = styled.div`
@@ -64,6 +64,8 @@ export const Setting = (props) => {
   const [nickname, changeNickname] = useState("");
   const [nightmode, changeNightmode] = useState("");
   const [categoryColors, changeCategoryColors] = useState("");
+  const [picture, changePicture] = useState("");
+  const pictures = picturesToDisplay;
   return (
     <SettingsWrapper>
       {props.userInfo && (
@@ -209,18 +211,27 @@ export const Setting = (props) => {
                 document
                   .querySelector(".picturePicker")
                   .classList.add("displayed");
+                changePicture(
+                  props.userInfo.find((data) => {
+                    return data.id === "Picture";
+                  }).number
+                );
               }}
             >
               Picture
             </Button>
             <OneSettingDisplayed>
-              {props.userInfo.find((data) => {
-                return data.id === "Picture";
-              })
-                ? props.userInfo.find((data) => {
+              {
+                pictures[
+                  props.userInfo.find((data) => {
                     return data.id === "Picture";
-                  }).number
-                : ""}
+                  })
+                    ? props.userInfo.find((data) => {
+                        return data.id === "Picture";
+                      }).number
+                    : ""
+                ]
+              }
             </OneSettingDisplayed>
           </OneSettingWrapper>
           <OneSettingWrapper>
@@ -338,7 +349,10 @@ export const Setting = (props) => {
           <ConfirmForm></ConfirmForm>
         </ConfirmFormOutsideWrapper>
         <PicturePickerOutsideWrapper className="picturePicker">
-          <PicturePicker></PicturePicker>
+          <PicturePicker
+            picture={picture}
+            changePicture={changePicture}
+          ></PicturePicker>
         </PicturePickerOutsideWrapper>
       </CoverPanel>
       <OpaquePanel className="opaquePanel"></OpaquePanel>
