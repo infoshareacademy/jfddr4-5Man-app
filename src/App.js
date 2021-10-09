@@ -4,9 +4,20 @@ import { Redirect, Route, Switch } from "react-router";
 import { Dashboard } from "./dashboard/Dashboard";
 import { Login } from "./loginPage/Login";
 import { Register } from "./registerPage/Register";
+import { getAuth, onAuthStateChanged } from "@firebase/auth";
 
 const App = () => {
   const [currentUser, changeCurrentUser] = useState("TestUser");
+  const auth = getAuth();
+  // onAuthStateChanged(auth, (user) => {
+  //   if (user) {
+  //     changeCurrentUser(user.uid);
+  //   } else {
+  //     if (window.location.href.toString().includes("main")) {
+  //       window.location.href = window.location.origin;
+  //     }
+  //   }
+  // });
 
   return (
     <UserContext.Provider value={currentUser}>
@@ -15,16 +26,10 @@ const App = () => {
           <Redirect to="/login" />
         </Route>
         <Route exact path="/login">
-          <Login
-            currentUser={currentUser}
-            changeCurrentUser={changeCurrentUser}
-          />
+          <Login />
         </Route>
         <Route exact path="/register">
-          <Register
-            currentUser={currentUser}
-            changeCurrentUser={changeCurrentUser}
-          />
+          <Register />
         </Route>
         <Route path="/main">
           <Dashboard />

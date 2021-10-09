@@ -17,7 +17,7 @@ const registerTheme = createTheme({
   },
 });
 
-export function Register({ currentUser, changeCurrentUser }) {
+export function Register() {
   const [registerEmail, setRegisterEmail] = useState("");
   const [registerPass, setRegisterPass] = useState("");
   const [registerPassRepeat, setRegisterPassRepeat] = useState("");
@@ -121,8 +121,6 @@ export function Register({ currentUser, changeCurrentUser }) {
             date: +new Date(),
             description: "test",
           });
-
-          changeCurrentUser(user.uid);
 
           history.push("/main");
         })

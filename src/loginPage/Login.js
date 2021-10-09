@@ -16,7 +16,7 @@ const loginTheme = createTheme({
   },
 });
 
-export function Login({ currentUser, changeCurrentUser }) {
+export function Login() {
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPass, setLoginPass] = useState("");
 
@@ -40,8 +40,6 @@ export function Login({ currentUser, changeCurrentUser }) {
       .then((userCredential) => {
         const user = userCredential.user;
 
-        console.log("Success");
-        changeCurrentUser(user.uid);
         history.push("/main");
       })
       .catch((error) => {
