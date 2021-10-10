@@ -20,6 +20,9 @@ const firebaseConfig = {
   appId: "1:889539831155:web:4372767c42ea3c4672d106",
 };
 const app = initializeApp(firebaseConfig);
+if (1 < 0) {
+  console.log(app);
+} /// FIX CONSOLE MESSAGE THAT APP IS UNASSIGNED
 const db = getFirestore();
 
 export const fetchCategories = (userName, setCategories) => {

@@ -33,44 +33,42 @@ const TotalBudgetAmount = styled.h2`
 export const TotalBudgetPanel = (props) => {
   const currency = useContext(CurrencyContext);
   const totalBudget = props.totalBudget;
-  return (
-    <TotalBudgetPanelWrapper>
-      {props.totalBudget && (
-        <>
-          <IconButton
-            onClick={() => {
-              props.setOperationType("add");
-              document.querySelector(".opaquePanel").classList.add("displayed");
-              document.querySelector(".coverPanel").classList.add("displayed");
-              document.querySelector(".budgetForm").classList.add("displayed");
-            }}
-          >
-            <AddCircleIcon sx={{ color: "#5350E9", fontSize: 80 }} />
-          </IconButton>
-          <TotalBudgetDisplay>
-            <TotalBudgetText>Total Budget</TotalBudgetText>
-            <TotalBudgetAmount
-              title={`${totalBudget.toFixed(2)} ${currency}`}
-            >{`${
-              totalBudget.toFixed(2).toString().length < 11
-                ? totalBudget.toFixed(2)
-                : totalBudget > 0
-                ? "9999999999..."
-                : "-9999999999..."
-            } ${currency}`}</TotalBudgetAmount>
-          </TotalBudgetDisplay>
-          <IconButton
-            onClick={() => {
-              props.setOperationType("subtract");
-              document.querySelector(".opaquePanel").classList.add("displayed");
-              document.querySelector(".coverPanel").classList.add("displayed");
-              document.querySelector(".budgetForm").classList.add("displayed");
-            }}
-          >
-            <RemoveCircleIcon sx={{ color: "#5350E9", fontSize: 80 }} />
-          </IconButton>
-        </>
-      )}
-    </TotalBudgetPanelWrapper>
-  );
+  if (props.totalBudget || props.totalBudget === 0) {
+    return (
+      <TotalBudgetPanelWrapper>
+        <IconButton
+          onClick={() => {
+            props.setOperationType("add");
+            document.querySelector(".opaquePanel").classList.add("displayed");
+            document.querySelector(".coverPanel").classList.add("displayed");
+            document.querySelector(".budgetForm").classList.add("displayed");
+          }}
+        >
+          <AddCircleIcon sx={{ color: "#5350E9", fontSize: 80 }} />
+        </IconButton>
+        <TotalBudgetDisplay>
+          <TotalBudgetText>Total Budget</TotalBudgetText>
+          <TotalBudgetAmount
+            title={`${totalBudget.toFixed(2)} ${currency}`}
+          >{`${
+            totalBudget.toFixed(2).toString().length < 11
+              ? totalBudget.toFixed(2)
+              : totalBudget > 0
+              ? "9999999999..."
+              : "-9999999999..."
+          } ${currency}`}</TotalBudgetAmount>
+        </TotalBudgetDisplay>
+        <IconButton
+          onClick={() => {
+            props.setOperationType("subtract");
+            document.querySelector(".opaquePanel").classList.add("displayed");
+            document.querySelector(".coverPanel").classList.add("displayed");
+            document.querySelector(".budgetForm").classList.add("displayed");
+          }}
+        >
+          <RemoveCircleIcon sx={{ color: "#5350E9", fontSize: 80 }} />
+        </IconButton>
+      </TotalBudgetPanelWrapper>
+    );
+  }
 };

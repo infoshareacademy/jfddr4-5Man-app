@@ -1,5 +1,4 @@
 import { Button } from "@mui/material";
-import { red, yellow } from "@mui/material/colors";
 import { useContext } from "react";
 import styled from "styled-components";
 import { v4 as uuidv4 } from "uuid";

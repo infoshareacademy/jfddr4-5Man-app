@@ -65,6 +65,7 @@ const Logo1 = styled.h2`
 const Logo2 = styled.h2`
   font-size: 25px;
   color: #15810b;
+  text-decoration: underline;
 `;
 const NavigationWrapper = styled.div`
   ul {
@@ -121,7 +122,7 @@ export function SidebarMenu() {
     <SidebarWrapper>
       <LogoWrapper>
         <LogoImage>
-          <img src="../../../images/logo.png"></img>
+          <img src="../../../images/logo.png" alt=""></img>
         </LogoImage>
         <Logo1>YOUR</Logo1>
         <Logo2>MONEY</Logo2>

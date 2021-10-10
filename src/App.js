@@ -7,17 +7,17 @@ import { Register } from "./registerPage/Register";
 import { getAuth, onAuthStateChanged } from "@firebase/auth";
 
 const App = () => {
-  const [currentUser, changeCurrentUser] = useState("TestUser");
+  const [currentUser, changeCurrentUser] = useState("");
   const auth = getAuth();
-  // onAuthStateChanged(auth, (user) => {
-  //   if (user) {
-  //     changeCurrentUser(user.uid);
-  //   } else {
-  //     if (window.location.href.includes("main")) {
-  //       window.location.href = window.location.origin;
-  //     }
-  //   }
-  // });
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      changeCurrentUser(user.uid);
+    } else {
+      if (window.location.href.includes("main")) {
+        window.location.href = window.location.origin;
+      }
+    }
+  });
 
   return (
     <UserContext.Provider value={currentUser}>

@@ -1,6 +1,5 @@
 import { useContext, useEffect, useState } from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
-import "./contentMain.css";
 import {
   compileGraphDatabase,
   compileHistoryDatabase,
@@ -70,9 +69,7 @@ export function ContentMain() {
       <DateContext.Provider value={dateToDisplay}>
         <Switch>
           <Route exact path="/main">
-            <section className="contentMainSection">
-              <Redirect to="/main/home" />
-            </section>
+            <Redirect to="/main/home" />
           </Route>
           <Route path="/main/home">
             <Home

@@ -1,5 +1,4 @@
 import { Button, FormControlLabel, FormGroup, Switch } from "@mui/material";
-import { red, yellow } from "@mui/material/colors";
 import { useContext } from "react";
 import styled from "styled-components";
 import { updateCategoryColors, updateNightmode } from "../../../firebase";
