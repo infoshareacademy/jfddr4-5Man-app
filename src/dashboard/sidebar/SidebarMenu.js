@@ -7,7 +7,7 @@ import styled from "styled-components";
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../UserContext";
 import { getSidebarInfo } from "../contentMain/utils";
-import { fetchUserInfo } from "../../firebase";
+import { fetchUserInfo, signOutFunc } from "../../firebase";
 import { picturesToDisplay } from "../contentMain/settings/PicturePicker";
 
 const UserDisplay = styled.div`
@@ -35,7 +35,9 @@ const UserName = styled.p`
   max-width: 190px;
   letter-spacing: 1px;
 `;
-const Logout = styled.p``;
+const Logout = styled.p`
+  cursor: pointer;
+`;
 const SidebarWrapper = styled.aside`
   display: flex;
   flex-direction: column;
@@ -187,7 +189,13 @@ export function SidebarMenu() {
         <UserImage>{pictures[sidebarInfo.picture]}</UserImage>
         <div>
           <UserName>{sidebarInfo.name}</UserName>
-          <Logout>Logout</Logout>
+          <Logout
+            onClick={() => {
+              signOutFunc();
+            }}
+          >
+            Logout
+          </Logout>
         </div>
       </UserDisplay>
     </SidebarWrapper>

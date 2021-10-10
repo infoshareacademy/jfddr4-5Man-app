@@ -10,6 +10,13 @@ import {
   deleteDoc,
   onSnapshot,
 } from "firebase/firestore";
+import {
+  getAuth,
+  updatePassword,
+  updateEmail,
+  deleteUser,
+  signOut,
+} from "firebase/auth";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAuW15Qk3tMLE-2sAEFXay41S1puJ-i_Pk",
@@ -366,4 +373,87 @@ export const updateCategoryColors = (userName, isOn) => {
 export const updatePicture = (userName, number) => {
   const c = doc(db, `${userName} - data`, "Picture");
   updateDoc(c, { number: number });
+};
+
+export const changePassword = (
+  password,
+  reset1,
+  reset2,
+  goBackHandler,
+  setErrorMessage
+) => {
+  const auth = getAuth();
+  const user = auth.currentUser;
+  updatePassword(user, password)
+    .then(() => {
+      reset1("");
+      reset2("");
+      goBackHandler();
+    })
+    .catch((error) => {
+      setErrorMessage("Something went wrong :(");
+      console.log(error.message);
+    });
+};
+
+export const changeEmail = (email, reset, goBackHandler, setErrorMessage) => {
+  const auth = getAuth();
+  updateEmail(auth.currentUser, email)
+    .then(() => {
+      reset("");
+      goBackHandler();
+    })
+    .catch((error) => {
+      setErrorMessage("Something went wrong :(");
+      console.log(error.message);
+    });
+};
+
+export const clearData = (userName, categories, transactions) => {
+  categories.forEach((category) => {
+    category.id !== "Income" &&
+      deleteDoc(doc(db, `${userName} - categories`, category.id));
+  });
+  transactions.forEach((transaction) =>
+    deleteDoc(doc(db, `${userName} - transactions`, transaction.id))
+  );
+  updateDoc(doc(db, `${userName} - data`, "Currency"), {
+    currency: "PLN",
+  });
+  updateDoc(doc(db, `${userName} - data`, "Nightmode"), {
+    isOn: "false",
+  });
+  updateDoc(doc(db, `${userName} - data`, "TotalBudget"), {
+    amount: 0,
+  });
+  updateDoc(doc(db, `${userName} - data`, "Nickname"), {
+    nickname: "User",
+  });
+  updateDoc(doc(db, `${userName} - data`, "Picture"), {
+    number: 0,
+  });
+  updateDoc(doc(db, `${userName} - data`, "CategoryColors"), {
+    isOn: "true",
+  });
+};
+
+export const deleteUserFunc = (goBackHandler, setErrorMessage) => {
+  const auth = getAuth();
+  const user = auth.currentUser;
+  deleteUser(user)
+    .then(() => {
+      goBackHandler();
+    })
+    .catch((error) => {
+      setErrorMessage("Something went wrong :(");
+      console.log(error.message);
+    });
+};
+
+export const signOutFunc = () => {
+  const auth = getAuth();
+  signOut(auth).catch((error) => {
+    console.log(error.message);
+  });
+  window.location.reload();
 };

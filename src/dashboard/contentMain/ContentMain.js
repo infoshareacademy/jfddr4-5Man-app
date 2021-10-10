@@ -96,7 +96,11 @@ export function ContentMain() {
             ></History>
           </Route>
           <Route exact path="/main/settings">
-            <Setting userInfo={userInfo}></Setting>
+            <Setting
+              userInfo={userInfo}
+              categories={categories}
+              transactions={transactions}
+            ></Setting>
           </Route>
         </Switch>
       </DateContext.Provider>

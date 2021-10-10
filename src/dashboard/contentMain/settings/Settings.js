@@ -95,6 +95,9 @@ export const Setting = (props) => {
   const [nightmode, changeNightmode] = useState("");
   const [categoryColors, changeCategoryColors] = useState("");
   const [picture, changePicture] = useState("");
+  const [password, changePassword] = useState("");
+  const [repeatPassword, changeRepeatPassword] = useState("");
+  const [email, changeEmail] = useState("");
   const pictures = picturesToDisplay;
   return (
     <SettingsWrapper>
@@ -319,6 +322,7 @@ export const Setting = (props) => {
                 document
                   .querySelector(".confirmForm")
                   .classList.add("displayed");
+                changeType("clearData");
               }}
             >
               Clear all data
@@ -338,6 +342,7 @@ export const Setting = (props) => {
                 document
                   .querySelector(".confirmForm")
                   .classList.add("displayed");
+                changeType("deleteAccount");
               }}
             >
               Delete account
@@ -354,6 +359,12 @@ export const Setting = (props) => {
             changeType={changeType}
             nickname={nickname}
             changeNickname={changeNickname}
+            password={password}
+            changePassword={changePassword}
+            repeatPassword={repeatPassword}
+            changeRepeatPassword={changeRepeatPassword}
+            email={email}
+            changeEmail={changeEmail}
           ></TextForm>
         </TextFormOutsideWrapper>
         <OnOffFormOutsideWrapper className="onOffForm">
@@ -367,7 +378,12 @@ export const Setting = (props) => {
           ></OnOffForm>
         </OnOffFormOutsideWrapper>
         <ConfirmFormOutsideWrapper className="confirmForm">
-          <ConfirmForm></ConfirmForm>
+          <ConfirmForm
+            type={type}
+            changeType={changeType}
+            categories={props.categories}
+            transactions={props.transactions}
+          ></ConfirmForm>
         </ConfirmFormOutsideWrapper>
         <PicturePickerOutsideWrapper className="picturePicker">
           <PicturePicker
