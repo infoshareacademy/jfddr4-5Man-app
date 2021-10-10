@@ -3,6 +3,7 @@ import { Route, Switch, Redirect } from "react-router-dom";
 import {
   compileGraphDatabase,
   compileHistoryDatabase,
+  filterCategoryColors,
   getTotalBudget,
 } from "./utils";
 import { CurrencyContext } from "./CurrencyContext";
@@ -51,14 +52,16 @@ export function ContentMain() {
     );
   }, [userInfo]);
 
+  const filteredCategories = filterCategoryColors(categories, userInfo);
+
   const compiledGraphDatabase = compileGraphDatabase(
-    categories,
+    filteredCategories,
     transactions,
     dateToDisplay
   );
 
   const compiledHistoryDatabase = compileHistoryDatabase(
-    categories,
+    filteredCategories,
     transactions
   );
 
@@ -77,12 +80,12 @@ export function ContentMain() {
               historyDatabase={compiledHistoryDatabase}
               setDateToDisplay={setDateToDisplay}
               totalBudget={totalBudget}
-              categories={categories}
+              categories={filteredCategories}
             ></Home>
           </Route>
           <Route exact path="/main/budget">
             <Budget
-              categories={categories}
+              categories={filteredCategories}
               transactions={transactions}
               totalBudget={totalBudget}
             ></Budget>
@@ -91,14 +94,14 @@ export function ContentMain() {
             <History
               historyDatabase={compiledHistoryDatabase}
               setDateToDisplay={setDateToDisplay}
-              categories={categories}
+              categories={filteredCategories}
               totalBudget={totalBudget}
             ></History>
           </Route>
           <Route exact path="/main/settings">
             <Setting
               userInfo={userInfo}
-              categories={categories}
+              categories={filteredCategories}
               transactions={transactions}
             ></Setting>
           </Route>

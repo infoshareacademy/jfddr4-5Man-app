@@ -73,3 +73,34 @@ export const getNightmode = (userData) => {
     }).isOn;
   }
 };
+
+export const filterCategoryColors = (categories, userInfo) => {
+  if (categories.length === 0 || userInfo.length === 0) {
+    return [];
+  }
+  if (
+    userInfo.find((data) => {
+      return data.id === "CategoryColors";
+    }).isOn === "true"
+  ) {
+    return categories;
+  }
+  if (
+    userInfo.find((data) => {
+      return data.id === "CategoryColors";
+    }).isOn === "false"
+  ) {
+    return categories.map((category) => {
+      return category.name !== "Income"
+        ? {
+            plannerOn: category.plannerOn,
+            planner: category.planner,
+            name: category.name,
+            createdAt: category.createdAt,
+            id: category.id,
+            color: "#E93131",
+          }
+        : category;
+    });
+  }
+};
