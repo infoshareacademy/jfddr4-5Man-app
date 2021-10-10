@@ -66,7 +66,7 @@ export const setBorder = (dataSet, database, day) => {
   } else if (dataSet.y === 0) {
     return 0;
   } else if (database.name === "Income" && dataSet.y !== 0) {
-    return "3px dashed darkred";
+    return "3px solid #004D00";
   }
 };
 

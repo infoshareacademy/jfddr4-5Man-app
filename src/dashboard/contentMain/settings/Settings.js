@@ -38,7 +38,6 @@ const UserImage = styled.div`
   align-items: center;
   justify-content: center;
   border-radius: 30px;
-  border-left: 2px solid #d0d0d0;
   img {
     width: 50px;
     height: 50px;

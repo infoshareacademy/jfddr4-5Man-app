@@ -16,6 +16,7 @@ import {
   updateEmail,
   deleteUser,
   signOut,
+  sendPasswordResetEmail,
 } from "firebase/auth";
 
 const firebaseConfig = {
@@ -456,4 +457,15 @@ export const signOutFunc = () => {
     console.log(error.message);
   });
   window.location.reload();
+};
+
+export const sendPasswordReset = (email, setForgotMessage) => {
+  const auth = getAuth();
+  sendPasswordResetEmail(auth, email)
+    .then(() => {
+      setForgotMessage("Email have been sent");
+    })
+    .catch((error) => {
+      console.log(error.message);
+    });
 };

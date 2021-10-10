@@ -5,6 +5,7 @@ import { Link, useHistory } from "react-router-dom";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import styled from "styled-components";
 import { TextField } from "@mui/material";
+import { sendPasswordReset } from "../firebase";
 
 const MainWrapper = styled.div`
   width: 100vw;
@@ -51,12 +52,30 @@ const Logo2 = styled.h2`
 `;
 const RegisterInfo = styled.p`
   text-align: center;
+  margin-bottom: 20px;
   a {
     text-decoration: underline;
     display: block;
     margin-top: 5px;
     color: #333193;
   }
+`;
+const ForgotPasswordWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+const ForgotPasswordText1 = styled.p`
+  margin-bottom: 5px;
+`;
+const ForgotPasswordText2 = styled.p`
+  color: #333193;
+  text-decoration: underline;
+  cursor: pointer;
+  margin-bottom: 5px;
+`;
+const ForgotPasswordInfo = styled.p`
+  color: red;
 `;
 const ErrorWrapper = styled.div`
   width: 235px;
@@ -99,6 +118,7 @@ export function Login() {
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPass, setLoginPass] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const [forgotMessage, setForgotMessage] = useState("");
 
   const history = useHistory();
 
@@ -128,6 +148,7 @@ export function Login() {
         setErrorMessage("");
         setLoginEmail("");
         setLoginPass("");
+        setForgotMessage("");
         history.push("/main");
       })
       .catch((error) => {
@@ -197,6 +218,22 @@ export function Login() {
           <br />
           <Link to="/register">Register here</Link>
         </RegisterInfo>
+
+        <ForgotPasswordWrapper>
+          <ForgotPasswordText1>Forgot password ?</ForgotPasswordText1>
+          <ForgotPasswordText2
+            onClick={() => {
+              if (loginEmail.length === 0) {
+                setForgotMessage("Please enter email");
+              } else {
+                sendPasswordReset(loginEmail, setForgotMessage);
+              }
+            }}
+          >
+            Click here !
+          </ForgotPasswordText2>
+          <ForgotPasswordInfo>{forgotMessage}</ForgotPasswordInfo>
+        </ForgotPasswordWrapper>
       </MainPanelWrapper>
     </MainWrapper>
   );
