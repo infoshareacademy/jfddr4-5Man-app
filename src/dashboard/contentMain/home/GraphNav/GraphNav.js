@@ -9,6 +9,26 @@ const GraphNavWrapper = styled.div`
   justify-content: center;
   margin-top: 20px;
 `;
+const selectStyles = {
+  marginRight: "20px",
+  "&:last-of-type": { marginRight: "0px" },
+  "& label": { color: "#5350E9" },
+  "& label.Mui-focused": {
+    color: "#333193",
+  },
+  "& .MuiOutlinedInput-root": {
+    "& fieldset": {
+      borderColor: "#5350E9",
+    },
+    "&:hover fieldset": {
+      borderColor: "#5350E9",
+    },
+    "&.Mui-focused fieldset": {
+      borderColor: "#333193",
+    },
+  },
+  "& .MuiList-root": { backgroundColor: "#5350E9" },
+};
 
 export const GraphNav = (props) => {
   const initialChartSetter = () => {
@@ -83,7 +103,7 @@ export const GraphNav = (props) => {
 
   return (
     <GraphNavWrapper>
-      <FormControl>
+      <FormControl sx={selectStyles}>
         <InputLabel id="chartSelect">Chart</InputLabel>
         <Select
           labelId="chartSelect"
@@ -91,15 +111,21 @@ export const GraphNav = (props) => {
           value={chart}
           onChange={chartChanger}
         >
-          <MenuItem value="piechart">
+          <MenuItem
+            value="piechart"
+            sx={{ padding: "0px", width: "116px", height: "36px" }}
+          >
             <Link to="/main/home/piechart">Pie Chart</Link>
           </MenuItem>
-          <MenuItem value="barchart">
+          <MenuItem
+            value="barchart"
+            sx={{ padding: "0px", width: "116px", height: "36px" }}
+          >
             <Link to="/main/home/barchart">Bar Chart</Link>
           </MenuItem>
         </Select>
       </FormControl>
-      <FormControl>
+      <FormControl sx={selectStyles}>
         <InputLabel id="monthSelect">Month</InputLabel>
         <Select
           labelId="monthSelect"
@@ -115,7 +141,7 @@ export const GraphNav = (props) => {
           {setMonthMenuItems()}
         </Select>
       </FormControl>
-      <FormControl>
+      <FormControl sx={selectStyles}>
         <InputLabel id="yearSelect">Year</InputLabel>
         <Select
           labelId="yearSelect"

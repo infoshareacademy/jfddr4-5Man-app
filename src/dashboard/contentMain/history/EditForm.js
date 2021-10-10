@@ -7,7 +7,6 @@ import {
 } from "@mui/material";
 import { useContext, useState } from "react";
 import styled from "styled-components";
-import { yellow, red } from "@mui/material/colors";
 import { UserContext } from "../../../UserContext";
 import {
   deleteTransaction,
@@ -27,9 +26,17 @@ const FormWrapper = styled.div`
 `;
 const ButtonsWrapper = styled.div`
   display: flex;
+  margin-top: 20px;
+  align-items: center;
+  justify-content: center;
+`;
+const ConfirmButtonsWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 const ErrorWrapper = styled.div`
-  width: 320px;
+  width: 372px;
   height: 15px;
   font-size: 15px;
   color: red;
@@ -38,11 +45,73 @@ const ErrorWrapper = styled.div`
 `;
 const ConfirmWrapper = styled.div`
   display: none;
-  margin-top: 10px;
+  margin-top: 20px;
+  align-items: center;
+  justify-content: center;
 `;
 const ConfirmMessage = styled.span`
   color: red;
+  letter-spacing: 1px;
+  margin-right: 15px;
 `;
+const buttonNormalStyles = {
+  backgroundColor: "#5350E9",
+  borderRadius: "25px",
+  color: "#FFFFFF",
+  fontWeight: "bold",
+  letterSpacing: "1px",
+  fontSize: "20px",
+  marginRight: "20px",
+  "&:last-of-type": { marginRight: "0px" },
+  "&:hover": { backgroundColor: "#333193" },
+};
+const buttonRedStyles = {
+  backgroundColor: "#C10A0A",
+  borderRadius: "25px",
+  color: "#FFFFFF",
+  fontWeight: "bold",
+  letterSpacing: "1px",
+  fontSize: "20px",
+  marginRight: "20px",
+  "&:last-of-type": { marginRight: "0px" },
+  "&:hover": { backgroundColor: "#730606" },
+};
+const textFieldStyles = {
+  marginBottom: "20px",
+  "& label": { color: "#5350E9" },
+  "& label.Mui-focused": {
+    color: "#333193",
+  },
+  "& .MuiOutlinedInput-root": {
+    "& fieldset": {
+      borderColor: "#5350E9",
+    },
+    "&:hover fieldset": {
+      borderColor: "#5350E9",
+    },
+    "&.Mui-focused fieldset": {
+      borderColor: "#333193",
+    },
+  },
+};
+const selectStyles = {
+  "& label": { color: "#5350E9" },
+  "& label.Mui-focused": {
+    color: "#333193",
+  },
+  "& .MuiOutlinedInput-root": {
+    "& fieldset": {
+      borderColor: "#5350E9",
+    },
+    "&:hover fieldset": {
+      borderColor: "#5350E9",
+    },
+    "&.Mui-focused fieldset": {
+      borderColor: "#333193",
+    },
+  },
+  "& .MuiList-root": { backgroundColor: "#5350E9" },
+};
 
 export const EditForm = (props) => {
   const [errorMessage, setErrorMessage] = useState("");
@@ -50,6 +119,7 @@ export const EditForm = (props) => {
 
   const goBackHandler = () => {
     props.setTransactionData("");
+    setErrorMessage("");
     document.querySelector(".opaquePanel").classList.remove("displayed");
     document.querySelector(".coverPanel").classList.remove("displayed");
   };
@@ -69,6 +139,7 @@ export const EditForm = (props) => {
       <FormWrapper>
         <ErrorWrapper>{errorMessage}</ErrorWrapper>
         <TextField
+          sx={textFieldStyles}
           label="Amount"
           type="number"
           value={props.transactionData.amount}
@@ -98,6 +169,7 @@ export const EditForm = (props) => {
           }}
         ></TextField>
         <TextField
+          sx={textFieldStyles}
           label="Description"
           value={props.transactionData.description}
           onChange={(event) => {
@@ -113,7 +185,7 @@ export const EditForm = (props) => {
             }
           }}
         ></TextField>
-        <FormControl>
+        <FormControl sx={selectStyles}>
           <InputLabel id="categorySelect">Category</InputLabel>
           <Select
             labelId="categorySelect"
@@ -136,8 +208,8 @@ export const EditForm = (props) => {
         </FormControl>
         <ButtonsWrapper>
           <Button
-            variant="outlined"
-            sx={{ color: yellow[500], fontSize: 20 }}
+            variant="contained"
+            sx={buttonNormalStyles}
             onClick={() => {
               if (validate() === true) {
                 updateTransaction(
@@ -208,8 +280,8 @@ export const EditForm = (props) => {
             EDIT
           </Button>
           <Button
-            variant="outlined"
-            sx={{ color: red[500], fontSize: 20 }}
+            variant="contained"
+            sx={buttonNormalStyles}
             onClick={() => {
               goBackHandler();
             }}
@@ -217,8 +289,8 @@ export const EditForm = (props) => {
             GO BACK
           </Button>
           <Button
-            variant="outlined"
-            sx={{ color: red[500], fontSize: 20 }}
+            variant="contained"
+            sx={buttonRedStyles}
             onClick={() => {
               document
                 .querySelector(".confirmWrapper")
@@ -230,10 +302,10 @@ export const EditForm = (props) => {
         </ButtonsWrapper>
         <ConfirmWrapper className="confirmWrapper">
           <ConfirmMessage>Are you sure ?</ConfirmMessage>
-          <ButtonsWrapper>
+          <ConfirmButtonsWrapper>
             <Button
-              variant="outlined"
-              sx={{ color: red[500], fontSize: 20 }}
+              variant="contained"
+              sx={buttonRedStyles}
               onClick={() => {
                 deleteTransaction(currentUser, props.transactionData.id);
                 updateBudgetForExistingTransaction(
@@ -253,8 +325,8 @@ export const EditForm = (props) => {
               YES
             </Button>
             <Button
-              variant="outlined"
-              sx={{ color: red[500], fontSize: 20 }}
+              variant="contained"
+              sx={buttonNormalStyles}
               onClick={() => {
                 document
                   .querySelector(".confirmWrapper")
@@ -263,7 +335,7 @@ export const EditForm = (props) => {
             >
               NO
             </Button>
-          </ButtonsWrapper>
+          </ConfirmButtonsWrapper>
         </ConfirmWrapper>
       </FormWrapper>
     )

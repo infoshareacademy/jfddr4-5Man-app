@@ -12,10 +12,33 @@ const OnOffFormInsideWrapper = styled.div`
   display: flex;
   flex-direction: column;
   z-index: 10;
+  align-items: center;
 `;
 const ButtonsWrapper = styled.div`
   display: flex;
+  margin-top: 20px;
+  justify-content: center;
 `;
+const buttonStyles = {
+  backgroundColor: "#5350E9",
+  borderRadius: "25px",
+  color: "#FFFFFF",
+  fontWeight: "bold",
+  letterSpacing: "1px",
+  fontSize: "20px",
+  "&:first-of-type": { marginRight: "20px" },
+  "&:hover": { backgroundColor: "#333193" },
+};
+const switchStyles = {
+  width: "fit-content",
+  "& .MuiTypography-root": { fontSize: "20px", marginLeft: "10px" },
+  "& .MuiSwitch-switchBase": {
+    "& .MuiSwitch-thumb": { backgroundColor: "#5350E9" },
+    "&.Mui-checked": {
+      "& + .MuiSwitch-track": { backgroundColor: "#333193", opacity: 1 },
+    },
+  },
+};
 
 export const OnOffForm = (props) => {
   const currentUser = useContext(UserContext);
@@ -31,7 +54,7 @@ export const OnOffForm = (props) => {
     <>
       {props.type === "nightmode" && (
         <OnOffFormInsideWrapper>
-          <FormGroup>
+          <FormGroup sx={switchStyles}>
             <FormControlLabel
               control={
                 <Switch
@@ -49,7 +72,7 @@ export const OnOffForm = (props) => {
           <ButtonsWrapper>
             <Button
               variant="outlined"
-              sx={{ color: yellow[500], fontSize: 20 }}
+              sx={buttonStyles}
               onClick={() => {
                 updateNightmode(currentUser, props.nightmode);
                 goBackHandler();
@@ -59,7 +82,7 @@ export const OnOffForm = (props) => {
             </Button>
             <Button
               variant="outlined"
-              sx={{ color: red[500], fontSize: 20 }}
+              sx={buttonStyles}
               onClick={() => {
                 goBackHandler();
               }}
@@ -72,7 +95,7 @@ export const OnOffForm = (props) => {
 
       {props.type === "categoryColors" && (
         <OnOffFormInsideWrapper>
-          <FormGroup>
+          <FormGroup sx={switchStyles}>
             <FormControlLabel
               control={
                 <Switch
@@ -90,7 +113,7 @@ export const OnOffForm = (props) => {
           <ButtonsWrapper>
             <Button
               variant="outlined"
-              sx={{ color: yellow[500], fontSize: 20 }}
+              sx={buttonStyles}
               onClick={() => {
                 updateCategoryColors(currentUser, props.categoryColors);
                 goBackHandler();
@@ -100,7 +123,7 @@ export const OnOffForm = (props) => {
             </Button>
             <Button
               variant="outlined"
-              sx={{ color: red[500], fontSize: 20 }}
+              sx={buttonStyles}
               onClick={() => {
                 goBackHandler();
               }}

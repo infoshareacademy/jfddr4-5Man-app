@@ -1,6 +1,6 @@
 import { Button } from "@mui/material";
-import { red } from "@mui/material/colors";
 import styled from "styled-components";
+import { v4 as uuidv4 } from "uuid";
 
 const ColorPickerInsideWrapper = styled.div`
   padding: 20px;
@@ -8,52 +8,64 @@ const ColorPickerInsideWrapper = styled.div`
   border-radius: 25px;
   display: flex;
   flex-direction: column;
+  align-items: center;
 `;
 const ColorsWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
   box-sizing: content-box;
-  width: 360px;
-  height: 240px;
+  width: 480px;
+  height: 320px;
   margin-bottom: 20px;
 `;
 const OneColor = styled.div`
-  width: 50px;
-  height: 50px;
-  border-radius: 25px;
-  margin: 5px;
+  width: 60px;
+  height: 60px;
+  border-radius: 30px;
+  margin: 10px;
   cursor: pointer;
 `;
 const ColorName = styled.div`
   display: none;
 `;
+const buttonStyles = {
+  backgroundColor: "#5350E9",
+  borderRadius: "25px",
+  color: "#FFFFFF",
+  fontWeight: "bold",
+  letterSpacing: "1px",
+  fontSize: "20px",
+  width: "200px",
+  "&:first-of-type": { marginRight: "20px" },
+  "&:hover": { backgroundColor: "#333193" },
+};
 
 export const ColorPicker = (props) => {
   const colorsToDisplay = [
-    "Aqua",
-    "Blue",
-    "BlueViolet",
-    "Brown",
-    "Chocolate",
-    "Crimson",
-    "DarkBlue",
-    "DarkMagenta",
-    "DarkRed",
-    "Red",
-    "DeepPink",
-    "DarkKhaki",
-    "Grey",
-    "Gold",
-    "Indigo",
-    "Yellow",
-    "Purple",
-    "Orange",
-    "DarkSalmon",
-    "Tomato",
-    "Teal",
-    "Turquoise",
-    "Tan",
-    "SaddleBrown",
+    "#FF0000",
+    "#FF7676",
+    "#FF8300",
+    "#FFB261",
+    "#F3FF00",
+    "#F9FF7E",
+    "#00FFE8",
+    "#A3FFF7",
+    "#A3FFF7",
+    "#0013FF",
+    "#7C00FF",
+    "#C996FF",
+    "#FF00F3",
+    "#FFB2FB",
+    "#FF0061",
+    "#C1FF00",
+    "#EDFFB4",
+    "#D4E3E5",
+    "#D8FFDE",
+    "#B1FFD8",
+    "#DEFFB1",
+    "#FBECFF",
+    "#ECFEFF",
+    "#F6EDFF",
   ];
 
   return (
@@ -62,7 +74,7 @@ export const ColorPicker = (props) => {
         {colorsToDisplay.map((color) => {
           return (
             <OneColor
-              key={color}
+              key={uuidv4()}
               onClick={(event) => {
                 props.setCategoryData({
                   color: event.currentTarget.childNodes[0].outerText,
@@ -84,7 +96,7 @@ export const ColorPicker = (props) => {
       </ColorsWrapper>
       <Button
         variant="outlined"
-        sx={{ color: red[500], fontSize: 20 }}
+        sx={buttonStyles}
         onClick={() => {
           document.querySelector(".colorPicker").classList.remove("displayed");
         }}

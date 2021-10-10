@@ -13,7 +13,7 @@ const App = () => {
   //   if (user) {
   //     changeCurrentUser(user.uid);
   //   } else {
-  //     if (window.location.href.toString().includes("main")) {
+  //     if (window.location.href.includes("main")) {
   //       window.location.href = window.location.origin;
   //     }
   //   }

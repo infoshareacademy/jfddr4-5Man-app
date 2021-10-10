@@ -1,4 +1,3 @@
-import "./sidebar.css";
 import HomeIcon from "@mui/icons-material/Home";
 import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
 import LibraryBooksIcon from "@mui/icons-material/LibraryBooks";
@@ -14,12 +13,11 @@ import { picturesToDisplay } from "../contentMain/settings/PicturePicker";
 const UserDisplay = styled.div`
   display: flex;
   align-items: center;
-  color: white;
-  margin-left: 10px;
+  margin: auto 0 20px 5px;
 `;
 const UserImage = styled.div`
   background-color: white;
-  margin-right: 10px;
+  margin-right: 15px;
   width: 50px;
   height: 50px;
   display: flex;
@@ -32,12 +30,70 @@ const UserImage = styled.div`
   }
 `;
 const UserName = styled.p`
-  margin-bottom: 5px;
+  font-size: 25px;
+  margin-bottom: 8px;
+  max-width: 190px;
+  letter-spacing: 1px;
 `;
 const Logout = styled.p``;
+const SidebarWrapper = styled.aside`
+  display: flex;
+  flex-direction: column;
+  width: 280px;
+  border-right: 3px solid #d0d0d0;
+  padding: 10px 20px;
+`;
+const LogoWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+  margin-bottom: 60px;
+`;
+const LogoImage = styled.div`
+  width: 50px;
+  height: 50px;
+  margin-right: 10px;
+  img {
+    width: 50px;
+    height: 50px;
+  }
+`;
+const Logo1 = styled.h2`
+  font-size: 25px;
+  margin-right: 7px;
+`;
+const Logo2 = styled.h2`
+  font-size: 25px;
+  color: #15810b;
+`;
+const NavigationWrapper = styled.div`
+  ul {
+    list-style: none;
+  }
+`;
+const NavigationItemWrapper = styled.li`
+  font-size: 25px;
+  border-radius: 25px;
+  margin-bottom: 20px;
+  letter-spacing: 2px;
+  transition: background-color 0.2s ease-out;
+  &:hover {
+    background-color: #b3b2e6;
+  }
+  a {
+    box-sizing: content-box;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+  }
+`;
+const NavigationItemText = styled.span`
+  margin-left: 20px;
+`;
 
 export function SidebarMenu() {
   const [userInfo, setUserInfo] = useState([]);
+
   const currentUser = useContext(UserContext);
   useEffect(() => {
     fetchUserInfo(currentUser, setUserInfo);
@@ -45,53 +101,87 @@ export function SidebarMenu() {
   const sidebarInfo = getSidebarInfo(userInfo);
   const pictures = picturesToDisplay;
 
+  const initialActiveSetter = () => {
+    if (window.location.href.includes("home")) {
+      return "home";
+    }
+    if (window.location.href.includes("budget")) {
+      return "budget";
+    }
+    if (window.location.href.includes("history")) {
+      return "history";
+    }
+    if (window.location.href.includes("settings")) {
+      return "settings";
+    }
+  };
+  const [activeNav, setActiveNav] = useState(initialActiveSetter());
+
   return (
-    <div className="navigation">
-      <h1 className="logo">
-        Your <span className="logo2">Money</span>
-      </h1>
-      <ul>
-        <li className="list active">
-          <div>
+    <SidebarWrapper>
+      <LogoWrapper>
+        <LogoImage>
+          <img src="../../../images/logo.png"></img>
+        </LogoImage>
+        <Logo1>YOUR</Logo1>
+        <Logo2>MONEY</Logo2>
+      </LogoWrapper>
+      <NavigationWrapper>
+        <ul>
+          <NavigationItemWrapper
+            className="navHome"
+            style={activeNav === "home" ? { backgroundColor: "#5350e9" } : {}}
+            onClick={() => {
+              setActiveNav("home");
+            }}
+          >
             <Link to="/main/home">
-              <span className="icon">
-                <HomeIcon />
-              </span>
-              <span className="title">Home</span>
+              <HomeIcon sx={{ fontSize: 40 }} />
+              <NavigationItemText>Home</NavigationItemText>
             </Link>
-          </div>
-        </li>
-        <li className="list">
-          <div>
+          </NavigationItemWrapper>
+          <NavigationItemWrapper
+            className="navBudget"
+            style={activeNav === "budget" ? { backgroundColor: "#5350e9" } : {}}
+            onClick={() => {
+              setActiveNav("budget");
+            }}
+          >
             <Link to="/main/budget">
-              <span className="icon">
-                <AccountBalanceWalletIcon />
-              </span>
-              <span className="title">Budget</span>
+              <AccountBalanceWalletIcon sx={{ fontSize: 40 }} />
+              <NavigationItemText>Budget</NavigationItemText>
             </Link>
-          </div>
-        </li>
-        <li className="list">
-          <div>
+          </NavigationItemWrapper>
+          <NavigationItemWrapper
+            className="navHistory"
+            style={
+              activeNav === "history" ? { backgroundColor: "#5350e9" } : {}
+            }
+            onClick={() => {
+              setActiveNav("history");
+            }}
+          >
             <Link to="/main/history">
-              <span className="icon">
-                <LibraryBooksIcon />
-              </span>
-              <span className="title">History</span>
+              <LibraryBooksIcon sx={{ fontSize: 40 }} />
+              <NavigationItemText>History</NavigationItemText>
             </Link>
-          </div>
-        </li>
-        <li className="list">
-          <div>
+          </NavigationItemWrapper>
+          <NavigationItemWrapper
+            className="navSettings"
+            style={
+              activeNav === "settings" ? { backgroundColor: "#5350e9" } : {}
+            }
+            onClick={() => {
+              setActiveNav("settings");
+            }}
+          >
             <Link to="/main/settings">
-              <span className="icon">
-                <SettingsIcon />
-              </span>
-              <span className="title">Settings</span>
+              <SettingsIcon sx={{ fontSize: 40 }} />
+              <NavigationItemText>Settings</NavigationItemText>
             </Link>
-          </div>
-        </li>
-      </ul>
+          </NavigationItemWrapper>
+        </ul>
+      </NavigationWrapper>
       <UserDisplay>
         <UserImage>{pictures[sidebarInfo.picture]}</UserImage>
         <div>
@@ -99,6 +189,6 @@ export function SidebarMenu() {
           <Logout>Logout</Logout>
         </div>
       </UserDisplay>
-    </div>
+    </SidebarWrapper>
   );
 }

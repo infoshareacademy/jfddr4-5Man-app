@@ -10,6 +10,7 @@ const CategoriesWrapper = styled.div`
   display: flex;
   flex-direction: column;
   padding: 25px;
+  letter-spacing: 1px;
 `;
 const OneCategory = styled.div`
   margin-bottom: 20px;
@@ -18,8 +19,10 @@ const OneCategory = styled.div`
   width: 100%;
   cursor: pointer;
   padding: 10px;
+  border-radius: 25px;
+  transition: background-color 0.2s ease-out;
   :hover {
-    background-color: grey;
+    background-color: #dfdfdf;
   }
 `;
 const OneCategoryIncome = styled.div`

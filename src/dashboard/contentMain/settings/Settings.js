@@ -9,21 +9,29 @@ import { TextForm } from "./TextForm";
 const SettingsWrapper = styled.div`
   width: 100%;
   height: 100%;
-  padding: 30px;
+  padding: 50px 30px 30px 50px;
   position: relative;
 `;
 const OneSettingWrapper = styled.div`
   display: flex;
   align-items: center;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
   padding: 5px;
   width: fit-content;
 `;
 const OneSettingDisplayed = styled.div`
-  margin-left: 10px;
-  height: 37px;
+  margin-left: 25px;
+  padding-left: 25px;
+  height: 60px;
   display: flex;
   align-items: center;
+  font-size: 30px;
+  letter-spacing: 1px;
+  border-left: 2px solid #d0d0d0;
+  img {
+    height: 50px;
+    width: 50px;
+  }
 `;
 const CoverPanel = styled.div`
   position: absolute;
@@ -57,6 +65,28 @@ const ConfirmFormOutsideWrapper = styled.div`
 const PicturePickerOutsideWrapper = styled.div`
   display: none;
 `;
+const normalButtonStyle = {
+  backgroundColor: "#5350E9",
+  fontSize: 20,
+  width: 280,
+  borderRadius: 25,
+  color: "#FFFFFF",
+  fontWeight: "bold",
+  letterSpacing: 1,
+  height: 60,
+  "&:hover": { backgroundColor: "#333193" },
+};
+const redButtonStyle = {
+  backgroundColor: "#5350E9",
+  fontSize: 20,
+  width: 280,
+  borderRadius: 25,
+  color: "#800C0C",
+  fontWeight: "bold",
+  letterSpacing: 1,
+  height: 60,
+  "&:hover": { backgroundColor: "#333193" },
+};
 
 export const Setting = (props) => {
   const [currency, changeCurrency] = useState("");
@@ -72,6 +102,7 @@ export const Setting = (props) => {
         <>
           <OneSettingWrapper>
             <Button
+              sx={normalButtonStyle}
               variant="contained"
               onClick={() => {
                 document
@@ -103,6 +134,7 @@ export const Setting = (props) => {
           </OneSettingWrapper>
           <OneSettingWrapper>
             <Button
+              sx={normalButtonStyle}
               variant="contained"
               onClick={() => {
                 document
@@ -136,6 +168,7 @@ export const Setting = (props) => {
           </OneSettingWrapper>
           <OneSettingWrapper>
             <Button
+              sx={normalButtonStyle}
               variant="contained"
               onClick={() => {
                 document
@@ -169,6 +202,7 @@ export const Setting = (props) => {
           </OneSettingWrapper>
           <OneSettingWrapper>
             <Button
+              sx={normalButtonStyle}
               variant="contained"
               onClick={() => {
                 document
@@ -200,6 +234,7 @@ export const Setting = (props) => {
           </OneSettingWrapper>
           <OneSettingWrapper>
             <Button
+              sx={normalButtonStyle}
               variant="contained"
               onClick={() => {
                 document
@@ -236,24 +271,7 @@ export const Setting = (props) => {
           </OneSettingWrapper>
           <OneSettingWrapper>
             <Button
-              variant="contained"
-              onClick={() => {
-                document
-                  .querySelector(".opaquePanel")
-                  .classList.add("displayed");
-                document
-                  .querySelector(".coverPanel")
-                  .classList.add("displayed");
-                document
-                  .querySelector(".confirmForm")
-                  .classList.add("displayed");
-              }}
-            >
-              Logout
-            </Button>
-          </OneSettingWrapper>
-          <OneSettingWrapper>
-            <Button
+              sx={normalButtonStyle}
               variant="contained"
               onClick={() => {
                 document
@@ -271,6 +289,7 @@ export const Setting = (props) => {
           </OneSettingWrapper>
           <OneSettingWrapper>
             <Button
+              sx={normalButtonStyle}
               variant="contained"
               onClick={() => {
                 document
@@ -288,6 +307,7 @@ export const Setting = (props) => {
           </OneSettingWrapper>
           <OneSettingWrapper>
             <Button
+              sx={redButtonStyle}
               variant="contained"
               onClick={() => {
                 document
@@ -306,6 +326,7 @@ export const Setting = (props) => {
           </OneSettingWrapper>
           <OneSettingWrapper>
             <Button
+              sx={redButtonStyle}
               variant="contained"
               onClick={() => {
                 document

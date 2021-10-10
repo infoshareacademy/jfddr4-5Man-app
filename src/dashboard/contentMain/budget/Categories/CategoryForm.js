@@ -24,12 +24,14 @@ const CategoryFormInsideWrapper = styled.div`
   border-radius: 25px;
   display: flex;
   flex-direction: column;
+  align-items: center;
 `;
 const ButtonsWrapper = styled.div`
   display: flex;
+  justify-content: center;
 `;
 const ErrorWrapper = styled.div`
-  width: 320px;
+  width: 372px;
   height: 15px;
   font-size: 15px;
   color: red;
@@ -38,14 +40,23 @@ const ErrorWrapper = styled.div`
 `;
 const ConfirmWrapper = styled.div`
   display: none;
-  margin-top: 10px;
+  margin-top: 20px;
+  align-items: center;
+  justify-content: center;
 `;
 const ConfirmMessage = styled.span`
   color: red;
+  letter-spacing: 1px;
+  margin-right: 15px;
+  width: 300px;
+  font-size: 15px;
 `;
 const ColorWrapper = styled.div`
   display: flex;
   align-items: center;
+  justify-content: center;
+  margin-right: 50px;
+  font-size: 20px;
 `;
 const CategoryColor = styled.div`
   width: 50px;
@@ -57,7 +68,59 @@ const CategoryColor = styled.div`
 const ColorAndPlannerWrapper = styled.div`
   display: flex;
   align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
 `;
+const buttonNormalStyles = {
+  backgroundColor: "#5350E9",
+  borderRadius: "25px",
+  color: "#FFFFFF",
+  fontWeight: "bold",
+  letterSpacing: "1px",
+  fontSize: "20px",
+  marginRight: "20px",
+  "&:last-of-type": { marginRight: "0px" },
+  "&:hover": { backgroundColor: "#333193" },
+};
+const buttonRedStyles = {
+  backgroundColor: "#C10A0A",
+  borderRadius: "25px",
+  color: "#FFFFFF",
+  fontWeight: "bold",
+  letterSpacing: "1px",
+  fontSize: "20px",
+  marginRight: "20px",
+  "&:last-of-type": { marginRight: "0px" },
+  "&:hover": { backgroundColor: "#730606" },
+};
+const textFieldStyles = {
+  marginBottom: "20px",
+  "& label": { color: "#5350E9" },
+  "& label.Mui-focused": {
+    color: "#333193",
+  },
+  "& .MuiOutlinedInput-root": {
+    "& fieldset": {
+      borderColor: "#5350E9",
+    },
+    "&:hover fieldset": {
+      borderColor: "#5350E9",
+    },
+    "&.Mui-focused fieldset": {
+      borderColor: "#333193",
+    },
+  },
+};
+const switchStyles = {
+  width: "fit-content",
+  "& .MuiTypography-root": { fontSize: "20px", marginLeft: "10px" },
+  "& .MuiSwitch-switchBase": {
+    "& .MuiSwitch-thumb": { backgroundColor: "#5350E9" },
+    "&.Mui-checked": {
+      "& + .MuiSwitch-track": { backgroundColor: "#333193", opacity: 1 },
+    },
+  },
+};
 
 export const CategoryForm = (props) => {
   const [errorMessage, setErrorMessage] = useState("");
@@ -90,6 +153,7 @@ export const CategoryForm = (props) => {
         <>
           <ErrorWrapper>{errorMessage}</ErrorWrapper>
           <TextField
+            sx={textFieldStyles}
             label="Name"
             type="text"
             value={props.categoryData.name ? props.categoryData.name : ""}
@@ -118,7 +182,7 @@ export const CategoryForm = (props) => {
               ></CategoryColor>
             </ColorWrapper>
             {props.categoryData && (
-              <FormGroup>
+              <FormGroup sx={switchStyles}>
                 <FormControlLabel
                   control={
                     <Switch
@@ -142,7 +206,7 @@ export const CategoryForm = (props) => {
           <ButtonsWrapper>
             <Button
               variant="outlined"
-              sx={{ color: yellow[500], fontSize: 20 }}
+              sx={buttonNormalStyles}
               onClick={() => {
                 if (validate() === true) {
                   updateCategory(
@@ -166,7 +230,7 @@ export const CategoryForm = (props) => {
             </Button>
             <Button
               variant="outlined"
-              sx={{ color: red[500], fontSize: 20 }}
+              sx={buttonNormalStyles}
               onClick={() => {
                 goBackHandler();
               }}
@@ -175,7 +239,7 @@ export const CategoryForm = (props) => {
             </Button>
             <Button
               variant="outlined"
-              sx={{ color: red[500], fontSize: 20 }}
+              sx={buttonRedStyles}
               onClick={() => {
                 document
                   .querySelector(".confirmWrapper")
@@ -188,14 +252,13 @@ export const CategoryForm = (props) => {
           <ConfirmWrapper className="confirmWrapper">
             <ConfirmMessage>
               Are you sure ?<br />
-              This will delete all the transactions for the given category,
-              <br />
-              but will not update your budget.
+              This will delete all the transactions for the given category, but
+              will not update your budget.
             </ConfirmMessage>
             <ButtonsWrapper>
               <Button
                 variant="outlined"
-                sx={{ color: red[500], fontSize: 20 }}
+                sx={buttonRedStyles}
                 onClick={() => {
                   deleteCategory(currentUser, props.categoryData.id);
                   deleteTransactionsForCategoryDelete(
@@ -213,7 +276,7 @@ export const CategoryForm = (props) => {
               </Button>
               <Button
                 variant="outlined"
-                sx={{ color: red[500], fontSize: 20 }}
+                sx={buttonNormalStyles}
                 onClick={() => {
                   document
                     .querySelector(".confirmWrapper")

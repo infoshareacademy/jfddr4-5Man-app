@@ -1,5 +1,4 @@
 import { Button, TextField } from "@mui/material";
-import { red, yellow } from "@mui/material/colors";
 import { useContext } from "react";
 import { useState } from "react";
 import styled from "styled-components";
@@ -23,7 +22,36 @@ const ErrorWrapper = styled.div`
 `;
 const ButtonsWrapper = styled.div`
   display: flex;
+  justify-content: center;
 `;
+const buttonStyles = {
+  backgroundColor: "#5350E9",
+  borderRadius: "25px",
+  color: "#FFFFFF",
+  fontWeight: "bold",
+  letterSpacing: "1px",
+  fontSize: "20px",
+  "&:first-of-type": { marginRight: "20px" },
+  "&:hover": { backgroundColor: "#333193" },
+};
+const textFieldStyles = {
+  marginBottom: "20px",
+  "& label": { color: "#5350E9" },
+  "& label.Mui-focused": {
+    color: "#333193",
+  },
+  "& .MuiOutlinedInput-root": {
+    "& fieldset": {
+      borderColor: "#5350E9",
+    },
+    "&:hover fieldset": {
+      borderColor: "#5350E9",
+    },
+    "&.Mui-focused fieldset": {
+      borderColor: "#333193",
+    },
+  },
+};
 
 export const TotalBudgetForm = (props) => {
   const [amount, setAmount] = useState("");
@@ -53,6 +81,7 @@ export const TotalBudgetForm = (props) => {
     <TotalBudgetFormInsideWrapper>
       <ErrorWrapper>{errorMessage}</ErrorWrapper>
       <TextField
+        sx={textFieldStyles}
         label="Amount"
         type="number"
         value={amount}
@@ -76,8 +105,8 @@ export const TotalBudgetForm = (props) => {
       ></TextField>
       <ButtonsWrapper>
         <Button
-          variant="outlined"
-          sx={{ color: yellow[500], fontSize: 20 }}
+          variant="contained"
+          sx={buttonStyles}
           onClick={() => {
             if (validate() === true) {
               let changedAmount = 0;
@@ -95,8 +124,8 @@ export const TotalBudgetForm = (props) => {
           {props.operationType === "add" ? "ADD" : "SUBTRACT"}
         </Button>
         <Button
-          variant="outlined"
-          sx={{ color: red[500], fontSize: 20 }}
+          variant="contained"
+          sx={buttonStyles}
           onClick={() => {
             goBackHandler();
           }}

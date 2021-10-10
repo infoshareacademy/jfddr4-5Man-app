@@ -82,7 +82,7 @@ export function Register() {
           // CATEGORIES
 
           setDoc(doc(db, user.uid + " - categories", "Income"), {
-            color: "green",
+            color: "#3BCA2D",
             createdAt: +new Date(),
             name: "Income",
           });

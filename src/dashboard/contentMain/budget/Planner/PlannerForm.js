@@ -23,7 +23,36 @@ const ErrorWrapper = styled.div`
 `;
 const ButtonsWrapper = styled.div`
   display: flex;
+  justify-content: center;
 `;
+const buttonStyles = {
+  backgroundColor: "#5350E9",
+  borderRadius: "25px",
+  color: "#FFFFFF",
+  fontWeight: "bold",
+  letterSpacing: "1px",
+  fontSize: "20px",
+  "&:first-of-type": { marginRight: "20px" },
+  "&:hover": { backgroundColor: "#333193" },
+};
+const textFieldStyles = {
+  marginBottom: "20px",
+  "& label": { color: "#5350E9" },
+  "& label.Mui-focused": {
+    color: "#333193",
+  },
+  "& .MuiOutlinedInput-root": {
+    "& fieldset": {
+      borderColor: "#5350E9",
+    },
+    "&:hover fieldset": {
+      borderColor: "#5350E9",
+    },
+    "&.Mui-focused fieldset": {
+      borderColor: "#333193",
+    },
+  },
+};
 
 export const PlannerForm = (props) => {
   const [errorMessage, setErrorMessage] = useState("");
@@ -54,6 +83,7 @@ export const PlannerForm = (props) => {
         <>
           <ErrorWrapper>{errorMessage}</ErrorWrapper>
           <TextField
+            sx={textFieldStyles}
             label="Amount"
             type="number"
             value={props.plannerData.amount}
@@ -80,8 +110,8 @@ export const PlannerForm = (props) => {
           ></TextField>
           <ButtonsWrapper>
             <Button
-              variant="outlined"
-              sx={{ color: yellow[500], fontSize: 20 }}
+              variant="contained"
+              sx={buttonStyles}
               onClick={() => {
                 if (validate() === true) {
                   updatePlanner(
@@ -96,8 +126,8 @@ export const PlannerForm = (props) => {
               CHANGE
             </Button>
             <Button
-              variant="outlined"
-              sx={{ color: red[500], fontSize: 20 }}
+              variant="contained"
+              sx={buttonStyles}
               onClick={() => {
                 goBackHandler();
               }}

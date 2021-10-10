@@ -10,16 +10,17 @@ const ListItem = styled.div`
   align-items: center;
   justify-content: space-between;
   padding: 0 15px;
+  color: black;
+  border-radius: 25px;
+  border: 2px solid #5350e9;
 `;
 const ListItemCategory = styled.span`
   font-size: 25px;
-  color: white;
   width: 120px;
 `;
 const ListItemAmount = styled.span`
   font-size: 25px;
   font-weight: bold;
-  color: white;
   max-width: 300px;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -27,9 +28,8 @@ const ListItemAmount = styled.span`
   right: 10px;
 `;
 const ListItemDate = styled.span`
-  font-size: 25px;
-  color: white;
-  width: 130px;
+  font-size: 20px;
+  width: 110px;
 `;
 
 export const RecentList = (props) => {

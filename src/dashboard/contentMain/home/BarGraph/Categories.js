@@ -3,23 +3,23 @@ import { useContext } from "react";
 import { getOutcomeSum, setCategoryInside, setCategoryTitle } from "./utils";
 import { CurrencyContext } from "../../CurrencyContext";
 
-
 const OneCategory = styled.div`
   display: flex;
   align-items: center;
   margin-right: 30px;
 `;
 const CategoryColor = styled.div`
-  width: 40px;
-  height: 40px;
-  border-radius: 25px;
+  width: 55px;
+  height: 55px;
+  border-radius: 27.5px;
   margin-right: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
+  color: black;
   font-weight: bold;
   font-size: 15px;
+  border: 1px solid #5350e9;
   :hover {
     opacity: 0.6;
   }
@@ -28,7 +28,7 @@ const CategoryColor = styled.div`
 const CategoryName = styled.p``;
 const CategoriesWrapper = styled.div`
   display: flex;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   height: 50px;
   width: fit-content;
 `;
@@ -62,7 +62,7 @@ const Categories = (props) => {
             >
               {category.name === "Income"
                 ? moneyImage
-                : `${setCategoryInside(category, outcomeSum)}%`}
+                : `${setCategoryInside(category, outcomeSum)} %`}
             </CategoryColor>
             <CategoryName>{category.name}</CategoryName>
           </OneCategory>

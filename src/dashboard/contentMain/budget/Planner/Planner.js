@@ -6,6 +6,7 @@ const PlannerWrapper = styled.div`
   width: 100%;
   height: 80%;
   padding: 20px;
+  letter-spacing: 1px;
 `;
 const PlannerTitle = styled.h2`
   font-size: 50px;
@@ -18,10 +19,12 @@ const PlannerItemWrapper = styled.div`
   margin-bottom: 15px;
   height: 75px;
   justify-content: space-between;
+  border-radius: 25px;
+  transition: box-shadow 0.2s ease-out;
+  border: 2px solid #5350e9;
   :hover {
-    opacity: 0.8;
+    box-shadow: inset 0px 0px 50px -10px rgba(0, 0, 0, 0.61);
   }
-  position: relative;
 `;
 const PlannerItemTitle = styled.span`
   font-size: 30px;
@@ -55,7 +58,11 @@ export const Planner = (props) => {
                 style={
                   category.plannerOn === "true"
                     ? { backgroundColor: category.color, cursor: "pointer" }
-                    : { backgroundColor: "grey", cursor: "not-allowed" }
+                    : {
+                        backgroundColor: "grey",
+                        cursor: "not-allowed",
+                        color: "#4F4F4F",
+                      }
                 }
                 onClick={(event) => {
                   category.plannerOn === "true" &&

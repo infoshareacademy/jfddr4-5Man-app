@@ -2,7 +2,6 @@ import styled from "styled-components";
 import TextField from "@mui/material/TextField";
 import { useContext, useState } from "react";
 import { Button, FormControl, InputLabel, Select } from "@mui/material";
-import { yellow, red } from "@mui/material/colors";
 import { UserContext } from "../../../../UserContext";
 import {
   addTransaction,
@@ -26,18 +25,74 @@ const FormWrapper = styled.div`
 `;
 const ButtonsWrapper = styled.div`
   display: flex;
+  justify-content: center;
 `;
 const DateWrapper = styled.div`
   display: flex;
 `;
 const ErrorWrapper = styled.div`
-  width: 235px;
+  width: 250px;
   height: fit-content;
   font-size: 15px;
   color: red;
   margin-bottom: 20px;
   text-align: center;
 `;
+const CategoryWrapper = styled.div`
+  width: 250px;
+  div {
+    width: 250px;
+  }
+`;
+const buttonStyles = {
+  backgroundColor: "#5350E9",
+  borderRadius: "25px",
+  color: "#FFFFFF",
+  fontWeight: "bold",
+  letterSpacing: "1px",
+  fontSize: "20px",
+  "&:first-of-type": { marginRight: "20px" },
+  "&:hover": { backgroundColor: "#333193" },
+};
+const textFieldStyles = {
+  marginBottom: "20px",
+  "& label": { color: "#5350E9" },
+  "& label.Mui-focused": {
+    color: "#333193",
+  },
+  "& .MuiOutlinedInput-root": {
+    "& fieldset": {
+      borderColor: "#5350E9",
+    },
+    "&:hover fieldset": {
+      borderColor: "#5350E9",
+    },
+    "&.Mui-focused fieldset": {
+      borderColor: "#333193",
+    },
+  },
+};
+const selectStyles = {
+  marginRight: "20px",
+  marginBottom: "20px",
+  "&:last-of-type": { marginRight: "0px" },
+  "& label": { color: "#5350E9" },
+  "& label.Mui-focused": {
+    color: "#333193",
+  },
+  "& .MuiOutlinedInput-root": {
+    "& fieldset": {
+      borderColor: "#5350E9",
+    },
+    "&:hover fieldset": {
+      borderColor: "#5350E9",
+    },
+    "&.Mui-focused fieldset": {
+      borderColor: "#333193",
+    },
+  },
+  "& .MuiList-root": { backgroundColor: "#5350E9" },
+};
 
 export const TransactionForm = (props) => {
   const [chosenCategory, chooseCategory] = useState("");
@@ -83,6 +138,7 @@ export const TransactionForm = (props) => {
     <FormWrapper>
       <ErrorWrapper>{errorMessage}</ErrorWrapper>
       <TextField
+        sx={textFieldStyles}
         label="Amount"
         type="number"
         value={amount}
@@ -105,6 +161,7 @@ export const TransactionForm = (props) => {
         }}
       ></TextField>
       <TextField
+        sx={textFieldStyles}
         label="Description"
         value={description}
         onChange={(event) => {
@@ -114,7 +171,7 @@ export const TransactionForm = (props) => {
         }}
       ></TextField>
       <DateWrapper>
-        <FormControl>
+        <FormControl sx={selectStyles}>
           <InputLabel id="daySelect">Day</InputLabel>
           <Select
             labelId="daySelect"
@@ -131,7 +188,7 @@ export const TransactionForm = (props) => {
             {setDayMenuItems(date.year, date.month)}
           </Select>
         </FormControl>
-        <FormControl>
+        <FormControl sx={selectStyles}>
           <InputLabel id="monthSelect">Month</InputLabel>
           <Select
             labelId="monthSelect"
@@ -148,7 +205,7 @@ export const TransactionForm = (props) => {
             {setMonthMenuItems(date.year)}
           </Select>
         </FormControl>
-        <FormControl>
+        <FormControl sx={selectStyles}>
           <InputLabel id="yearSelect">Category</InputLabel>
           <Select
             labelId="yeatSelect"
@@ -166,28 +223,30 @@ export const TransactionForm = (props) => {
           </Select>
         </FormControl>
       </DateWrapper>
-      {props.type === "outcome" ? (
-        <FormControl>
-          <InputLabel id="categorySelect">Category</InputLabel>
-          <Select
-            labelId="categorySelect"
-            label="Category"
-            value={chosenCategory}
-            onChange={(event) => {
-              chooseCategory(event.target.value);
-            }}
-          >
-            {props.categories.length !== 0 &&
-              setCategoryMenuItems(props.categories)}
-          </Select>
-        </FormControl>
-      ) : (
-        ""
-      )}
+      <CategoryWrapper>
+        {props.type === "outcome" ? (
+          <FormControl sx={selectStyles}>
+            <InputLabel id="categorySelect">Category</InputLabel>
+            <Select
+              labelId="categorySelect"
+              label="Category"
+              value={chosenCategory}
+              onChange={(event) => {
+                chooseCategory(event.target.value);
+              }}
+            >
+              {props.categories.length !== 0 &&
+                setCategoryMenuItems(props.categories)}
+            </Select>
+          </FormControl>
+        ) : (
+          ""
+        )}
+      </CategoryWrapper>
       <ButtonsWrapper>
         <Button
-          variant="outlined"
-          sx={{ color: yellow[500], fontSize: 20 }}
+          variant="contained"
+          sx={buttonStyles}
           onClick={() => {
             if (validate() === true) {
               addTransaction(
@@ -223,8 +282,8 @@ export const TransactionForm = (props) => {
           ADD
         </Button>
         <Button
-          variant="outlined"
-          sx={{ color: red[500], fontSize: 20 }}
+          variant="contained"
+          sx={buttonStyles}
           onClick={() => {
             goBackHandler();
           }}

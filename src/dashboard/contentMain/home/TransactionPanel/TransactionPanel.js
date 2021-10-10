@@ -2,10 +2,8 @@ import { IconButton } from "@mui/material";
 import styled from "styled-components";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
-import { yellow } from "@mui/material/colors";
 import { useContext } from "react";
 import { CurrencyContext } from "../../CurrencyContext";
-import "./TransactionPanel.scss";
 import { TransactionForm } from "./TransactionForm";
 import { useState } from "react";
 
@@ -14,6 +12,7 @@ const MainWrapper = styled.div`
   height: 100%;
   padding: 50px 75px;
   min-width: 670px;
+  letter-spacing: 1px;
 `;
 const ButtonsWrapper = styled.div`
   display: flex;
@@ -81,7 +80,7 @@ export const TransactionPanel = (props) => {
               document.querySelector(".coverPanel").classList.add("displayed");
             }}
           >
-            <AddCircleIcon sx={{ color: yellow[500], fontSize: 80 }} />
+            <AddCircleIcon sx={{ color: "#5350E9", fontSize: 80 }} />
           </IconButton>
         </ButtonWrapper>
         <ButtonWrapper>
@@ -93,7 +92,7 @@ export const TransactionPanel = (props) => {
               document.querySelector(".coverPanel").classList.add("displayed");
             }}
           >
-            <RemoveCircleIcon sx={{ color: yellow[500], fontSize: 80 }} />
+            <RemoveCircleIcon sx={{ color: "#5350E9", fontSize: 80 }} />
           </IconButton>
         </ButtonWrapper>
       </ButtonsWrapper>

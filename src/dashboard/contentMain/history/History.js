@@ -2,7 +2,6 @@ import { useState } from "react";
 import styled from "styled-components";
 import { HistoryList } from "./HistoryList";
 import { HistoryNav } from "./HistoryNav";
-import "./history.scss";
 import { EditForm } from "./EditForm";
 
 const HistoryWrapper = styled.div`
@@ -15,13 +14,13 @@ const HistoryWrapper = styled.div`
     width: 15px;
   }
   ::-webkit-scrollbar-track {
-    background: #b49600;
+    background: #b3b2e6;
   }
   ::-webkit-scrollbar-thumb {
-    background: #ffd600;
+    background: #5350e9;
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: #ffd500a2;
+    background: #333193;
   }
 `;
 const CoverPanel = styled.div`

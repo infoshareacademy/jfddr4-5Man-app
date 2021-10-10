@@ -15,6 +15,26 @@ const HistoryNavWrapper = styled.div`
   justify-content: center;
   margin-bottom: 30px;
 `;
+const selectStyles = {
+  marginRight: "20px",
+  "&:last-of-type": { marginRight: "0px" },
+  "& label": { color: "#5350E9" },
+  "& label.Mui-focused": {
+    color: "#333193",
+  },
+  "& .MuiOutlinedInput-root": {
+    "& fieldset": {
+      borderColor: "#5350E9",
+    },
+    "&:hover fieldset": {
+      borderColor: "#5350E9",
+    },
+    "&.Mui-focused fieldset": {
+      borderColor: "#333193",
+    },
+  },
+  "& .MuiList-root": { backgroundColor: "#5350E9" },
+};
 
 export const HistoryNav = (props) => {
   const dateToDisplay = useContext(DateContext);
@@ -24,7 +44,7 @@ export const HistoryNav = (props) => {
   return (
     changedCategories && (
       <HistoryNavWrapper>
-        <FormControl>
+        <FormControl sx={selectStyles}>
           <InputLabel id="monthSelect">Month</InputLabel>
           <Select
             labelId="monthSelect"
@@ -40,7 +60,7 @@ export const HistoryNav = (props) => {
             {setMonthMenuItems(dateToDisplay.year)}
           </Select>
         </FormControl>
-        <FormControl>
+        <FormControl sx={selectStyles}>
           <InputLabel id="yearSelect">Year</InputLabel>
           <Select
             labelId="yearSelect"
@@ -56,7 +76,7 @@ export const HistoryNav = (props) => {
             {setYearMenuItems()}
           </Select>
         </FormControl>
-        <FormControl sx={{ width: 150 }}>
+        <FormControl sx={selectStyles}>
           <InputLabel id="categorySelect">Category</InputLabel>
           <Select
             labelId="categorySelect"
@@ -70,7 +90,7 @@ export const HistoryNav = (props) => {
               setCategoryMenuItems(changedCategories)}
           </Select>
         </FormControl>
-        <FormControl>
+        <FormControl sx={selectStyles}>
           <InputLabel id="orderSelect">Sort by</InputLabel>
           <Select
             labelId="orderSelect"

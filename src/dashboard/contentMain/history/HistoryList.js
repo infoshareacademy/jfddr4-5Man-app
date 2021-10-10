@@ -8,23 +8,27 @@ const HistoryListWrapper = styled.div``;
 const ListItem = styled.div`
   height: 75px;
   width: 100%;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0 15px;
   cursor: pointer;
+  border-radius: 25px;
+  transition: box-shadow 0.2s ease-out;
+  letter-spacing: 1px;
+  border: 2px solid #5350e9;
   :hover {
-    opacity: 0.8;
+    box-shadow: inset 0px 0px 50px -10px rgba(0, 0, 0, 0.61);
   }
 `;
 const ListItemCategory = styled.span`
-  font-size: 35px;
+  font-size: 27px;
   color: black;
   width: 270px;
 `;
 const ListItemAmount = styled.span`
-  font-size: 30px;
+  font-size: 27px;
   font-weight: bold;
   color: black;
   width: 400px;
@@ -33,12 +37,12 @@ const ListItemAmount = styled.span`
   text-align: center;
 `;
 const ListItemDate = styled.span`
-  font-size: 25px;
+  font-size: 23px;
   color: black;
   width: 130px;
 `;
 const ListItemDescription = styled.span`
-  font-size: 25px;
+  font-size: 22.5px;
   color: black;
   width: 405px;
   text-align: center;

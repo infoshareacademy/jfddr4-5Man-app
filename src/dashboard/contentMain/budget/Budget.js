@@ -5,7 +5,6 @@ import { Planner } from "./Planner/Planner";
 import { CategoryForm } from "./Categories/CategoryForm";
 import { useState } from "react";
 import { ColorPicker } from "./Categories/ColorPicker";
-import "./budget.scss";
 import { TotalBudgetForm } from "./TotalBudgetPanel/TotalBudgetForm";
 import { PlannerForm } from "./Planner/PlannerForm";
 

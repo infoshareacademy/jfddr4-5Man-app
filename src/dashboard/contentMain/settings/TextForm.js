@@ -1,12 +1,11 @@
 import { Button, TextField } from "@mui/material";
-import { red, yellow } from "@mui/material/colors";
 import { useContext, useState } from "react";
 import styled from "styled-components";
 import { updateCurrency, updateNickname } from "../../../firebase";
 import { UserContext } from "../../../UserContext";
 
 const ErrorWrapper = styled.div`
-  width: 235px;
+  width: 274px;
   height: fit-content;
   font-size: 15px;
   color: red;
@@ -23,7 +22,36 @@ const TextFormInsideWrapper = styled.div`
 `;
 const ButtonsWrapper = styled.div`
   display: flex;
+  margin-top: 20px;
+  justify-content: center;
 `;
+const buttonStyles = {
+  backgroundColor: "#5350E9",
+  borderRadius: "25px",
+  color: "#FFFFFF",
+  fontWeight: "bold",
+  letterSpacing: "1px",
+  fontSize: "20px",
+  "&:first-of-type": { marginRight: "20px" },
+  "&:hover": { backgroundColor: "#333193" },
+};
+const textFieldStyles = {
+  "& label": { color: "#5350E9" },
+  "& label.Mui-focused": {
+    color: "#333193",
+  },
+  "& .MuiOutlinedInput-root": {
+    "& fieldset": {
+      borderColor: "#5350E9",
+    },
+    "&:hover fieldset": {
+      borderColor: "#5350E9",
+    },
+    "&.Mui-focused fieldset": {
+      borderColor: "#333193",
+    },
+  },
+};
 
 export const TextForm = (props) => {
   const [errorMessage, setErrorMessage] = useState("");
@@ -62,6 +90,8 @@ export const TextForm = (props) => {
         <TextFormInsideWrapper>
           <ErrorWrapper>{errorMessage}</ErrorWrapper>
           <TextField
+            sx={textFieldStyles}
+            mode
             label="Currency"
             type="text"
             value={props.currency}
@@ -73,8 +103,8 @@ export const TextForm = (props) => {
           ></TextField>
           <ButtonsWrapper>
             <Button
-              variant="outlined"
-              sx={{ color: yellow[500], fontSize: 20 }}
+              sx={buttonStyles}
+              variant="contained"
               onClick={() => {
                 if (validateCurrency() === true) {
                   updateCurrency(currentUser, props.currency);
@@ -85,8 +115,8 @@ export const TextForm = (props) => {
               CHANGE
             </Button>
             <Button
-              variant="outlined"
-              sx={{ color: red[500], fontSize: 20 }}
+              variant="contained"
+              sx={buttonStyles}
               onClick={() => {
                 goBackHandler();
               }}
@@ -101,11 +131,12 @@ export const TextForm = (props) => {
         <TextFormInsideWrapper>
           <ErrorWrapper>{errorMessage}</ErrorWrapper>
           <TextField
+            sx={textFieldStyles}
             label="Nickname"
             type="text"
             value={props.nickname}
             onChange={(event) => {
-              if (event.target.value.length < 20) {
+              if (event.target.value.length < 11) {
                 props.changeNickname(event.target.value);
               }
             }}
@@ -113,7 +144,7 @@ export const TextForm = (props) => {
           <ButtonsWrapper>
             <Button
               variant="outlined"
-              sx={{ color: yellow[500], fontSize: 20 }}
+              sx={buttonStyles}
               onClick={() => {
                 if (validateNickname() === true) {
                   updateNickname(currentUser, props.nickname);
@@ -125,7 +156,7 @@ export const TextForm = (props) => {
             </Button>
             <Button
               variant="outlined"
-              sx={{ color: red[500], fontSize: 20 }}
+              sx={buttonStyles}
               onClick={() => {
                 goBackHandler();
               }}

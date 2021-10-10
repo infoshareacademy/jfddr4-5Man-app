@@ -37,9 +37,7 @@ export function Login() {
     const password = loginPass;
 
     signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        const user = userCredential.user;
-
+      .then(() => {
         history.push("/main");
       })
       .catch((error) => {

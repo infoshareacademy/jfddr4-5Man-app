@@ -8,17 +8,18 @@ const RecentWrapper = styled.div`
   min-width: 670px;
   overflow-y: scroll;
   padding: 20px;
+  letter-spacing: 1px;
   ::-webkit-scrollbar {
     width: 15px;
   }
   ::-webkit-scrollbar-track {
-    background: #b49600;
+    background: #b3b2e6;
   }
   ::-webkit-scrollbar-thumb {
-    background: #ffd600;
+    background: #5350e9;
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: #ffd500a2;
+    background: #333193;
   }
 `;
 

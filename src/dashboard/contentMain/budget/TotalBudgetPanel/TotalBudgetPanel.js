@@ -2,7 +2,6 @@ import { IconButton } from "@mui/material";
 import styled from "styled-components";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
-import { yellow } from "@mui/material/colors";
 import { useContext } from "react";
 import { CurrencyContext } from "../../CurrencyContext";
 
@@ -14,6 +13,7 @@ const TotalBudgetPanelWrapper = styled.div`
   padding: 0 10px;
   justify-content: center;
   align-items: center;
+  letter-spacing: 1px;
 `;
 const TotalBudgetDisplay = styled.div`
   display: flex;
@@ -45,7 +45,7 @@ export const TotalBudgetPanel = (props) => {
               document.querySelector(".budgetForm").classList.add("displayed");
             }}
           >
-            <AddCircleIcon sx={{ color: yellow[500], fontSize: 80 }} />
+            <AddCircleIcon sx={{ color: "#5350E9", fontSize: 80 }} />
           </IconButton>
           <TotalBudgetDisplay>
             <TotalBudgetText>Total Budget</TotalBudgetText>
@@ -67,7 +67,7 @@ export const TotalBudgetPanel = (props) => {
               document.querySelector(".budgetForm").classList.add("displayed");
             }}
           >
-            <RemoveCircleIcon sx={{ color: yellow[500], fontSize: 80 }} />
+            <RemoveCircleIcon sx={{ color: "#5350E9", fontSize: 80 }} />
           </IconButton>
         </>
       )}

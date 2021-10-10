@@ -53,7 +53,6 @@ export const getDailyMaxValue = (database) => {
   return daysMaxValues;
 };
 
-
 export const getMaxValue = (database) => {
   const maxValue = Math.max(...getDailyMaxValue(database));
   return maxValue;
@@ -165,7 +164,7 @@ export const getIncomeSum = (database) => {
 };
 
 export const getOutcomeSum = (database) => {
-  if (database.length === 0) {
+  if (database.length === 1 || database.length === 0) {
     return 0;
   } else {
     return database

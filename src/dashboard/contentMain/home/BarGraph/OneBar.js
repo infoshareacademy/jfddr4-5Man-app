@@ -25,6 +25,7 @@ const BarWrapper = styled.div`
 
 const OneSegment = styled.div`
   width: 20px;
+  border: 1px solid #5350e9;
   :hover {
     opacity: 0.6;
   }
