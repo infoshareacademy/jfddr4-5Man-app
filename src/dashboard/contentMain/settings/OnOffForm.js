@@ -6,7 +6,8 @@ import { UserContext } from "../../../UserContext";
 
 const OnOffFormInsideWrapper = styled.div`
   padding: 20px;
-  background-color: white;
+  background-color: ${(props) => props.theme.formsBackgroundColor};
+  color: ${(props) => props.theme.formsTextColor};
   border-radius: 25px;
   display: flex;
   flex-direction: column;

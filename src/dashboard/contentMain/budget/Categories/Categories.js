@@ -22,7 +22,7 @@ const OneCategory = styled.div`
   border-radius: 25px;
   transition: background-color 0.2s ease-out;
   :hover {
-    background-color: #dfdfdf;
+    background-color: ${(props) => props.theme.hoverCategoriesColor};
   }
 `;
 const OneCategoryIncome = styled.div`

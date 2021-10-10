@@ -28,9 +28,20 @@ const OneSettingDisplayed = styled.div`
   font-size: 30px;
   letter-spacing: 1px;
   border-left: 2px solid #d0d0d0;
+`;
+const UserImage = styled.div`
+  background-color: white;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: center;
+  border-radius: 30px;
+  border-left: 2px solid #d0d0d0;
   img {
-    height: 50px;
     width: 50px;
+    height: 50px;
   }
 `;
 const CoverPanel = styled.div`
@@ -50,7 +61,7 @@ const OpaquePanel = styled.div`
   left: 0;
   display: none;
   z-index: 8;
-  background-color: #b5b5b5;
+  background-color: ${(props) => props.theme.opaqueColor};
   opacity: 0.9;
 `;
 const TextFormOutsideWrapper = styled.div`
@@ -259,17 +270,19 @@ export const Setting = (props) => {
               Picture
             </Button>
             <OneSettingDisplayed>
-              {
-                pictures[
-                  props.userInfo.find((data) => {
-                    return data.id === "Picture";
-                  })
-                    ? props.userInfo.find((data) => {
-                        return data.id === "Picture";
-                      }).number
-                    : ""
-                ]
-              }
+              <UserImage>
+                {
+                  pictures[
+                    props.userInfo.find((data) => {
+                      return data.id === "Picture";
+                    })
+                      ? props.userInfo.find((data) => {
+                          return data.id === "Picture";
+                        }).number
+                      : ""
+                  ]
+                }
+              </UserImage>
             </OneSettingDisplayed>
           </OneSettingWrapper>
           <OneSettingWrapper>

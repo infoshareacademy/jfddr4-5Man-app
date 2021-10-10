@@ -18,7 +18,7 @@ import { setCategoryMenuItems } from "./utils";
 
 const FormWrapper = styled.div`
   padding: 20px;
-  background-color: white;
+  background-color: ${(props) => props.theme.formsBackgroundColor};
   border-radius: 25px;
   display: flex;
   flex-direction: column;

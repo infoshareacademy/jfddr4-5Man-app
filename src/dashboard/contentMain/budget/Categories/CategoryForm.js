@@ -5,7 +5,6 @@ import {
   Switch,
   TextField,
 } from "@mui/material";
-import { red, yellow } from "@mui/material/colors";
 import { useState } from "react";
 import { useContext } from "react";
 import styled from "styled-components";
@@ -20,7 +19,8 @@ import { UserContext } from "../../../../UserContext";
 
 const CategoryFormInsideWrapper = styled.div`
   padding: 20px;
-  background-color: white;
+  background-color: ${(props) => props.theme.formsBackgroundColor};
+  color: ${(props) => props.theme.formsTextColor};
   border-radius: 25px;
   display: flex;
   flex-direction: column;
@@ -292,6 +292,7 @@ export const CategoryForm = (props) => {
         <>
           <ErrorWrapper>{errorMessage}</ErrorWrapper>
           <TextField
+            sx={textFieldStyles}
             label="Name"
             type="text"
             value={props.categoryData.name ? props.categoryData.name : ""}
@@ -324,7 +325,7 @@ export const CategoryForm = (props) => {
               ></CategoryColor>
             </ColorWrapper>
             {props.categoryData && (
-              <FormGroup>
+              <FormGroup sx={switchStyles}>
                 <FormControlLabel
                   control={
                     <Switch
@@ -348,7 +349,7 @@ export const CategoryForm = (props) => {
           <ButtonsWrapper>
             <Button
               variant="outlined"
-              sx={{ color: yellow[500], fontSize: 20 }}
+              sx={buttonNormalStyles}
               onClick={() => {
                 if (validate() === true) {
                   addCategory(
@@ -365,7 +366,7 @@ export const CategoryForm = (props) => {
             </Button>
             <Button
               variant="outlined"
-              sx={{ color: red[500], fontSize: 20 }}
+              sx={buttonNormalStyles}
               onClick={() => {
                 goBackHandler();
               }}

@@ -4,10 +4,9 @@ import LibraryBooksIcon from "@mui/icons-material/LibraryBooks";
 import SettingsIcon from "@mui/icons-material/Settings";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { useContext, useEffect, useState } from "react";
-import { UserContext } from "../../UserContext";
+import { useState } from "react";
 import { getSidebarInfo } from "../contentMain/utils";
-import { fetchUserInfo, signOutFunc } from "../../firebase";
+import { signOutFunc } from "../../firebase";
 import { picturesToDisplay } from "../contentMain/settings/PicturePicker";
 
 const UserDisplay = styled.div`
@@ -44,6 +43,7 @@ const SidebarWrapper = styled.aside`
   width: 280px;
   border-right: 3px solid #d0d0d0;
   padding: 10px 20px;
+  color: ${(props) => props.theme.color};
 `;
 const LogoWrapper = styled.div`
   display: flex;
@@ -81,9 +81,10 @@ const NavigationItemWrapper = styled.li`
   letter-spacing: 2px;
   transition: background-color 0.2s ease-out;
   &:hover {
-    background-color: #b3b2e6;
+    background-color: ${(props) => props.theme.hoverSidebarColor};
   }
   a {
+    color: inherit;
     box-sizing: content-box;
     padding: 15px;
     display: flex;
@@ -94,14 +95,8 @@ const NavigationItemText = styled.span`
   margin-left: 20px;
 `;
 
-export function SidebarMenu() {
-  const [userInfo, setUserInfo] = useState([]);
-
-  const currentUser = useContext(UserContext);
-  useEffect(() => {
-    fetchUserInfo(currentUser, setUserInfo);
-  }, [currentUser]);
-  const sidebarInfo = getSidebarInfo(userInfo);
+export function SidebarMenu(props) {
+  const sidebarInfo = getSidebarInfo(props.userInfo);
   const pictures = picturesToDisplay;
 
   const initialActiveSetter = () => {

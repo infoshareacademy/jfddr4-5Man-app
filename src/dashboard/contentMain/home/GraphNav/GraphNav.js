@@ -5,9 +5,15 @@ import { useContext, useState } from "react";
 import { DateContext } from "../../DateContext";
 
 const GraphNavWrapper = styled.div`
+  width: fit-content;
   display: flex;
   justify-content: center;
-  margin-top: 20px;
+  background-color: ${(props) => props.theme.navBackgroundColor};
+  border-radius: 25px;
+  padding: 10px 15px;
+  a {
+    color: black !important;
+  }
 `;
 const selectStyles = {
   marginRight: "20px",

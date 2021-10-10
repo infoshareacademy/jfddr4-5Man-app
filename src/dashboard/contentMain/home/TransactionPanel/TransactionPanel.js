@@ -60,7 +60,7 @@ const OpaquePanel = styled.div`
   left: 0;
   display: none;
   z-index: 8;
-  background-color: #b5b5b5;
+  background-color: ${(props) => props.theme.opaqueColor};
   opacity: 0.9;
 `;
 

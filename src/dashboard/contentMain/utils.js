@@ -64,8 +64,12 @@ export const getSidebarInfo = (userData) => {
   };
 };
 
-export const getDashboardInfo = (userData) => {
-  return userData.length === 0
-    ? "false"
-    : userData.find((data) => data.id === "Nightmode").isOn;
+export const getNightmode = (userData) => {
+  if (userData.length === 0) {
+    return "false";
+  } else {
+    return userData.find((data) => {
+      return data.id === "Nightmode";
+    }).isOn;
+  }
 };

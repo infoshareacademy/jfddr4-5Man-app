@@ -10,10 +10,13 @@ import {
 } from "./utils";
 
 const HistoryNavWrapper = styled.div`
-  width: 100%;
+  width: fit-content;
   display: flex;
   justify-content: center;
   margin-bottom: 30px;
+  background-color: ${(props) => props.theme.navBackgroundColor};
+  border-radius: 25px;
+  padding: 20px;
 `;
 const selectStyles = {
   marginRight: "20px",

@@ -17,6 +17,7 @@ const HomeUpper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  align-items: center;
   min-width: 1375px;
 `;
 const HomeLower = styled.div`

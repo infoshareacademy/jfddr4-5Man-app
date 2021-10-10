@@ -7,9 +7,13 @@ import { EditForm } from "./EditForm";
 const HistoryWrapper = styled.div`
   width: 100%;
   height: 100%;
-  padding: 30px;
+  padding: 10px 30px;
   min-width: 1290px;
   overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-x: hidden;
   ::-webkit-scrollbar {
     width: 15px;
   }
@@ -40,7 +44,7 @@ const OpaquePanel = styled.div`
   left: 0;
   display: none;
   z-index: 8;
-  background-color: #b5b5b5;
+  background-color: ${(props) => props.theme.opaqueColor};
   opacity: 0.9;
 `;
 
