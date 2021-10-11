@@ -15,6 +15,9 @@ const darkTheme = {
   formsTextColor: "black",
   navBackgroundColor: "#b5b5b5",
   hoverCategoriesColor: "#373737",
+  background1: "rgb(46,46,46)",
+  background2:
+    "linear-gradient(0deg, rgba(46,46,46,1) 0%, rgba(122,122,122,1) 100%)",
 };
 const lightTheme = {
   color: "black",
@@ -23,8 +26,11 @@ const lightTheme = {
   opaqueColor: "#b5b5b5",
   formsBackgroundColor: "white",
   formsTextColor: "black",
-  navBackgroundColor: "white",
+  navBackgroundColor: "",
   hoverCategoriesColor: "#dfdfdf",
+  background1: "rgb(179,178,230)",
+  background2:
+    "linear-gradient(0deg, rgba(179,178,230,1) 0%, rgba(255,255,255,1) 100%)",
 };
 
 const DashboardWrapper = styled.div`
@@ -39,7 +45,8 @@ const DashboardWrapper = styled.div`
   max-width: 1920px;
   min-height: 950px;
   color: ${(props) => props.theme.color};
-  background-color: ${(props) => props.theme.backgroundColor};
+  background: ${(props) => props.theme.background1};
+  background: ${(props) => props.theme.background2};
 `;
 
 export function Dashboard() {

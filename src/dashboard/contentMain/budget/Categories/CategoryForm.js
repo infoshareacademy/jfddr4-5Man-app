@@ -16,6 +16,7 @@ import {
   updateTransactionsForCategoryChange,
 } from "../../../../firebase";
 import { UserContext } from "../../../../UserContext";
+import { animateForm } from "../../animations";
 
 const CategoryFormInsideWrapper = styled.div`
   padding: 20px;
@@ -178,6 +179,7 @@ export const CategoryForm = (props) => {
                   document
                     .querySelector(".colorPicker")
                     .classList.add("displayed");
+                  animateForm("colorPicker");
                 }}
               ></CategoryColor>
             </ColorWrapper>

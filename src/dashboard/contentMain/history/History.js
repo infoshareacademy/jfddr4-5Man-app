@@ -27,6 +27,9 @@ const HistoryWrapper = styled.div`
     background: #333193;
   }
 `;
+const FormOutsideWrapper = styled.div`
+  display: none;
+`;
 const CoverPanel = styled.div`
   position: absolute;
   width: 100%;
@@ -69,12 +72,14 @@ export const History = (props) => {
         setTransactionData={setTransactionData}
       ></HistoryList>
       <CoverPanel className="coverPanel">
-        <EditForm
-          transactionData={transactionData}
-          setTransactionData={setTransactionData}
-          categories={props.categories}
-          totalBudget={props.totalBudget}
-        ></EditForm>
+        <FormOutsideWrapper className="historyForm">
+          <EditForm
+            transactionData={transactionData}
+            setTransactionData={setTransactionData}
+            categories={props.categories}
+            totalBudget={props.totalBudget}
+          ></EditForm>
+        </FormOutsideWrapper>
       </CoverPanel>
       <OpaquePanel className="opaquePanel"></OpaquePanel>
     </HistoryWrapper>

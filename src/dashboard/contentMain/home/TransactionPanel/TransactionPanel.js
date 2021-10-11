@@ -6,6 +6,7 @@ import { useContext } from "react";
 import { CurrencyContext } from "../../CurrencyContext";
 import { TransactionForm } from "./TransactionForm";
 import { useState } from "react";
+import { animateForm, animateOpaquePanel } from "../../animations";
 
 const MainWrapper = styled.div`
   width: 50%;
@@ -42,6 +43,9 @@ const BudgetDisplay = styled.h2`
   font-size: 40px;
   text-align: center;
 `;
+const FormOutsideWrapper = styled.div`
+  display: none;
+`;
 const CoverPanel = styled.div`
   position: absolute;
   width: 100%;
@@ -51,7 +55,6 @@ const CoverPanel = styled.div`
   display: none;
   z-index: 9;
 `;
-
 const OpaquePanel = styled.div`
   position: absolute;
   width: 100%;
@@ -78,6 +81,11 @@ export const TransactionPanel = (props) => {
               setTransactionType("income");
               document.querySelector(".opaquePanel").classList.add("displayed");
               document.querySelector(".coverPanel").classList.add("displayed");
+              document
+                .querySelector(".transactionForm")
+                .classList.add("displayed");
+              animateForm("transactionForm");
+              animateOpaquePanel();
             }}
           >
             <AddCircleIcon sx={{ color: "#5350E9", fontSize: 80 }} />
@@ -90,6 +98,11 @@ export const TransactionPanel = (props) => {
               setTransactionType("outcome");
               document.querySelector(".opaquePanel").classList.add("displayed");
               document.querySelector(".coverPanel").classList.add("displayed");
+              document
+                .querySelector(".transactionForm")
+                .classList.add("displayed");
+              animateForm("transactionForm");
+              animateOpaquePanel();
             }}
           >
             <RemoveCircleIcon sx={{ color: "#5350E9", fontSize: 80 }} />
@@ -107,11 +120,13 @@ export const TransactionPanel = (props) => {
         } ${currency}`}</BudgetDisplay>
       </BudgetWrapper>
       <CoverPanel className="coverPanel">
-        <TransactionForm
-          categories={props.categories}
-          type={transactionType}
-          totalBudget={props.totalBudget}
-        ></TransactionForm>
+        <FormOutsideWrapper className="transactionForm">
+          <TransactionForm
+            categories={props.categories}
+            type={transactionType}
+            totalBudget={props.totalBudget}
+          ></TransactionForm>
+        </FormOutsideWrapper>
       </CoverPanel>
       <OpaquePanel className="opaquePanel"></OpaquePanel>
     </MainWrapper>

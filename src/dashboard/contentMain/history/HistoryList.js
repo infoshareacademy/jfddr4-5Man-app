@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import styled from "styled-components";
+import { animateForm, animateOpaquePanel } from "../animations";
 import { CurrencyContext } from "../CurrencyContext";
 import { DateContext } from "../DateContext";
 import { getDate, orderAndFilterData } from "./utils";
@@ -80,6 +81,9 @@ export const HistoryList = (props) => {
               });
               document.querySelector(".opaquePanel").classList.add("displayed");
               document.querySelector(".coverPanel").classList.add("displayed");
+              document.querySelector(".historyForm").classList.add("displayed");
+              animateForm("historyForm");
+              animateOpaquePanel();
             }}
           >
             <ListItemCategory>{data.category}</ListItemCategory>

@@ -16,7 +16,7 @@ import {
 } from "../../../firebase";
 import { setCategoryMenuItems } from "./utils";
 
-const FormWrapper = styled.div`
+const FormInsideWrapper = styled.div`
   padding: 20px;
   background-color: ${(props) => props.theme.formsBackgroundColor};
   border-radius: 25px;
@@ -122,6 +122,7 @@ export const EditForm = (props) => {
     setErrorMessage("");
     document.querySelector(".opaquePanel").classList.remove("displayed");
     document.querySelector(".coverPanel").classList.remove("displayed");
+    document.querySelector(".historyForm").classList.remove("displayed");
   };
 
   const validate = () => {
@@ -136,7 +137,7 @@ export const EditForm = (props) => {
 
   return (
     props.transactionData && (
-      <FormWrapper>
+      <FormInsideWrapper>
         <ErrorWrapper>{errorMessage}</ErrorWrapper>
         <TextField
           sx={textFieldStyles}
@@ -337,7 +338,7 @@ export const EditForm = (props) => {
             </Button>
           </ConfirmButtonsWrapper>
         </ConfirmWrapper>
-      </FormWrapper>
+      </FormInsideWrapper>
     )
   );
 };

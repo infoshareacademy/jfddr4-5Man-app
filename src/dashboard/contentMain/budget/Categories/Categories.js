@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import AddIcon from "@mui/icons-material/Add";
 import { grey } from "@mui/material/colors";
+import { animateForm, animateOpaquePanel } from "../../animations";
 
 const CategoriesWrapper = styled.div`
   height: 100%;
@@ -93,6 +94,8 @@ export const Categories = (props) => {
                 document
                   .querySelector(".categoryForm")
                   .classList.add("displayed");
+                animateForm("categoryForm");
+                animateOpaquePanel();
               }}
             >
               <CategoryCircle
@@ -120,6 +123,8 @@ export const Categories = (props) => {
             document.querySelector(".opaquePanel").classList.add("displayed");
             document.querySelector(".coverPanel").classList.add("displayed");
             document.querySelector(".categoryForm").classList.add("displayed");
+            animateForm("categoryForm");
+            animateOpaquePanel();
           }}
         >
           <CategoryCircle style={{ backgroundColor: "#1C31E3" }}>

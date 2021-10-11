@@ -15,7 +15,7 @@ import {
   setYearMenuItems,
 } from "./utils";
 
-const FormWrapper = styled.div`
+const FormInsideWrapper = styled.div`
   padding: 20px;
   background-color: ${(props) => props.theme.formsBackgroundColor};
   border-radius: 25px;
@@ -115,6 +115,7 @@ export const TransactionForm = (props) => {
     setErrorMessage("Please make sure that you set the right date");
     document.querySelector(".opaquePanel").classList.remove("displayed");
     document.querySelector(".coverPanel").classList.remove("displayed");
+    document.querySelector(".transactionForm").classList.remove("displayed");
   };
 
   const validate = () => {
@@ -135,7 +136,7 @@ export const TransactionForm = (props) => {
   };
 
   return (
-    <FormWrapper>
+    <FormInsideWrapper>
       <ErrorWrapper>{errorMessage}</ErrorWrapper>
       <TextField
         sx={textFieldStyles}
@@ -291,6 +292,6 @@ export const TransactionForm = (props) => {
           GO BACK
         </Button>
       </ButtonsWrapper>
-    </FormWrapper>
+    </FormInsideWrapper>
   );
 };

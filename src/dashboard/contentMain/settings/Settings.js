@@ -1,6 +1,7 @@
 import { Button } from "@mui/material";
 import { useState } from "react";
 import styled from "styled-components";
+import { animateForm, animateOpaquePanel } from "../animations";
 import { ConfirmForm } from "./ConfirmForm";
 import { OnOffForm } from "./OnOffForm";
 import { PicturePicker, picturesToDisplay } from "./PicturePicker";
@@ -65,6 +66,7 @@ const OpaquePanel = styled.div`
 `;
 const TextFormOutsideWrapper = styled.div`
   display: none;
+  transform-origin: center;
 `;
 const OnOffFormOutsideWrapper = styled.div`
   display: none;
@@ -131,6 +133,8 @@ export const Setting = (props) => {
                   }).currency
                 );
                 changeType("currency");
+                animateForm("textForm");
+                animateOpaquePanel();
               }}
             >
               Currency
@@ -163,6 +167,8 @@ export const Setting = (props) => {
                     return data.id === "Nightmode";
                   }).isOn
                 );
+                animateForm("onOffForm");
+                animateOpaquePanel();
               }}
             >
               Nightmode
@@ -197,6 +203,8 @@ export const Setting = (props) => {
                     return data.id === "CategoryColors";
                   }).isOn
                 );
+                animateForm("onOffForm");
+                animateOpaquePanel();
               }}
             >
               Category colors
@@ -231,6 +239,8 @@ export const Setting = (props) => {
                   }).nickname
                 );
                 changeType("nickname");
+                animateForm("textForm");
+                animateOpaquePanel();
               }}
             >
               Nickname
@@ -264,6 +274,8 @@ export const Setting = (props) => {
                     return data.id === "Picture";
                   }).number
                 );
+                animateForm("picturePicker");
+                animateOpaquePanel();
               }}
             >
               Picture
@@ -297,6 +309,8 @@ export const Setting = (props) => {
                   .classList.add("displayed");
                 document.querySelector(".textForm").classList.add("displayed");
                 changeType("password");
+                animateForm("textForm");
+                animateOpaquePanel();
               }}
             >
               Change password
@@ -315,6 +329,8 @@ export const Setting = (props) => {
                   .classList.add("displayed");
                 document.querySelector(".textForm").classList.add("displayed");
                 changeType("email");
+                animateForm("textForm");
+                animateOpaquePanel();
               }}
             >
               Change email
@@ -335,6 +351,8 @@ export const Setting = (props) => {
                   .querySelector(".confirmForm")
                   .classList.add("displayed");
                 changeType("clearData");
+                animateForm("confirmForm");
+                animateOpaquePanel();
               }}
             >
               Clear all data
@@ -355,6 +373,8 @@ export const Setting = (props) => {
                   .querySelector(".confirmForm")
                   .classList.add("displayed");
                 changeType("deleteAccount");
+                animateForm("confirmForm");
+                animateOpaquePanel();
               }}
             >
               Delete account

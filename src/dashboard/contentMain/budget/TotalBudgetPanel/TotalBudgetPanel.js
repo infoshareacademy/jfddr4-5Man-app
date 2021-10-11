@@ -4,6 +4,7 @@ import AddCircleIcon from "@mui/icons-material/AddCircle";
 import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
 import { useContext } from "react";
 import { CurrencyContext } from "../../CurrencyContext";
+import { animateForm, animateOpaquePanel } from "../../animations";
 
 const TotalBudgetPanelWrapper = styled.div`
   width: 100%;
@@ -42,6 +43,8 @@ export const TotalBudgetPanel = (props) => {
             document.querySelector(".opaquePanel").classList.add("displayed");
             document.querySelector(".coverPanel").classList.add("displayed");
             document.querySelector(".budgetForm").classList.add("displayed");
+            animateForm("budgetForm");
+            animateOpaquePanel();
           }}
         >
           <AddCircleIcon sx={{ color: "#5350E9", fontSize: 80 }} />
@@ -64,6 +67,8 @@ export const TotalBudgetPanel = (props) => {
             document.querySelector(".opaquePanel").classList.add("displayed");
             document.querySelector(".coverPanel").classList.add("displayed");
             document.querySelector(".budgetForm").classList.add("displayed");
+            animateForm("budgetForm");
+            animateOpaquePanel();
           }}
         >
           <RemoveCircleIcon sx={{ color: "#5350E9", fontSize: 80 }} />

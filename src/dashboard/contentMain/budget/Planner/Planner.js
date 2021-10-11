@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { useContext } from "react";
 import { CurrencyContext } from "../../CurrencyContext";
+import { animateForm, animateOpaquePanel } from "../../animations";
 
 const PlannerWrapper = styled.div`
   width: 100%;
@@ -85,6 +86,8 @@ export const Planner = (props) => {
                     document
                       .querySelector(".plannerForm")
                       .classList.add("displayed");
+                  category.plannerOn === "true" && animateForm("plannerForm");
+                  category.plannerOn === "true" && animateOpaquePanel();
                 }}
               >
                 <PlannerItemTitle>{category.name}</PlannerItemTitle>
