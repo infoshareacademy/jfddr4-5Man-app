@@ -8,15 +8,17 @@ import { getAuth, onAuthStateChanged } from "@firebase/auth";
 import styled from "styled-components";
 
 const MainWrapper = styled.div`
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
+  max-height: 1080px;
+  max-width: 1920px;
+  min-height: 950px;
   display: flex;
   align-items: center;
   justify-content: center;
   background-color: #b3b2e6;
 `;
 const FixWrapper = styled.div`
-  height: 100vw;
   max-height: 1080px;
   max-width: 1920px;
   min-height: 950px;
