@@ -32,7 +32,6 @@ const lightTheme = {
   background2:
     "linear-gradient(0deg, rgba(179,178,230,1) 0%, rgba(255,255,255,1) 100%)",
 };
-
 const DashboardWrapper = styled.div`
   width: 100%;
   height: 100vh;
@@ -48,6 +47,10 @@ const DashboardWrapper = styled.div`
   background: ${(props) => props.theme.background1};
   background: ${(props) => props.theme.background2};
 `;
+const ContentMainWrapper = styled.div`
+  width: 100%;
+  height: 100%;
+`;
 
 export function Dashboard() {
   const [userInfo, setUserInfo] = useState([]);
@@ -61,7 +64,9 @@ export function Dashboard() {
     <ThemeProvider theme={nightmode === "true" ? darkTheme : lightTheme}>
       <DashboardWrapper>
         <SidebarMenu userInfo={userInfo} />
-        <ContentMain />
+        <ContentMainWrapper className="contentMainWrapper">
+          <ContentMain />
+        </ContentMainWrapper>
       </DashboardWrapper>
     </ThemeProvider>
   );

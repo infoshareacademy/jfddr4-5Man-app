@@ -34,3 +34,20 @@ export const animateOpaquePanel = () => {
     }
   );
 };
+export const animateContentMain = () => {
+  const form = document.querySelector(`.contentMainWrapper`);
+  form.animate(
+    [
+      {
+        opacity: 0,
+      },
+      {
+        opacity: 1,
+      },
+    ],
+    {
+      duration: 200,
+      easing: "ease-out",
+    }
+  );
+};

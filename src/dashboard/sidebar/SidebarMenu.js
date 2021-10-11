@@ -8,6 +8,7 @@ import { useState } from "react";
 import { getSidebarInfo } from "../contentMain/utils";
 import { signOutFunc } from "../../firebase";
 import { picturesToDisplay } from "../contentMain/settings/PicturePicker";
+import { animateContentMain } from "../contentMain/animations";
 
 const UserDisplay = styled.div`
   display: flex;
@@ -131,6 +132,7 @@ export function SidebarMenu(props) {
             style={activeNav === "home" ? { backgroundColor: "#5350e9" } : {}}
             onClick={() => {
               setActiveNav("home");
+              activeNav !== "home" && animateContentMain();
             }}
           >
             <Link to="/main/home">
@@ -143,6 +145,7 @@ export function SidebarMenu(props) {
             style={activeNav === "budget" ? { backgroundColor: "#5350e9" } : {}}
             onClick={() => {
               setActiveNav("budget");
+              activeNav !== "budget" && animateContentMain();
             }}
           >
             <Link to="/main/budget">
@@ -157,6 +160,7 @@ export function SidebarMenu(props) {
             }
             onClick={() => {
               setActiveNav("history");
+              activeNav !== "history" && animateContentMain();
             }}
           >
             <Link to="/main/history">
@@ -171,6 +175,7 @@ export function SidebarMenu(props) {
             }
             onClick={() => {
               setActiveNav("settings");
+              activeNav !== "settings" && animateContentMain();
             }}
           >
             <Link to="/main/settings">
