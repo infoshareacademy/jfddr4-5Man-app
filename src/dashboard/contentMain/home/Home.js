@@ -6,8 +6,9 @@ import { Recent } from "./Recent/Recent";
 import { TransactionPanel } from "./TransactionPanel/TransactionPanel";
 
 const HomeWrapper = styled.div`
-  width: calc(100% - 283px);
+  width: 100%;
   height: 100%;
+  position: relative;
 `;
 
 const HomeUpper = styled.div`

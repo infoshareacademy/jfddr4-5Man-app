@@ -70,12 +70,15 @@ const TextFormOutsideWrapper = styled.div`
 `;
 const OnOffFormOutsideWrapper = styled.div`
   display: none;
+  transform-origin: center;
 `;
 const ConfirmFormOutsideWrapper = styled.div`
   display: none;
+  transform-origin: center;
 `;
 const PicturePickerOutsideWrapper = styled.div`
   display: none;
+  transform-origin: center;
 `;
 const normalButtonStyle = {
   backgroundColor: "#5350E9",

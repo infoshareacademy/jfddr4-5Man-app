@@ -8,6 +8,11 @@ import { TextField } from "@mui/material";
 import styled from "styled-components";
 import { picturesToDisplay } from "../dashboard/contentMain/settings/PicturePicker";
 import { PicturePicker } from "./PicturePicker";
+import {
+  animateForm,
+  animateLoginOrPass,
+  animateOpaquePanel,
+} from "../dashboard/contentMain/animations";
 
 const MainWrapper = styled.div`
   width: 100vw;
@@ -17,6 +22,7 @@ const MainWrapper = styled.div`
   justify-content: center;
   flex-direction: column;
   background-color: #b3b2e6;
+  position: relative;
 `;
 const MainPanelWrapper = styled.div`
   display: flex;
@@ -26,11 +32,15 @@ const MainPanelWrapper = styled.div`
   padding: 20px;
   border-radius: 25px;
   background-color: white;
+  position: relative;
+  top: -100px;
 `;
 const LogoWrapper = styled.div`
   display: flex;
   align-items: center;
   margin-bottom: 100px;
+  position: relative;
+  top: -100px;
 `;
 const LogoImage = styled.div`
   width: 100px;
@@ -303,6 +313,8 @@ export function Register() {
               document
                 .querySelector(".picturePicker")
                 .classList.add("displayed");
+              animateForm("picturePicker");
+              animateOpaquePanel();
             }}
           >
             {pictures[registerPicture]}
@@ -344,8 +356,13 @@ export function Register() {
         >
           Register
         </Button>
-        <RegisterInfo>
-          You have an account? <Link to="/login">Login here</Link>
+        <RegisterInfo
+          onClick={() => {
+            animateLoginOrPass("loginForm");
+          }}
+        >
+          You have an account?
+          <Link to="/login">Login here</Link>
         </RegisterInfo>
       </MainPanelWrapper>
       <CoverPanel className="coverPanel">

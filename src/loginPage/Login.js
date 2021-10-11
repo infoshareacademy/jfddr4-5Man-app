@@ -6,6 +6,7 @@ import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import styled from "styled-components";
 import { TextField } from "@mui/material";
 import { sendPasswordReset } from "../firebase";
+import { animateLoginOrPass } from "../dashboard/contentMain/animations";
 
 const MainWrapper = styled.div`
   width: 100vw;
@@ -15,6 +16,7 @@ const MainWrapper = styled.div`
   justify-content: center;
   flex-direction: column;
   background-color: #b3b2e6;
+  position: relative;
 `;
 const MainPanelWrapper = styled.div`
   display: flex;
@@ -24,11 +26,15 @@ const MainPanelWrapper = styled.div`
   padding: 20px;
   border-radius: 25px;
   background-color: white;
+  position: relative;
+  top: -100px;
 `;
 const LogoWrapper = styled.div`
   display: flex;
   align-items: center;
   margin-bottom: 100px;
+  position: relative;
+  top: -100px;
 `;
 const LogoImage = styled.div`
   width: 100px;
@@ -213,7 +219,11 @@ export function Login() {
           Login
         </Button>
 
-        <RegisterInfo>
+        <RegisterInfo
+          onClick={() => {
+            animateLoginOrPass("loginForm");
+          }}
+        >
           Do not have an account?
           <br />
           <Link to="/register">Register here</Link>

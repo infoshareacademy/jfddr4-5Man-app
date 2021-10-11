@@ -26,9 +26,11 @@ const HistoryWrapper = styled.div`
   ::-webkit-scrollbar-thumb:hover {
     background: #333193;
   }
+  position: relative;
 `;
 const FormOutsideWrapper = styled.div`
   display: none;
+  transform-origin: center;
 `;
 const CoverPanel = styled.div`
   position: absolute;

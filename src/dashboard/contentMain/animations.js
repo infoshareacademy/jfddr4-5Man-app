@@ -46,7 +46,24 @@ export const animateContentMain = () => {
       },
     ],
     {
-      duration: 200,
+      duration: 150,
+      easing: "ease-out",
+    }
+  );
+};
+export const animateLoginOrPass = () => {
+  const form = document.querySelector(`.mainWrapper`);
+  form.animate(
+    [
+      {
+        opacity: 0,
+      },
+      {
+        opacity: 1,
+      },
+    ],
+    {
+      duration: 250,
       easing: "ease-out",
     }
   );

@@ -45,6 +45,7 @@ const BudgetDisplay = styled.h2`
 `;
 const FormOutsideWrapper = styled.div`
   display: none;
+  transform-origin: center;
 `;
 const CoverPanel = styled.div`
   position: absolute;

@@ -13,6 +13,7 @@ const BudgetWrapper = styled.div`
   height: 100%;
   display: flex;
   min-width: 1240px;
+  position: relative;
 `;
 const BudgetWrapperRight = styled.div`
   width: 100%;
@@ -46,6 +47,7 @@ const ColorPickerOutsideWrapper = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
+  transform-origin: center;
 `;
 const CategoryFormOutsideWrapper = styled.div`
   display: none;
@@ -55,6 +57,7 @@ const CategoryFormOutsideWrapper = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
+  transform-origin: center;
 `;
 const TotalBudgetFormOutsideWrapper = styled.div`
   display: none;
@@ -64,6 +67,7 @@ const TotalBudgetFormOutsideWrapper = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
+  transform-origin: center;
 `;
 const PlannerFormOutsideWrapper = styled.div`
   display: none;
@@ -73,6 +77,7 @@ const PlannerFormOutsideWrapper = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
+  transform-origin: center;
 `;
 
 export const Budget = (props) => {

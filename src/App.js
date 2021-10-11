@@ -5,6 +5,26 @@ import { Dashboard } from "./dashboard/Dashboard";
 import { Login } from "./loginPage/Login";
 import { Register } from "./registerPage/Register";
 import { getAuth, onAuthStateChanged } from "@firebase/auth";
+import styled from "styled-components";
+
+const MainWrapper = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #b3b2e6;
+`;
+const FixWrapper = styled.div`
+  height: 100vw;
+  max-height: 1080px;
+  max-width: 1920px;
+  min-height: 950px;
+  background-color: #b3b2e6;
+  overflow: hidden;
+  border-bottom: 1px solid #d0d0d0;
+  border-right: 1px solid #d0d0d0;
+`;
 
 const App = () => {
   const [currentUser, changeCurrentUser] = useState("");
@@ -21,20 +41,24 @@ const App = () => {
 
   return (
     <UserContext.Provider value={currentUser}>
-      <Switch>
-        <Route exact path="/">
-          <Redirect to="/login" />
-        </Route>
-        <Route exact path="/login">
-          <Login />
-        </Route>
-        <Route exact path="/register">
-          <Register />
-        </Route>
-        <Route path="/main">
-          <Dashboard />
-        </Route>
-      </Switch>
+      <FixWrapper>
+        <MainWrapper className="mainWrapper">
+          <Switch>
+            <Route exact path="/">
+              <Redirect to="/login" />
+            </Route>
+            <Route exact path="/login">
+              <Login />
+            </Route>
+            <Route exact path="/register">
+              <Register />
+            </Route>
+            <Route path="/main">
+              <Dashboard />
+            </Route>
+          </Switch>
+        </MainWrapper>
+      </FixWrapper>
     </UserContext.Provider>
   );
 };

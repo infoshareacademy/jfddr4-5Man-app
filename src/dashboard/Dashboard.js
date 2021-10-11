@@ -28,21 +28,17 @@ const lightTheme = {
   formsTextColor: "black",
   navBackgroundColor: "",
   hoverCategoriesColor: "#dfdfdf",
-  background1: "rgb(179,178,230)",
-  background2:
-    "linear-gradient(0deg, rgba(179,178,230,1) 0%, rgba(255,255,255,1) 100%)",
+  background1: "white",
+  background2: "white",
 };
 const DashboardWrapper = styled.div`
   width: 100%;
-  height: 100vh;
+  height: 100%;
   display: flex;
   overflow: hidden;
   box-sizing: content-box;
   border-bottom: 1px solid #d0d0d0;
   border-right: 1px solid #d0d0d0;
-  max-height: 1080px;
-  max-width: 1920px;
-  min-height: 950px;
   color: ${(props) => props.theme.color};
   background: ${(props) => props.theme.background1};
   background: ${(props) => props.theme.background2};
