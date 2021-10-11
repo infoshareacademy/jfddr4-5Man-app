@@ -10,6 +10,11 @@ body {
   max-height: 1080px;
   max-width: 1920px;
 }
+html {
+  overflow: hidden;
+  max-height: 1080px;
+  max-width: 1920px;
+}
 
 a {
   text-decoration: none;

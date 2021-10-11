@@ -23,6 +23,7 @@ const PlannerItemWrapper = styled.div`
   border-radius: 25px;
   transition: box-shadow 0.2s ease-out;
   border: 2px solid #5350e9;
+  color: black;
   :hover {
     box-shadow: inset 0px 0px 50px -10px rgba(0, 0, 0, 0.61);
   }
