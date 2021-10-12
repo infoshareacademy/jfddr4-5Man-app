@@ -1,26 +1,55 @@
 import Chart from "react-google-charts";
 
 export function PieChart() {
+    const pieOptions = {
+        backgroundColor: 'transparent',
+        slices: [
+            {
+                color: "#2BB673"
+            },
+            {
+                color: "#d91e48"
+            },
+            {
+                color: "#007fad"
+            },
+            {
+                color: "#e9a227"
+            }
+        ],
+        legend: {
+            position: "right",
+            alignment: "center",
+            textStyle: {
+                color: "233238",
+                fontSize: 14
+            }
+        },
+        tooltip: {
+            showColorCode: true
+        },
+        chartArea: {
+            left: 0,
+            top: 0,
+            width: "100%",
+            height: "80%"
+        },
+        fontName: "Roboto"
+    };
+
+
     return (
         <section className="pieChartSection">
             <Chart
-                width={'500px'}
-                height={'300px'}
                 chartType="PieChart"
-                loader={<div>Loading Chart</div>}
-                data={[
-                    ['Task', 'Hours per Day'],
-                    ['Work', 11],
-                    ['Eat', 2],
-                    ['Commute', 2],
-                    ['Watch TV', 2],
-                    ['Sleep', 7],
-                ]}
-                options={{
-                    title: 'My Daily Activities',
-                }}
-                rootProps={{ 'data-testid': '1' }}
+                data={[["Age", "Weight"], ["b", 12], ["b", 5.5]]}
+                options={pieOptions}
+                graph_id="PieChart"
+                width={"700px"}
+                height={"700px"}
+                legend_toggle
             />
         </section>
+
     )
 }
