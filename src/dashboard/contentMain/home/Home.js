@@ -2,6 +2,7 @@ import { Redirect, Route, Switch } from "react-router";
 import styled from "styled-components";
 import BarGraph from "./BarGraph/BarGraph";
 import { GraphNav } from "./GraphNav/GraphNav";
+import { PieChart } from "./PieChart/PieChart";
 import { Recent } from "./Recent/Recent";
 import { TransactionPanel } from "./TransactionPanel/TransactionPanel";
 
@@ -42,7 +43,7 @@ export const Home = (props) => {
               <Redirect to="/main/home/piechart"></Redirect>
             </Route>
             <Route exact path="/main/home/piechart">
-              piechart placeholder
+              <PieChart/>
             </Route>
             <Route exact path="/main/home/barchart">
               <BarGraph database={props.graphDatabase}></BarGraph>
