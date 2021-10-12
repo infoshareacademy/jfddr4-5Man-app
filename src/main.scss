@@ -1,0 +1,39 @@
+* {
+  font-family: "Ubuntu", sans-serif !important;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  overflow: hidden;
+  max-height: 1080px;
+  max-width: 1920px;
+}
+html {
+  overflow: hidden;
+  max-height: 1080px;
+  max-width: 1920px;
+}
+
+a {
+  text-decoration: none;
+}
+
+.displayed {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+}
+
+.MuiPaper-root {
+  a {
+    width: 116px;
+    height: 36px;
+    display: flex;
+    padding-right: 20px;
+    justify-content: center;
+    align-items: center;
+    color: black;
+  }
+}

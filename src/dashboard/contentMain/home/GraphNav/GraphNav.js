@@ -2,21 +2,45 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import { useContext, useState } from "react";
-import { MonthContext } from "../../MonthContext";
-import { YearContext } from "../../YearContext";
-import "./graphNav.scss";
+import { DateContext } from "../../DateContext";
 
 const GraphNavWrapper = styled.div`
+  width: fit-content;
   display: flex;
   justify-content: center;
-  margin-top: 20px;
+  background-color: ${(props) => props.theme.navBackgroundColor};
+  border-radius: 25px;
+  padding: 10px 15px;
+  a {
+    color: black !important;
+  }
 `;
+const selectStyles = {
+  marginRight: "20px",
+  "&:last-of-type": { marginRight: "0px" },
+  "& label": { color: "#5350E9" },
+  "& label.Mui-focused": {
+    color: "#333193",
+  },
+  "& .MuiOutlinedInput-root": {
+    "& fieldset": {
+      borderColor: "#5350E9",
+    },
+    "&:hover fieldset": {
+      borderColor: "#5350E9",
+    },
+    "&.Mui-focused fieldset": {
+      borderColor: "#333193",
+    },
+  },
+  "& .MuiList-root": { backgroundColor: "#5350E9" },
+};
 
 export const GraphNav = (props) => {
   const initialChartSetter = () => {
     if (
       window.location.pathname === "/main/home" ||
-      window.location.pathname == "/main/home/piechart"
+      window.location.pathname === "/main/home/piechart"
     ) {
       return "piechart";
     } else {
@@ -30,8 +54,7 @@ export const GraphNav = (props) => {
     setChart(event.target.value);
   };
 
-  const monthToDisplay = useContext(MonthContext);
-  const yearToDisplay = useContext(YearContext);
+  const dateToDisplay = useContext(DateContext);
 
   const setYearMenuItems = () => {
     const currentYear = new Date().getFullYear();
@@ -58,19 +81,35 @@ export const GraphNav = (props) => {
   };
 
   const setMonthMenuItems = () => {
-    const months = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
-    return months.map((data) => {
-      return (
-        <MenuItem key={data} value={data}>
-          {data < 10 ? `0${data}` : data}
-        </MenuItem>
-      );
-    });
+    const currentMonth = new Date().getMonth() + 1;
+    const currentYear = new Date().getFullYear();
+    if (currentYear === dateToDisplay.year) {
+      const months = [];
+      for (let i = 1; i <= currentMonth; i++) {
+        months.push(i);
+      }
+      return months.reverse().map((data) => {
+        return (
+          <MenuItem key={data} value={data}>
+            {data < 10 ? `0${data}` : data}
+          </MenuItem>
+        );
+      });
+    } else {
+      const months = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+      return months.reverse().map((data) => {
+        return (
+          <MenuItem key={data} value={data}>
+            {data < 10 ? `0${data}` : data}
+          </MenuItem>
+        );
+      });
+    }
   };
 
   return (
     <GraphNavWrapper>
-      <FormControl>
+      <FormControl sx={selectStyles}>
         <InputLabel id="chartSelect">Chart</InputLabel>
         <Select
           labelId="chartSelect"
@@ -78,35 +117,47 @@ export const GraphNav = (props) => {
           value={chart}
           onChange={chartChanger}
         >
-          <MenuItem value="piechart">
+          <MenuItem
+            value="piechart"
+            sx={{ padding: "0px", width: "116px", height: "36px" }}
+          >
             <Link to="/main/home/piechart">Pie Chart</Link>
           </MenuItem>
-          <MenuItem value="barchart">
+          <MenuItem
+            value="barchart"
+            sx={{ padding: "0px", width: "116px", height: "36px" }}
+          >
             <Link to="/main/home/barchart">Bar Chart</Link>
           </MenuItem>
         </Select>
       </FormControl>
-      <FormControl>
+      <FormControl sx={selectStyles}>
         <InputLabel id="monthSelect">Month</InputLabel>
         <Select
           labelId="monthSelect"
           label="Month"
-          value={monthToDisplay}
+          value={dateToDisplay.month}
           onChange={(event) => {
-            props.setMonthToDisplay(event.target.value);
+            props.setDateToDisplay({
+              month: event.target.value,
+              year: dateToDisplay.year,
+            });
           }}
         >
           {setMonthMenuItems()}
         </Select>
       </FormControl>
-      <FormControl>
+      <FormControl sx={selectStyles}>
         <InputLabel id="yearSelect">Year</InputLabel>
         <Select
           labelId="yearSelect"
           label="Year"
-          value={yearToDisplay}
+          value={dateToDisplay.year}
           onChange={(event) => {
-            props.setYearToDisplay(event.target.value);
+            props.setDateToDisplay({
+              month: dateToDisplay.month,
+              year: event.target.value,
+            });
           }}
         >
           {setYearMenuItems()}

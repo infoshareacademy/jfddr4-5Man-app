@@ -10,21 +10,26 @@ const ListItem = styled.div`
   align-items: center;
   justify-content: space-between;
   padding: 0 15px;
+  color: black;
+  border-radius: 25px;
+  border: 2px solid #5350e9;
 `;
 const ListItemCategory = styled.span`
   font-size: 25px;
-  color: white;
-  width: 100px;
+  width: 120px;
 `;
 const ListItemAmount = styled.span`
   font-size: 25px;
   font-weight: bold;
-  color: white;
+  max-width: 300px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  position: relative;
+  right: 10px;
 `;
 const ListItemDate = styled.span`
-  font-size: 25px;
-  color: white;
-  width: 130px;
+  font-size: 20px;
+  width: 110px;
 `;
 
 export const RecentList = (props) => {
@@ -56,9 +61,9 @@ export const RecentList = (props) => {
         return (
           <ListItem key={data.id} style={{ backgroundColor: data.color }}>
             <ListItemCategory>{data.category}</ListItemCategory>
-            <ListItemAmount>{`${data.amount.toFixed(
-              2
-            )} ${currency}`}</ListItemAmount>
+            <ListItemAmount>{`${
+              data.amount && data.amount.toFixed(2)
+            } ${currency}`}</ListItemAmount>
             <ListItemDate>{getDate(data.date)}</ListItemDate>
           </ListItem>
         );

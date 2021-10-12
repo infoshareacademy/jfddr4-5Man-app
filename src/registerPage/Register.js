@@ -1,141 +1,379 @@
-import * as React from 'react';
-import { useState } from 'react';
-import Button from '@mui/material/Button';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { Redirect } from 'react-router-dom';
-import { Link } from "react-router-dom";
-import "./register.scss";
+import * as React from "react";
+import { useState } from "react";
+import Button from "@mui/material/Button";
+import { Link, useHistory } from "react-router-dom";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { doc, setDoc, getFirestore } from "firebase/firestore";
+import { TextField } from "@mui/material";
+import styled from "styled-components";
+import { picturesToDisplay } from "../dashboard/contentMain/settings/PicturePicker";
+import { PicturePicker } from "./PicturePicker";
+import {
+  animateForm,
+  animateLoginOrPass,
+  animateOpaquePanel,
+} from "../dashboard/contentMain/animations";
 
-
-const registerTheme = createTheme({
-    palette: {
-        primary: {
-            main: '#F6C90E',
-            secondary: '#f50057',
-            contrastText: '#FCFCFC'
-        },
+const MainWrapper = styled.div`
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background-color: #b3b2e6;
+  position: relative;
+`;
+const MainPanelWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 20px;
+  border-radius: 25px;
+  background-color: white;
+  position: relative;
+  top: -100px;
+`;
+const LogoWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  margin-bottom: 100px;
+  position: relative;
+  top: -100px;
+`;
+const LogoImage = styled.div`
+  width: 100px;
+  height: 100px;
+  margin-right: 30px;
+  img {
+    width: 100px;
+    height: 100px;
+  }
+`;
+const Logo1 = styled.h2`
+  font-size: 45px;
+  margin-right: 15px;
+  font-weight: bold;
+`;
+const Logo2 = styled.h2`
+  font-size: 45px;
+  color: #15810b;
+  font-weight: bold;
+  text-decoration: underline;
+`;
+const RegisterInfo = styled.p`
+  text-align: center;
+  a {
+    text-decoration: underline;
+    display: block;
+    margin-top: 5px;
+    color: #333193;
+  }
+`;
+const ErrorWrapper = styled.div`
+  width: 235px;
+  height: fit-content;
+  font-size: 15px;
+  color: red;
+  margin-bottom: 20px;
+  text-align: center;
+`;
+const ImageWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  color: #5350e9;
+`;
+const ImageChosen = styled.div`
+  width: 50px;
+  height: 50px;
+  margin-left: 25px;
+  cursor: pointer;
+  img {
+    width: 50px;
+    height: 50px;
+  }
+`;
+const CoverPanel = styled.div`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  display: none;
+  z-index: 9;
+`;
+const OpaquePanel = styled.div`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  display: none;
+  z-index: 8;
+  background-color: #b5b5b5;
+  opacity: 0.9;
+`;
+const PicturePickerOutsideWrapper = styled.div`
+  display: none;
+`;
+const buttonStyles = {
+  backgroundColor: "#5350E9",
+  borderRadius: "25px",
+  color: "#FFFFFF",
+  fontWeight: "bold",
+  letterSpacing: "1px",
+  fontSize: "20px",
+  marginBottom: "20px",
+  "&:hover": { backgroundColor: "#333193" },
+};
+const textFieldStyles = {
+  marginBottom: "20px",
+  "& label": { color: "#5350E9" },
+  "& label.Mui-focused": {
+    color: "#333193",
+  },
+  "& .MuiOutlinedInput-root": {
+    "& fieldset": {
+      borderColor: "#5350E9",
     },
-});
-
+    "&:hover fieldset": {
+      borderColor: "#5350E9",
+    },
+    "&.Mui-focused fieldset": {
+      borderColor: "#333193",
+    },
+  },
+};
 
 export function Register() {
-    const [registerEmail, setRegisterEmail] = useState("");
-    const [registerPass, setRegisterPass] = useState("");
-    const [registerPassRepeat, setRegisterPassRepeat] = useState("");
+  const [registerEmail, setRegisterEmail] = useState("");
+  const [registerPass, setRegisterPass] = useState("");
+  const [registerPassRepeat, setRegisterPassRepeat] = useState("");
+  const [registerNickname, setRegisterNickname] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+  const [registerPicture, setRegisterPicture] = useState(0);
+  const pictures = picturesToDisplay;
 
-    const [registerEmailError, setRegisterEmailError] = useState("");
-    const [registerPassError, setRegisterPassError] = useState("");
-    const [registerPassRepeatError, setRegisterPassRepeatError] = useState("");
+  const history = useHistory();
 
-    const mailRegex = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-
-    function registerEmailValidation(e) {
-        setRegisterEmail(e.target.value);
-        console.log(registerEmail);
-        if (e.target.value.match(mailRegex)) {
-            setRegisterEmailError("");
-            return true;
-        } else {
-            setRegisterEmailError("Wrong Mail");
-            return false;
-        }
+  const validate = () => {
+    let valid = true;
+    if (registerEmail.length === 0) {
+      setErrorMessage("Please enter email");
+      valid = false;
+      return valid;
     }
-
-    function registerPassValidation(e) {
-        setRegisterPass(e.target.value);
-        if(e.target.value.length < 6){
-            setRegisterPassError("Password is too short")
-            return false;
-        } else {
-            setRegisterPassError("")
-            return true;
-        }
+    if (registerEmail.match(/[@]/g) === null) {
+      setErrorMessage("Wrong email");
+      valid = false;
+      return valid;
     }
-
-    function registerPassRepeatValidation(e) {
-        setRegisterPassRepeat(e.target.value);
-        if(registerPass === e.target.value){
-            setRegisterPassRepeatError("")
-            return true;
-        } else {
-            setRegisterPassRepeatError("Password don't match")
-            return false;
-        }
+    if (registerNickname.length === 0) {
+      setErrorMessage("Please enter name");
+      valid = false;
+      return valid;
     }
-
-    function registerCreateUser(){
-        console.log(registerEmailError);
-        console.log(registerPassError);
-        console.log(registerPassRepeatError);
-        if(registerEmailError === "",registerPassError === "", registerPassRepeatError === ""){
-            
-            // CONNECT AND CREATE WITH FIREBASE
-            <Redirect to='/main'/>
-
-        } else {
-            return false;
-        }
+    if (registerPass.length === 0) {
+      setErrorMessage("Please enter password");
+      valid = false;
+      return valid;
     }
+    if (registerPass.length < 6) {
+      setErrorMessage("Password too short");
+      valid = false;
+      return valid;
+    }
+    if (registerPassRepeat.length === 0) {
+      setErrorMessage("Please repeat password");
+      valid = false;
+      return valid;
+    }
+    if (registerPassRepeat !== registerPass) {
+      setErrorMessage("Passwords must match");
+      valid = false;
+      return valid;
+    }
+    return valid;
+  };
 
-    return (
-        <ThemeProvider theme={registerTheme}>
-            <div className="registerMainDiv">
-                <section className="registerDirectDiv">
-                    <h1 className="registerHeader">Your<span>Money</span></h1>
-                    <form className="registerForm">
+  function registerCreateUser() {
+    const email = registerEmail;
+    const password = registerPass;
 
-                        <input type="text"
-                            className="registerFormEmail"
-                            name="registerFormEmail"
-                            placeholder="Email"
-                            onChange={registerEmailValidation} 
-                            value={registerEmail}/>
+    const auth = getAuth();
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        const db = getFirestore();
 
-                        <p id="registerMailError" className="registerParError">
-                            {registerEmailError}
-                        </p>
+        // CATEGORIES
 
-                        <input type="password"
-                            className="registerFormPassword"
-                            name="registerFormPassword"
-                            placeholder="Password"
-                            onChange={registerPassValidation} 
-                            value={registerPass}/>
+        setDoc(doc(db, user.uid + " - categories", "Income"), {
+          color: "#3BCA2D",
+          createdAt: +new Date(),
+          name: "Income",
+        });
 
-                        <p id="registerPasswordError" className="registerParError">
-                            {registerPassError}
-                        </p>
+        // USER DATA
 
-                        <input type="password"
-                            className="registerFormPasswordRepeat"
-                            name="registerFormPasswordRepeat"
-                            placeholder="Repeat Password"
-                            onChange={registerPassRepeatValidation} 
-                            value={registerPassRepeat}/>
+        setDoc(doc(db, user.uid + " - data", "Currency"), {
+          currency: "PLN",
+        });
 
-                        <p id="registerPasswordRepeatError" className="registerParError">
-                            {registerPassRepeatError}
-                        </p>
+        setDoc(doc(db, user.uid + " - data", "Nightmode"), {
+          isOn: "false",
+        });
 
-                        <Button onClick={registerCreateUser} className="registerFormButton" variant="contained" color="primary">
-                            Register
-                        </Button>
+        setDoc(doc(db, user.uid + " - data", "TotalBudget"), {
+          amount: 0,
+        });
 
-                    </form>
+        setDoc(doc(db, user.uid + " - data", "Nickname"), {
+          nickname: registerNickname,
+        });
 
-                    <p> --- Or --- </p>
+        setDoc(doc(db, user.uid + " - data", "Picture"), {
+          number: registerPicture,
+        });
 
-                    <div className="registerGoogle">
-                        <p>Google</p>
-                    </div>
+        setDoc(doc(db, user.uid + " - data", "CategoryColors"), {
+          isOn: "true",
+        });
 
-                </section>
+        // TRANSACTION
 
-                <section className="goToLoginDiv">
-                    <p>You have an account? <Link to="/login">Login here</Link></p>
-                </section>
+        setDoc(doc(db, user.uid + " - transactions", "test"), {
+          amount: 1,
+          category: "Income",
+          date: +new Date(),
+          description: "test",
+        });
 
-            </div>
-        </ThemeProvider>
-    )
+        setRegisterNickname("");
+        setRegisterEmail("");
+        setRegisterPass("");
+        setRegisterPassRepeat("");
+        setRegisterPicture(0);
+        setErrorMessage("");
+        history.push("/main");
+      })
+      .catch((error) => {
+        if (error.message === "Firebase: Error (auth/email-already-in-use).") {
+          setErrorMessage("Email already in use");
+        } else {
+          setErrorMessage("Something went wrong :(");
+        }
+      });
+  }
+
+  return (
+    <MainWrapper>
+      <LogoWrapper>
+        <LogoImage>
+          <img src="../../../images/logo.png" alt=""></img>
+        </LogoImage>
+        <Logo1>YOUR</Logo1>
+        <Logo2>MONEY</Logo2>
+      </LogoWrapper>
+      <MainPanelWrapper>
+        <ErrorWrapper>{errorMessage}</ErrorWrapper>
+        <TextField
+          sx={textFieldStyles}
+          type="text"
+          label="Email"
+          onChange={(event) => {
+            if (event.target.value.length < 30) {
+              setRegisterEmail(event.target.value);
+            }
+          }}
+          value={registerEmail}
+        />
+
+        <TextField
+          sx={textFieldStyles}
+          type="text"
+          label="Name"
+          onChange={(event) => {
+            if (event.target.value.length < 11) {
+              setRegisterNickname(event.target.value);
+            }
+          }}
+          value={registerNickname}
+        />
+
+        <ImageWrapper>
+          Image:
+          <ImageChosen
+            onClick={() => {
+              document.querySelector(".opaquePanel").classList.add("displayed");
+              document.querySelector(".coverPanel").classList.add("displayed");
+              document
+                .querySelector(".picturePicker")
+                .classList.add("displayed");
+              animateForm("picturePicker");
+              animateOpaquePanel();
+            }}
+          >
+            {pictures[registerPicture]}
+          </ImageChosen>
+        </ImageWrapper>
+
+        <TextField
+          sx={textFieldStyles}
+          type="password"
+          label="Password"
+          onChange={(event) => {
+            if (event.target.value.length < 30) {
+              setRegisterPass(event.target.value);
+            }
+          }}
+          value={registerPass}
+        />
+
+        <TextField
+          sx={textFieldStyles}
+          type="password"
+          onChange={(event) => {
+            if (event.target.value.length < 30) {
+              setRegisterPassRepeat(event.target.value);
+            }
+          }}
+          label="Repeat Password"
+          value={registerPassRepeat}
+        />
+
+        <Button
+          sx={buttonStyles}
+          onClick={() => {
+            if (validate() === true) {
+              registerCreateUser();
+            }
+          }}
+          variant="contained"
+        >
+          Register
+        </Button>
+        <RegisterInfo
+          onClick={() => {
+            animateLoginOrPass("loginForm");
+          }}
+        >
+          You have an account?
+          <Link to="/login">Login here</Link>
+        </RegisterInfo>
+      </MainPanelWrapper>
+      <CoverPanel className="coverPanel">
+        <PicturePickerOutsideWrapper className="picturePicker">
+          <PicturePicker
+            picture={registerPicture}
+            setPicture={setRegisterPicture}
+          ></PicturePicker>
+        </PicturePickerOutsideWrapper>
+      </CoverPanel>
+      <OpaquePanel className="opaquePanel"></OpaquePanel>
+    </MainWrapper>
+  );
 }

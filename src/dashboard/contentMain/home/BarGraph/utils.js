@@ -53,94 +53,90 @@ export const getDailyMaxValue = (database) => {
   return daysMaxValues;
 };
 
-
 export const getMaxValue = (database) => {
   const maxValue = Math.max(...getDailyMaxValue(database));
   return maxValue;
 };
 
-export const setBorder = (dataSet, day) => {
-  if (
-    dataSet.dataPoints.find((dataPoint) => dataPoint.x === day) === undefined
-  ) {
+export const setBorder = (dataSet, database, day) => {
+  if (dataSet === undefined) {
     return 0;
-  } else if (
-    dataSet.name === "Income" &&
-    dataSet.dataPoints.find((dataPoint) => dataPoint.x === day).y !== 0
-  ) {
-    return "3px dashed darkred";
-  } else {
+  } else if (dataSet.x !== day) {
     return 0;
+  } else if (dataSet.y === 0) {
+    return 0;
+  } else if (database.name === "Income" && dataSet.y !== 0) {
+    return "3px solid #004D00";
   }
 };
 
-export const setOrder = (dataSet, day) => {
-  if (dataSet.name === "Income") {
-    return 98;
+export const setOrder = (database, dataSet, day) => {
+  if (dataSet === undefined) {
+    return;
+  } else if (database.name === "Income") {
+    return 2;
   } else {
-    return day;
+    const date = new Date(dataSet.date);
+    return (
+      +date.getFullYear() +
+      (+date.getMonth() + 1) +
+      +date.getDate() +
+      +date.getHours() +
+      +date.getMinutes() +
+      +date.getSeconds()
+    );
   }
 };
 
-export const setMinHeight = (dataSet, day) => {
-  if (
-    dataSet.dataPoints.find((dataPoint) => dataPoint.x === day) === undefined
-  ) {
+export const setMinHeight = (dataSet, database, day) => {
+  if (dataSet === undefined) {
     return 0;
-  } else if (dataSet.name === "Income") {
+  } else if (dataSet.x !== day) {
+    return 0;
+  } else if (dataSet.y === 0) {
+    return 0;
+  } else if (database.name === "Income") {
     return "15px";
-  } else if (
-    dataSet.dataPoints.find((dataPoint) => dataPoint.x === day).y !== 0
-  ) {
+  } else if (dataSet.y !== 0) {
     return "7.5px";
-  } else {
-    return 0;
   }
 };
 
-export const setBarTitle = (dataSet, day) => {
-  if (
-    dataSet.dataPoints.find((dataPoint) => dataPoint.x === day) === undefined
-  ) {
+export const setSegmentTitle = (dataSet, day) => {
+  if (dataSet === undefined) {
+    return "";
+  } else if (dataSet.x !== day) {
+    return "";
+  } else if (dataSet.y === 0) {
     return "";
   } else {
-    return dataSet.dataPoints
-      .find((dataPoint) => dataPoint.x === day)
-      .y.toFixed(2);
+    return dataSet.y;
   }
 };
 
 export const setMarginBottom = (dataSet, day) => {
-  if (
-    dataSet.dataPoints.find((dataPoint) => dataPoint.x === day) === undefined
-  ) {
+  if (dataSet === undefined) {
     return 0;
-  } else if (
-    dataSet.dataPoints.find((dataPoint) => dataPoint.x === day).y !== 0
-  ) {
+  } else if (dataSet.x !== day) {
+    return 0;
+  } else if (dataSet.y === 0) {
+    return 0;
+  } else if (dataSet.y !== 0) {
     return "3px";
-  } else {
-    return 0;
   }
 };
 
-export const setSegmentHeight = (dataSet, day, daysMaxValues) => {
-  if (
-    dataSet.dataPoints.find((dataPoint) => dataPoint.x === day) === undefined
-  ) {
+export const setSegmentHeight = (dataSet, database, day, daysMaxValues) => {
+  if (dataSet === undefined) {
     return 0;
-  } else if (
-    dataSet.dataPoints.find((dataPoint) => dataPoint.x === day).y === 0
-  ) {
+  } else if (dataSet.x !== day) {
     return 0;
-  } else if (dataSet.name === "Income") {
+  } else if (dataSet.y === 0) {
+    return 0;
+  } else if (database.name === "Income") {
     return 10;
   } else {
-    return (
-      (dataSet.dataPoints.find((dataPoint) => dataPoint.x === day).y /
-        daysMaxValues[day - 1]) *
-      100
-    );
+    return (dataSet.y / daysMaxValues[day - 1]) * 100;
   }
 };
 
@@ -168,7 +164,7 @@ export const getIncomeSum = (database) => {
 };
 
 export const getOutcomeSum = (database) => {
-  if (database.length === 0) {
+  if (database.length === 1 || database.length === 0) {
     return 0;
   } else {
     return database
