@@ -20,7 +20,7 @@ const ConfirmFormInsideWrapper = styled.div`
   display: flex;
   flex-direction: column;
   z-index: 10;
-  background-color: ${(props) => props.theme.formsBackgroundColor};
+  background-color: ${(props) => props.theme.formsBackground};
 `;
 const ButtonsWrapper = styled.div`
   display: flex;

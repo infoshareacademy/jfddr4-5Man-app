@@ -42,9 +42,9 @@ const SidebarWrapper = styled.aside`
   display: flex;
   flex-direction: column;
   width: 280px;
-  border-right: 3px solid #d0d0d0;
   padding: 10px 20px;
   color: ${(props) => props.theme.color};
+  background-color: ${(props) => props.theme.sidebarBackground};
 `;
 const LogoWrapper = styled.div`
   display: flex;
@@ -82,7 +82,7 @@ const NavigationItemWrapper = styled.li`
   letter-spacing: 2px;
   transition: background-color 0.2s ease-out;
   &:hover {
-    background-color: ${(props) => props.theme.hoverSidebarColor};
+    background-color: ${(props) => props.theme.sidebarHover};
   }
   a {
     color: inherit;

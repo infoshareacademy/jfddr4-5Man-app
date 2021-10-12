@@ -12,7 +12,7 @@ const MainWrapper = styled.div`
   height: 100vh;
   max-height: 1080px;
   max-width: 1920px;
-  min-height: 950px;
+  min-height: 900px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -21,7 +21,7 @@ const MainWrapper = styled.div`
 const FixWrapper = styled.div`
   max-height: 1080px;
   max-width: 1920px;
-  min-height: 950px;
+  min-height: 900px;
   background-color: #b3b2e6;
   overflow: hidden;
   border-bottom: 1px solid #d0d0d0;

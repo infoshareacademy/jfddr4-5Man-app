@@ -5,7 +5,25 @@ import { CurrencyContext } from "../CurrencyContext";
 import { DateContext } from "../DateContext";
 import { getDate, orderAndFilterData } from "./utils";
 
-const HistoryListWrapper = styled.div``;
+const HistoryListWrapper = styled.div`
+  ::-webkit-scrollbar {
+    width: 15px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #b3b2e6;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #5350e9;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #333193;
+  }
+  padding-right: 50px;
+  margin-bottom: 20px;
+  overflow-y: auto;
+  height: 100%;
+  min-width: 650px;
+`;
 const ListItem = styled.div`
   height: 75px;
   width: 100%;

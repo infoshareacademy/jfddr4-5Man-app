@@ -13,8 +13,8 @@ const HistoryNavWrapper = styled.div`
   width: fit-content;
   display: flex;
   justify-content: center;
-  margin-bottom: 30px;
-  background-color: ${(props) => props.theme.navBackgroundColor};
+  margin: 15px 0;
+  background-color: ${(props) => props.theme.navBackground};
   border-radius: 25px;
   padding: 20px;
 `;

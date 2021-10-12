@@ -7,11 +7,12 @@ const CategoriesWrapper = styled.div`
   height: 100%;
   width: 500px;
   min-width: 500px;
-  border-right: 1px solid #d0d0d0;
   display: flex;
   flex-direction: column;
   padding: 25px;
   letter-spacing: 1px;
+  background-color: ${(props) => props.theme.contentBackground};
+  border-radius: 25px;
 `;
 const OneCategory = styled.div`
   margin-bottom: 20px;
@@ -23,7 +24,7 @@ const OneCategory = styled.div`
   border-radius: 25px;
   transition: background-color 0.2s ease-out;
   :hover {
-    background-color: ${(props) => props.theme.hoverCategoriesColor};
+    background-color: ${(props) => props.theme.categoriesHover};
   }
 `;
 const OneCategoryIncome = styled.div`
@@ -34,9 +35,9 @@ const OneCategoryIncome = styled.div`
   padding: 10px;
 `;
 const CategoryCircle = styled.div`
-  width: 60px;
-  height: 60px;
-  border-radius: 30px;
+  width: 55px;
+  height: 55px;
+  border-radius: 27.5px;
   margin-right: 35px;
 `;
 const CategoryName = styled.p`
@@ -128,7 +129,7 @@ export const Categories = (props) => {
           }}
         >
           <CategoryCircle style={{ backgroundColor: "#1C31E3" }}>
-            <AddIcon sx={{ color: grey[50], fontSize: 60 }}></AddIcon>
+            <AddIcon sx={{ color: grey[50], fontSize: 55 }}></AddIcon>
           </CategoryCircle>
           <CategoryName>Add category</CategoryName>
         </OneCategory>

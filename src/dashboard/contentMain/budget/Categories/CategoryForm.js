@@ -20,8 +20,8 @@ import { animateForm } from "../../animations";
 
 const CategoryFormInsideWrapper = styled.div`
   padding: 20px;
-  background-color: ${(props) => props.theme.formsBackgroundColor};
-  color: ${(props) => props.theme.formsTextColor};
+  background-color: ${(props) => props.theme.formsBackground};
+  color: ${(props) => props.theme.formsColor};
   border-radius: 25px;
   display: flex;
   flex-direction: column;

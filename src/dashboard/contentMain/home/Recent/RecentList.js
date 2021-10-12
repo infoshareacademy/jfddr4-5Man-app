@@ -13,6 +13,9 @@ const ListItem = styled.div`
   color: black;
   border-radius: 25px;
   border: 2px solid #5350e9;
+  :last-of-type {
+    margin-bottom: 0px;
+  }
 `;
 const ListItemCategory = styled.span`
   font-size: 25px;
@@ -30,6 +33,24 @@ const ListItemAmount = styled.span`
 const ListItemDate = styled.span`
   font-size: 20px;
   width: 110px;
+`;
+const ListItemWrapper = styled.div`
+  height: 100%;
+  max-height: 320px;
+  overflow-y: auto;
+  padding: 0 15px 0 0;
+  ::-webkit-scrollbar {
+    width: 15px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #b3b2e6;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #5350e9;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #333193;
+  }
 `;
 
 export const RecentList = (props) => {
@@ -56,7 +77,7 @@ export const RecentList = (props) => {
   };
 
   return (
-    <div>
+    <ListItemWrapper>
       {orderAndLimitData(props.database, 10).map((data) => {
         return (
           <ListItem key={data.id} style={{ backgroundColor: data.color }}>
@@ -68,6 +89,6 @@ export const RecentList = (props) => {
           </ListItem>
         );
       })}
-    </div>
+    </ListItemWrapper>
   );
 };
