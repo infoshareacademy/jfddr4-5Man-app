@@ -33,14 +33,14 @@ const MainPanelWrapper = styled.div`
   border-radius: 25px;
   background-color: white;
   position: relative;
-  top: -100px;
+  top: -50px;
 `;
 const LogoWrapper = styled.div`
   display: flex;
   align-items: center;
   margin-bottom: 100px;
   position: relative;
-  top: -100px;
+  top: -50px;
 `;
 const LogoImage = styled.div`
   width: 100px;
