@@ -18,19 +18,19 @@ const HomeWrapper = styled.div`
 const HomeUpper = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
   background-color: ${(props) => props.theme.contentBackground};
   border-radius: 25px;
   margin-bottom: 20px;
-  max-height: 60%;
+  max-height: 65%;
   height: 100%;
   padding: 10px;
   min-width: 1400px;
 `;
 const HomeLower = styled.div`
   display: flex;
-  max-height: 40%;
+  max-height: 35%;
   height: 100%;
 `;
 

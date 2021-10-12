@@ -9,14 +9,13 @@ const Wrapper = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-around;
   min-height: 350px;
   height: 100%;
 `;
 const BarsAndSummaryWrapper = styled.div`
   display: flex;
   width: fit-content;
-  margin: auto 0;
 `;
 
 const BarGraph = (props) => {
