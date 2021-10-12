@@ -34,9 +34,15 @@ const App = () => {
   onAuthStateChanged(auth, (user) => {
     if (user) {
       changeCurrentUser(user.uid);
+      if (
+        window.location.href.includes("login") ||
+        window.location.href.includes("register")
+      ) {
+        window.location.replace("/main");
+      }
     } else {
       if (window.location.href.includes("main")) {
-        window.location.href = window.location.origin;
+        window.location.replace(window.location.origin);
       }
     }
   });
