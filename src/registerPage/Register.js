@@ -241,6 +241,10 @@ export function Register() {
           isOn: "true",
         });
 
+        setDoc(doc(db, user.uid + " - data", "InitialChart"), {
+          chart: "piechart",
+        });
+
         // TRANSACTION
 
         setDoc(doc(db, user.uid + " - transactions", "test"), {

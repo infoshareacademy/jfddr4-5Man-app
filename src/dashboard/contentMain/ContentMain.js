@@ -4,6 +4,7 @@ import {
   compileGraphDatabase,
   compileHistoryDatabase,
   filterCategoryColors,
+  getInitialChart,
   getTotalBudget,
 } from "./utils";
 import { CurrencyContext } from "./CurrencyContext";
@@ -67,6 +68,8 @@ export function ContentMain() {
 
   const totalBudget = getTotalBudget(userInfo);
 
+  const initialChart = getInitialChart(userInfo);
+
   return (
     <CurrencyContext.Provider value={currentCurrency}>
       <DateContext.Provider value={dateToDisplay}>
@@ -81,6 +84,7 @@ export function ContentMain() {
               setDateToDisplay={setDateToDisplay}
               totalBudget={totalBudget}
               categories={filteredCategories}
+              initialChart={initialChart}
             ></Home>
           </Route>
           <Route exact path="/main/budget">

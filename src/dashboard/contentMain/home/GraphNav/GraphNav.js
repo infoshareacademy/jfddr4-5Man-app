@@ -39,10 +39,7 @@ const selectStyles = {
 
 export const GraphNav = (props) => {
   const initialChartSetter = () => {
-    if (
-      window.location.pathname === "/main/home" ||
-      window.location.pathname === "/main/home/piechart"
-    ) {
+    if (props.initialChart === "piechart") {
       return "piechart";
     } else {
       return "barchart";

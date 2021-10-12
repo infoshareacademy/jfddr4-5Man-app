@@ -104,3 +104,11 @@ export const filterCategoryColors = (categories, userInfo) => {
     });
   }
 };
+
+export const getInitialChart = (userData) => {
+  return userData.length === 0
+    ? "piechart"
+    : userData.find((data) => {
+        return data.id === "InitialChart";
+      }).chart;
+};

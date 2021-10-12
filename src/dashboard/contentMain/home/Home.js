@@ -38,10 +38,17 @@ export const Home = (props) => {
   return (
     <HomeWrapper>
       <HomeUpper>
-        <GraphNav setDateToDisplay={props.setDateToDisplay}></GraphNav>
+        <GraphNav
+          setDateToDisplay={props.setDateToDisplay}
+          initialChart={props.initialChart}
+        ></GraphNav>
         <Switch>
           <Route exact path="/main/home">
-            <Redirect to="/main/home/piechart"></Redirect>
+            {props.initialChart === "piechart" ? (
+              <Redirect to="/main/home/piechart"></Redirect>
+            ) : (
+              <Redirect to="/main/home/barchart"></Redirect>
+            )}
           </Route>
           <Route exact path="/main/home/piechart">
             piechart placeholder
