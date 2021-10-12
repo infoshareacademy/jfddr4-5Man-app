@@ -6,23 +6,31 @@ import {
     getTotalBudget,
   } from "../../utils"
 
+function mapColors(element){
+    return {color: element.color};
+}
+
+function reduceExpenses(element){
+
+}
+
+function mapExpenses(element){
+    return [element.name, element.dataPoints.reduce(reduceExpenses)];
+}
+
 export function PieChart(props) {
+
+    const colors = props.database.map(mapColors);
+    let expenses = props.database.map(mapExpenses)
+
+    expenses = [["Name", "Amount"], ...expenses];
+
+    console.log(props.databse);
+    console.log(expenses);
+
     const pieOptions = {
         backgroundColor: 'transparent',
-        slices: [
-            {
-                color: "#2BB673"
-            },
-            {
-                color: "#d91e48"
-            },
-            {
-                color: "#007fad"
-            },
-            {
-                color: "#e9a227"
-            }
-        ],
+        slices: colors,
         legend: {
             position: "right",
             alignment: "center",
@@ -37,7 +45,7 @@ export function PieChart(props) {
         chartArea: {
             left: 0,
             top: 0,
-            width: "100%",
+            width: "80%",
             height: "80%"
         },
         fontName: "Roboto"
@@ -49,11 +57,11 @@ export function PieChart(props) {
         <section className="pieChartSection">
             <Chart
                 chartType="PieChart"
-                data={[["Age", "Weight"], ["b", 12], ["b", 5.5]]}
-                options={pieOptions}
+                data={expenses}
                 graph_id="PieChart"
-                width={"700px"}
+                width={"800px"}
                 height={"700px"}
+                options={pieOptions}
                 legend_toggle
             />
         </section>
