@@ -43,7 +43,7 @@ export const Home = (props) => {
               <Redirect to="/main/home/piechart"></Redirect>
             </Route>
             <Route exact path="/main/home/piechart">
-              <PieChart/>
+              <PieChart database={props.graphDatabase}/>
             </Route>
             <Route exact path="/main/home/barchart">
               <BarGraph database={props.graphDatabase}></BarGraph>

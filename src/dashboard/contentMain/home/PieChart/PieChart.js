@@ -1,6 +1,12 @@
 import Chart from "react-google-charts";
+import {
+    compileGraphDatabase,
+    compileHistoryDatabase,
+    filterCategoryColors,
+    getTotalBudget,
+  } from "../../utils"
 
-export function PieChart() {
+export function PieChart(props) {
     const pieOptions = {
         backgroundColor: 'transparent',
         slices: [
@@ -37,6 +43,7 @@ export function PieChart() {
         fontName: "Roboto"
     };
 
+    console.log(props.database);
 
     return (
         <section className="pieChartSection">
