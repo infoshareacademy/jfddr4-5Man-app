@@ -10,8 +10,14 @@ import { TextForm } from "./TextForm";
 const SettingsWrapper = styled.div`
   width: 100%;
   height: 100%;
-  padding: 50px 30px 30px 50px;
+  padding: 20px;
   position: relative;
+`;
+const SettingsInsideWrapper = styled.div`
+  background-color: ${(props) => props.theme.contentBackground};
+  border-radius: 25px;
+  height: 100%;
+  padding: 20px 20px;
 `;
 const OneSettingWrapper = styled.div`
   display: flex;
@@ -61,7 +67,7 @@ const OpaquePanel = styled.div`
   left: 0;
   display: none;
   z-index: 8;
-  background-color: ${(props) => props.theme.opaqueColor};
+  background-color: ${(props) => props.theme.opaqueBackground};
   opacity: 0.9;
 `;
 const TextFormOutsideWrapper = styled.div`
@@ -117,7 +123,7 @@ export const Setting = (props) => {
   return (
     <SettingsWrapper>
       {props.userInfo && (
-        <>
+        <SettingsInsideWrapper>
           <OneSettingWrapper>
             <Button
               sx={normalButtonStyle}
@@ -383,7 +389,7 @@ export const Setting = (props) => {
               Delete account
             </Button>
           </OneSettingWrapper>
-        </>
+        </SettingsInsideWrapper>
       )}
       <CoverPanel className="coverPanel">
         <TextFormOutsideWrapper className="textForm">

@@ -7,29 +7,43 @@ import { fetchUserInfo } from "../firebase";
 import { UserContext } from "../UserContext";
 
 const darkTheme = {
-  color: "white",
+  ///OLD
+
   backgroundColor: "#212121",
-  hoverSidebarColor: "#333193",
-  opaqueColor: "#000000",
-  formsBackgroundColor: "#b5b5b5",
-  formsTextColor: "black",
-  navBackgroundColor: "#b5b5b5",
-  hoverCategoriesColor: "#373737",
+
   background1: "rgb(46,46,46)",
   background2:
     "linear-gradient(0deg, rgba(46,46,46,1) 0%, rgba(122,122,122,1) 100%)",
+  ///NEW
+  categoriesHover: "#373737",
+  navBackground: "#b5b5b5",
+  opaqueBackground: "#000000",
+  formsColor: "black",
+  formsBackground: "#b5b5b5",
+  dashboardBackground: "rgb(24, 25, 26)",
+  color: "white",
+  contentBackground: "#4E4E4E",
+  sidebarBackground: "#4E4E4E",
+  sidebarHover: "#333193",
 };
 const lightTheme = {
-  color: "black",
+  ///OLD
+
   backgroundColor: "white",
-  hoverSidebarColor: "#b3b2e6",
-  opaqueColor: "#b5b5b5",
-  formsBackgroundColor: "white",
-  formsTextColor: "black",
-  navBackgroundColor: "",
-  hoverCategoriesColor: "#dfdfdf",
+
   background1: "white",
   background2: "white",
+  ///NEW
+  categoriesHover: "#dfdfdf",
+  navBackground: "",
+  opaqueBackground: "#b5b5b5",
+  formsColor: "black",
+  formsBackground: "white",
+  color: "black",
+  dashboardBackground: "grey",
+  contentBackground: "white",
+  sidebarBackground: "white",
+  sidebarHover: "#b3b2e6",
 };
 const DashboardWrapper = styled.div`
   width: 100%;
@@ -40,12 +54,12 @@ const DashboardWrapper = styled.div`
   border-bottom: 1px solid #d0d0d0;
   border-right: 1px solid #d0d0d0;
   color: ${(props) => props.theme.color};
-  background: ${(props) => props.theme.background1};
-  background: ${(props) => props.theme.background2};
+  background-color: ${(props) => props.theme.dashboardBackground};
 `;
 const ContentMainWrapper = styled.div`
   width: 100%;
   height: 100%;
+  background-color: ${(props) => props.theme.dashboardBackground};
 `;
 
 export function Dashboard() {

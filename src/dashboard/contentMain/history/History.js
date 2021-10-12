@@ -7,26 +7,19 @@ import { EditForm } from "./EditForm";
 const HistoryWrapper = styled.div`
   width: 100%;
   height: 100%;
-  padding: 10px 30px;
+  padding: 20px;
   min-width: 1290px;
-  overflow-y: scroll;
+  overflow: hidden;
+  position: relative;
+`;
+const HistoryInsideWrapper = styled.div`
+  background-color: ${(props) => props.theme.contentBackground};
+  border-radius: 25px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  overflow-x: hidden;
-  ::-webkit-scrollbar {
-    width: 15px;
-  }
-  ::-webkit-scrollbar-track {
-    background: #b3b2e6;
-  }
-  ::-webkit-scrollbar-thumb {
-    background: #5350e9;
-  }
-  ::-webkit-scrollbar-thumb:hover {
-    background: #333193;
-  }
-  position: relative;
+  width: 100%;
+  height: 100%;
 `;
 const FormOutsideWrapper = styled.div`
   display: none;
@@ -49,7 +42,7 @@ const OpaquePanel = styled.div`
   left: 0;
   display: none;
   z-index: 8;
-  background-color: ${(props) => props.theme.opaqueColor};
+  background-color: ${(props) => props.theme.opaqueBackground};
   opacity: 0.9;
 `;
 
@@ -59,20 +52,22 @@ export const History = (props) => {
   const [transactionData, setTransactionData] = useState("");
   return (
     <HistoryWrapper>
-      <HistoryNav
-        categories={props.categories}
-        setDateToDisplay={props.setDateToDisplay}
-        setSortOrder={setSortOrder}
-        sortOrder={sortOrder}
-        category={category}
-        chooseCategory={chooseCategory}
-      ></HistoryNav>
-      <HistoryList
-        database={props.historyDatabase}
-        sortOrder={sortOrder}
-        category={category}
-        setTransactionData={setTransactionData}
-      ></HistoryList>
+      <HistoryInsideWrapper>
+        <HistoryNav
+          categories={props.categories}
+          setDateToDisplay={props.setDateToDisplay}
+          setSortOrder={setSortOrder}
+          sortOrder={sortOrder}
+          category={category}
+          chooseCategory={chooseCategory}
+        ></HistoryNav>
+        <HistoryList
+          database={props.historyDatabase}
+          sortOrder={sortOrder}
+          category={category}
+          setTransactionData={setTransactionData}
+        ></HistoryList>
+      </HistoryInsideWrapper>
       <CoverPanel className="coverPanel">
         <FormOutsideWrapper className="historyForm">
           <EditForm

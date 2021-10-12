@@ -46,7 +46,7 @@ export const animateContentMain = () => {
       },
     ],
     {
-      duration: 150,
+      duration: 100,
       easing: "ease-out",
     }
   );

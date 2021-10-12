@@ -7,8 +7,9 @@ import { DateContext } from "../../DateContext";
 const GraphNavWrapper = styled.div`
   width: fit-content;
   display: flex;
+  margin-bottom: 10px;
   justify-content: center;
-  background-color: ${(props) => props.theme.navBackgroundColor};
+  background-color: ${(props) => props.theme.navBackground};
   border-radius: 25px;
   padding: 10px 15px;
   a {

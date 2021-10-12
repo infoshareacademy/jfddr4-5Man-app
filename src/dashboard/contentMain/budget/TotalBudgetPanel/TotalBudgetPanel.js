@@ -9,18 +9,20 @@ import { animateForm, animateOpaquePanel } from "../../animations";
 const TotalBudgetPanelWrapper = styled.div`
   width: 100%;
   height: 20%;
-  border-bottom: 1px solid #d0d0d0;
   display: flex;
   padding: 0 10px;
   justify-content: center;
   align-items: center;
   letter-spacing: 1px;
+  background-color: ${(props) => props.theme.contentBackground};
+  border-radius: 25px;
+  margin-bottom: 20px;
 `;
 const TotalBudgetDisplay = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 0 35px;
+  margin: 0 80px;
 `;
 const TotalBudgetText = styled.h3`
   font-weight: normal;

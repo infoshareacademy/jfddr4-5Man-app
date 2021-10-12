@@ -14,11 +14,19 @@ const MainWrapper = styled.div`
   padding: 50px 75px;
   min-width: 670px;
   letter-spacing: 1px;
+  background-color: ${(props) => props.theme.contentBackground};
+  border-radius: 25px;
+  margin-left: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 `;
 const ButtonsWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   margin-bottom: 40px;
+  width: 500px;
 `;
 const ButtonWrapper = styled.div`
   display: flex;
@@ -64,7 +72,7 @@ const OpaquePanel = styled.div`
   left: 0;
   display: none;
   z-index: 8;
-  background-color: ${(props) => props.theme.opaqueColor};
+  background-color: ${(props) => props.theme.opaqueBackground};
   opacity: 0.9;
 `;
 
@@ -76,7 +84,7 @@ export const TransactionPanel = (props) => {
     <MainWrapper>
       <ButtonsWrapper>
         <ButtonWrapper>
-          <ButtonsTitle>Add income</ButtonsTitle>
+          <ButtonsTitle>Income</ButtonsTitle>
           <IconButton
             onClick={() => {
               setTransactionType("income");
@@ -93,7 +101,7 @@ export const TransactionPanel = (props) => {
           </IconButton>
         </ButtonWrapper>
         <ButtonWrapper>
-          <ButtonsTitle>Add outcome </ButtonsTitle>
+          <ButtonsTitle>Outcome </ButtonsTitle>
           <IconButton
             onClick={() => {
               setTransactionType("outcome");

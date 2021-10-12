@@ -13,8 +13,8 @@ const HistoryNavWrapper = styled.div`
   width: fit-content;
   display: flex;
   justify-content: center;
-  margin-bottom: 30px;
-  background-color: ${(props) => props.theme.navBackgroundColor};
+  margin: 15px 0;
+  background-color: ${(props) => props.theme.navBackground};
   border-radius: 25px;
   padding: 20px;
 `;
@@ -26,6 +26,27 @@ const selectStyles = {
     color: "#333193",
   },
   "& .MuiOutlinedInput-root": {
+    "& fieldset": {
+      borderColor: "#5350E9",
+    },
+    "&:hover fieldset": {
+      borderColor: "#5350E9",
+    },
+    "&.Mui-focused fieldset": {
+      borderColor: "#333193",
+    },
+  },
+  "& .MuiList-root": { backgroundColor: "#5350E9" },
+};
+const selectCategoryStyles = {
+  marginRight: "20px",
+  "&:last-of-type": { marginRight: "0px" },
+  "& label": { color: "#5350E9" },
+  "& label.Mui-focused": {
+    color: "#333193",
+  },
+  "& .MuiOutlinedInput-root": {
+    width: "100px",
     "& fieldset": {
       borderColor: "#5350E9",
     },
@@ -79,7 +100,7 @@ export const HistoryNav = (props) => {
             {setYearMenuItems()}
           </Select>
         </FormControl>
-        <FormControl sx={selectStyles}>
+        <FormControl sx={selectCategoryStyles}>
           <InputLabel id="categorySelect">Category</InputLabel>
           <Select
             labelId="categorySelect"
