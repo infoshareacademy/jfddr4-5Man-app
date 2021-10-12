@@ -11,7 +11,7 @@ const GraphNavWrapper = styled.div`
   justify-content: center;
   background-color: ${(props) => props.theme.navBackground};
   border-radius: 25px;
-  padding: 10px 15px;
+  padding: 20px;
   a {
     color: black !important;
   }

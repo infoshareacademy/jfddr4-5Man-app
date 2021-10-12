@@ -38,8 +38,6 @@ const DashboardWrapper = styled.div`
   display: flex;
   overflow: hidden;
   box-sizing: content-box;
-  border-bottom: 1px solid #d0d0d0;
-  border-right: 1px solid #d0d0d0;
   color: ${(props) => props.theme.color};
   background-color: ${(props) => props.theme.dashboardBackground};
 `;
