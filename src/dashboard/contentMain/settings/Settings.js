@@ -2,6 +2,7 @@ import { Button } from "@mui/material";
 import { useState } from "react";
 import styled from "styled-components";
 import { animateForm, animateOpaquePanel } from "../animations";
+import { getDate } from "../history/utils";
 import { ConfirmForm } from "./ConfirmForm";
 import { OnOffForm } from "./OnOffForm";
 import { PicturePicker, picturesToDisplay } from "./PicturePicker";
@@ -21,9 +22,7 @@ const SettingsInsideWrapper = styled.div`
   display: flex;
 `;
 const OneSettingRow = styled.div`
-  :first-of-type {
-    margin-right: 90px;
-  }
+  margin-right: 90px;
 `;
 const OneSettingWrapper = styled.div`
   display: flex;
@@ -92,6 +91,12 @@ const PicturePickerOutsideWrapper = styled.div`
   display: none;
   transform-origin: center;
 `;
+const TimeDisplay = styled.span`
+  display: block;
+  margin-left: auto;
+  margin-right: 40px;
+  text-align: center;
+`;
 const normalButtonStyle = {
   backgroundColor: "#5350E9",
   fontSize: 20,
@@ -101,6 +106,7 @@ const normalButtonStyle = {
   fontWeight: "bold",
   letterSpacing: 1,
   height: 60,
+  minWidth: "280px",
   "&:hover": { backgroundColor: "#333193" },
 };
 const redButtonStyle = {
@@ -450,6 +456,19 @@ export const Setting = (props) => {
               </Button>
             </OneSettingWrapper>
           </OneSettingRow>
+          <TimeDisplay>
+            {`Account since : ${
+              props.userInfo.find((data) => {
+                return data.id === "AccountSince";
+              })
+                ? getDate(
+                    props.userInfo.find((data) => {
+                      return data.id === "AccountSince";
+                    }).date
+                  )
+                : ""
+            }`}
+          </TimeDisplay>
         </SettingsInsideWrapper>
       )}
       <CoverPanel className="coverPanel">

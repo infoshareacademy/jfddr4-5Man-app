@@ -245,6 +245,10 @@ export function Register() {
           chart: "piechart",
         });
 
+        setDoc(doc(db, user.uid + " - data", "AccountSince"), {
+          date: +new Date(),
+        });
+
         // TRANSACTION
 
         setDoc(doc(db, user.uid + " - transactions", "test"), {

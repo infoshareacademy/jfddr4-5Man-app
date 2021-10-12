@@ -6,7 +6,7 @@ import { CurrencyContext } from "../../CurrencyContext";
 const OneCategory = styled.div`
   display: flex;
   align-items: center;
-  margin-right: 30px;
+  margin-right: 40px;
 `;
 const CategoryColor = styled.div`
   width: 55px;
