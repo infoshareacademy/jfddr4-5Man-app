@@ -10,18 +10,20 @@ function mapColors(element){
     return {color: element.color};
 }
 
-function reduceExpenses(element){
-
+function reduceExpenses(element, accumulator){
+    return element.y + accumulator;
 }
 
 function mapExpenses(element){
-    return [element.name, element.dataPoints.reduce(reduceExpenses)];
+    return [element.name, element.dataPoints[1].y];
 }
 
 export function PieChart(props) {
 
     const colors = props.database.map(mapColors);
-    let expenses = props.database.map(mapExpenses)
+    let expenses = props.database.map((element) => {
+        return [element.name, element.dataPoints[0][1]];
+    }, 1)
 
     expenses = [["Name", "Amount"], ...expenses];
 
