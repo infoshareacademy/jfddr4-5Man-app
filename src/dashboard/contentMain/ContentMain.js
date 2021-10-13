@@ -4,10 +4,12 @@ import {
   compileGraphDatabase,
   compileHistoryDatabase,
   filterCategoryColors,
+  getInitialChart,
   getTotalBudget,
 } from "./utils";
 import { CurrencyContext } from "./CurrencyContext";
 import { DateContext } from "./DateContext";
+import { DisplayContext } from "./DisplayContext";
 import {
   fetchCategories,
   fetchTransactions,
@@ -28,6 +30,7 @@ export function ContentMain() {
   const [categories, setCategories] = useState([]);
   const [transactions, setTransactions] = useState([]);
   const [userInfo, setUserInfo] = useState([]);
+  const [displayType, setDisplayType] = useState("monthly");
 
   const currentUser = useContext(UserContext);
 
@@ -57,8 +60,11 @@ export function ContentMain() {
   const compiledGraphDatabase = compileGraphDatabase(
     filteredCategories,
     transactions,
-    dateToDisplay
+    dateToDisplay,
+    displayType
   );
+
+  console.log(compiledGraphDatabase);
 
   const compiledHistoryDatabase = compileHistoryDatabase(
     filteredCategories,
@@ -67,45 +73,51 @@ export function ContentMain() {
 
   const totalBudget = getTotalBudget(userInfo);
 
+  const initialChart = getInitialChart(userInfo);
+
   return (
     <CurrencyContext.Provider value={currentCurrency}>
       <DateContext.Provider value={dateToDisplay}>
-        <Switch>
-          <Route exact path="/main">
-            <Redirect to="/main/home" />
-          </Route>
-          <Route path="/main/home">
-            <Home
-              graphDatabase={compiledGraphDatabase}
-              historyDatabase={compiledHistoryDatabase}
-              setDateToDisplay={setDateToDisplay}
-              totalBudget={totalBudget}
-              categories={filteredCategories}
-            ></Home>
-          </Route>
-          <Route exact path="/main/budget">
-            <Budget
-              categories={filteredCategories}
-              transactions={transactions}
-              totalBudget={totalBudget}
-            ></Budget>
-          </Route>
-          <Route exact path="/main/history">
-            <History
-              historyDatabase={compiledHistoryDatabase}
-              setDateToDisplay={setDateToDisplay}
-              categories={filteredCategories}
-              totalBudget={totalBudget}
-            ></History>
-          </Route>
-          <Route exact path="/main/settings">
-            <Setting
-              userInfo={userInfo}
-              categories={filteredCategories}
-              transactions={transactions}
-            ></Setting>
-          </Route>
-        </Switch>
+        <DisplayContext.Provider value={displayType}>
+          <Switch>
+            <Route exact path="/main">
+              <Redirect to="/main/home" />
+            </Route>
+            <Route path="/main/home">
+              <Home
+                graphDatabase={compiledGraphDatabase}
+                historyDatabase={compiledHistoryDatabase}
+                setDateToDisplay={setDateToDisplay}
+                totalBudget={totalBudget}
+                categories={filteredCategories}
+                initialChart={initialChart}
+                setDisplayType={setDisplayType}
+              ></Home>
+            </Route>
+            <Route exact path="/main/budget">
+              <Budget
+                categories={filteredCategories}
+                transactions={transactions}
+                totalBudget={totalBudget}
+              ></Budget>
+            </Route>
+            <Route exact path="/main/history">
+              <History
+                historyDatabase={compiledHistoryDatabase}
+                setDateToDisplay={setDateToDisplay}
+                categories={filteredCategories}
+                totalBudget={totalBudget}
+              ></History>
+            </Route>
+            <Route exact path="/main/settings">
+              <Setting
+                userInfo={userInfo}
+                categories={filteredCategories}
+                transactions={transactions}
+              ></Setting>
+            </Route>
+          </Switch>
+        </DisplayContext.Provider>
       </DateContext.Provider>
     </CurrencyContext.Provider>
   );

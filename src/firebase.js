@@ -436,6 +436,9 @@ export const clearData = (userName, categories, transactions) => {
   updateDoc(doc(db, `${userName} - data`, "CategoryColors"), {
     isOn: "true",
   });
+  updateDoc(doc(db, `${userName} - data`, "InitialChart"), {
+    chart: "piechart",
+  });
 };
 
 export const deleteUserFunc = (goBackHandler, setErrorMessage) => {
@@ -468,4 +471,9 @@ export const sendPasswordReset = (email, setForgotMessage) => {
     .catch((error) => {
       console.log(error.message);
     });
+};
+
+export const updateInitialChart = (userName, chart) => {
+  const c = doc(db, `${userName} - data`, "InitialChart");
+  updateDoc(c, { chart: chart });
 };

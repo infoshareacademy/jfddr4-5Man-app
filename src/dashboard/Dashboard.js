@@ -7,13 +7,6 @@ import { fetchUserInfo } from "../firebase";
 import { UserContext } from "../UserContext";
 
 const darkTheme = {
-  ///OLD
-
-  backgroundColor: "#212121",
-
-  background1: "rgb(46,46,46)",
-  background2:
-    "linear-gradient(0deg, rgba(46,46,46,1) 0%, rgba(122,122,122,1) 100%)",
   ///NEW
   categoriesHover: "#373737",
   navBackground: "#b5b5b5",
@@ -27,12 +20,6 @@ const darkTheme = {
   sidebarHover: "#333193",
 };
 const lightTheme = {
-  ///OLD
-
-  backgroundColor: "white",
-
-  background1: "white",
-  background2: "white",
   ///NEW
   categoriesHover: "#dfdfdf",
   navBackground: "",
@@ -51,8 +38,6 @@ const DashboardWrapper = styled.div`
   display: flex;
   overflow: hidden;
   box-sizing: content-box;
-  border-bottom: 1px solid #d0d0d0;
-  border-right: 1px solid #d0d0d0;
   color: ${(props) => props.theme.color};
   background-color: ${(props) => props.theme.dashboardBackground};
 `;

@@ -19,7 +19,7 @@ const ListItem = styled.div`
 `;
 const ListItemCategory = styled.span`
   font-size: 25px;
-  width: 120px;
+  min-width: 150px;
 `;
 const ListItemAmount = styled.span`
   font-size: 25px;

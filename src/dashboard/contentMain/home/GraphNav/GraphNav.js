@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import { useContext, useState } from "react";
 import { DateContext } from "../../DateContext";
+import { DisplayContext } from "../../DisplayContext";
 
 const GraphNavWrapper = styled.div`
   width: fit-content;
@@ -11,7 +12,7 @@ const GraphNavWrapper = styled.div`
   justify-content: center;
   background-color: ${(props) => props.theme.navBackground};
   border-radius: 25px;
-  padding: 10px 15px;
+  padding: 20px;
   a {
     color: black !important;
   }
@@ -39,10 +40,7 @@ const selectStyles = {
 
 export const GraphNav = (props) => {
   const initialChartSetter = () => {
-    if (
-      window.location.pathname === "/main/home" ||
-      window.location.pathname === "/main/home/piechart"
-    ) {
+    if (props.initialChart === "piechart") {
       return "piechart";
     } else {
       return "barchart";
@@ -56,6 +54,7 @@ export const GraphNav = (props) => {
   };
 
   const dateToDisplay = useContext(DateContext);
+  const typeToDisplay = useContext(DisplayContext);
 
   const setYearMenuItems = () => {
     const currentYear = new Date().getFullYear();
@@ -130,6 +129,20 @@ export const GraphNav = (props) => {
           >
             <Link to="/main/home/barchart">Bar Chart</Link>
           </MenuItem>
+        </Select>
+      </FormControl>
+      <FormControl sx={selectStyles}>
+        <InputLabel id="typeSelect">Range</InputLabel>
+        <Select
+          labelId="typeSelect"
+          label="Range"
+          value={typeToDisplay}
+          onChange={(event) => {
+            props.setDisplayType(event.target.value);
+          }}
+        >
+          <MenuItem value="monthly">Monthly</MenuItem>
+          <MenuItem value="yearly">Yearly</MenuItem>
         </Select>
       </FormControl>
       <FormControl sx={selectStyles}>

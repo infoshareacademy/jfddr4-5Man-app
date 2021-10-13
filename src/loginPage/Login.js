@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useState } from "react";
 import Button from "@mui/material/Button";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import styled from "styled-components";
 import { TextField } from "@mui/material";
@@ -126,8 +126,6 @@ export function Login() {
   const [errorMessage, setErrorMessage] = useState("");
   const [forgotMessage, setForgotMessage] = useState("");
 
-  const history = useHistory();
-
   const validate = () => {
     let valid = true;
     if (loginEmail.length === 0) {
@@ -155,7 +153,6 @@ export function Login() {
         setLoginEmail("");
         setLoginPass("");
         setForgotMessage("");
-        history.push("/main");
       })
       .catch((error) => {
         if (

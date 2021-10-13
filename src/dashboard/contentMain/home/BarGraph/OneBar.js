@@ -13,18 +13,17 @@ import {
   setSegmentHeight,
 } from "./utils";
 import { v4 as uuidv4 } from "uuid";
+import { DisplayContext } from "../../DisplayContext";
 
 const BarWrapper = styled.div`
   display: flex;
   flex-direction: column-reverse;
   justify-content: flex-start;
-  margin-right: 15px;
   width: 20px;
   align-items: center;
 `;
 
 const OneSegment = styled.div`
-  width: 20px;
   border: 1px solid #5350e9;
   :hover {
     opacity: 0.6;
@@ -39,9 +38,13 @@ const OneBar = (props) => {
   const currency = useContext(CurrencyContext);
   const maxValue = getMaxValue(props.database);
   const daysMaxValues = getDailyMaxValue(props.database);
+  const displayType = useContext(DisplayContext);
   return (
     <BarWrapper
-      style={{ height: `${setBarHeight(daysMaxValues, props.day, maxValue)}%` }}
+      style={{
+        height: `${setBarHeight(daysMaxValues, props.day, maxValue)}%`,
+        marginRight: displayType === "monthly" ? "15px" : "50px",
+      }}
     >
       {props.database.map((data1) => {
         return data1.dataPoints.map((data2) => {
@@ -66,6 +69,7 @@ const OneBar = (props) => {
                   minHeight: setMinHeight(data2, data1, props.day),
                   order: setOrder(data1, data2, props.day),
                   border: setBorder(data2, data1, props.day),
+                  width: displayType === "monthly" ? "20px" : "40px",
                 }}
                 title={`${setSegmentTitle(data2, props.day)} ${currency}`}
                 key={uuidv4()}

@@ -24,8 +24,6 @@ const FixWrapper = styled.div`
   min-height: 900px;
   background-color: #b3b2e6;
   overflow: hidden;
-  border-bottom: 1px solid #d0d0d0;
-  border-right: 1px solid #d0d0d0;
 `;
 
 const App = () => {
@@ -34,9 +32,15 @@ const App = () => {
   onAuthStateChanged(auth, (user) => {
     if (user) {
       changeCurrentUser(user.uid);
+      if (
+        window.location.href.includes("login") ||
+        window.location.href.includes("register")
+      ) {
+        window.location.replace("/main");
+      }
     } else {
       if (window.location.href.includes("main")) {
-        window.location.href = window.location.origin;
+        window.location.replace(window.location.origin);
       }
     }
   });

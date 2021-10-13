@@ -44,7 +44,7 @@ const ListItem = styled.div`
 const ListItemCategory = styled.span`
   font-size: 27px;
   color: black;
-  width: 270px;
+  width: 250px;
 `;
 const ListItemAmount = styled.span`
   font-size: 27px;
@@ -64,6 +64,7 @@ const ListItemDescription = styled.span`
   font-size: 22.5px;
   color: black;
   width: 405px;
+  word-wrap: break-word;
   text-align: center;
 `;
 const ListItemId = styled.span`

@@ -2,7 +2,7 @@ import { Redirect, Route, Switch } from "react-router";
 import styled from "styled-components";
 import BarGraph from "./BarGraph/BarGraph";
 import { GraphNav } from "./GraphNav/GraphNav";
-import { PieChart } from "./PieChart/PieChart";
+import { PieChart } from "./Piechart/Piechart";
 import { Recent } from "./Recent/Recent";
 import { TransactionPanel } from "./TransactionPanel/TransactionPanel";
 
@@ -39,20 +39,26 @@ export const Home = (props) => {
   return (
     <HomeWrapper>
       <HomeUpper>
-        <GraphNav setDateToDisplay={props.setDateToDisplay}></GraphNav>
-        <GraphWrapper>
-          <Switch>
-            <Route exact path="/main/home">
+        <GraphNav
+          setDateToDisplay={props.setDateToDisplay}
+          initialChart={props.initialChart}
+          setDisplayType={props.setDisplayType}
+        ></GraphNav>
+        <Switch>
+          <Route exact path="/main/home">
+            {props.initialChart === "piechart" ? (
               <Redirect to="/main/home/piechart"></Redirect>
-            </Route>
-            <Route exact path="/main/home/piechart">
-              <PieChart database={props.graphDatabase}/>
-            </Route>
-            <Route exact path="/main/home/barchart">
-              <BarGraph database={props.graphDatabase}></BarGraph>
-            </Route>
-          </Switch>
-        </GraphWrapper>
+            ) : (
+              <Redirect to="/main/home/barchart"></Redirect>
+            )}
+          </Route>
+          <Route exact path="/main/home/piechart">
+            <PieChart database={props.graphDatabase} />
+          </Route>
+          <Route exact path="/main/home/barchart">
+            <BarGraph database={props.graphDatabase}></BarGraph>
+          </Route>
+        </Switch>
       </HomeUpper>
       <HomeLower>
         <Recent database={props.historyDatabase}></Recent>

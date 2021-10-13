@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useState } from "react";
 import Button from "@mui/material/Button";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { doc, setDoc, getFirestore } from "firebase/firestore";
 import { TextField } from "@mui/material";
@@ -157,8 +157,6 @@ export function Register() {
   const [registerPicture, setRegisterPicture] = useState(0);
   const pictures = picturesToDisplay;
 
-  const history = useHistory();
-
   const validate = () => {
     let valid = true;
     if (registerEmail.length === 0) {
@@ -243,6 +241,14 @@ export function Register() {
           isOn: "true",
         });
 
+        setDoc(doc(db, user.uid + " - data", "InitialChart"), {
+          chart: "piechart",
+        });
+
+        setDoc(doc(db, user.uid + " - data", "AccountSince"), {
+          date: +new Date(),
+        });
+
         // TRANSACTION
 
         setDoc(doc(db, user.uid + " - transactions", "test"), {
@@ -258,7 +264,6 @@ export function Register() {
         setRegisterPassRepeat("");
         setRegisterPicture(0);
         setErrorMessage("");
-        history.push("/main");
       })
       .catch((error) => {
         if (error.message === "Firebase: Error (auth/email-already-in-use).") {
