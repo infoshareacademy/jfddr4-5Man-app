@@ -14,10 +14,15 @@ const BudgetWrapper = styled.div`
   display: flex;
   min-width: 1240px;
   position: relative;
+  padding: 20px;
 `;
 const BudgetWrapperRight = styled.div`
   width: 100%;
   height: 100%;
+  margin-left: 20px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
 `;
 const CoverPanel = styled.div`
   position: absolute;
@@ -36,7 +41,7 @@ const OpaquePanel = styled.div`
   left: 0;
   display: none;
   z-index: 8;
-  background-color: ${(props) => props.theme.opaqueColor};
+  background-color: ${(props) => props.theme.opaqueBackground};
   opacity: 0.9;
 `;
 const ColorPickerOutsideWrapper = styled.div`

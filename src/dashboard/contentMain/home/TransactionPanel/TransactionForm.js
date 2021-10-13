@@ -17,7 +17,7 @@ import {
 
 const FormInsideWrapper = styled.div`
   padding: 20px;
-  background-color: ${(props) => props.theme.formsBackgroundColor};
+  background-color: ${(props) => props.theme.formsBackground};
   border-radius: 25px;
   display: flex;
   flex-direction: column;
@@ -29,9 +29,11 @@ const ButtonsWrapper = styled.div`
 `;
 const DateWrapper = styled.div`
   display: flex;
+  width: 276px;
+  justify-content: space-between;
 `;
 const ErrorWrapper = styled.div`
-  width: 250px;
+  width: 276px;
   height: fit-content;
   font-size: 15px;
   color: red;
@@ -39,9 +41,9 @@ const ErrorWrapper = styled.div`
   text-align: center;
 `;
 const CategoryWrapper = styled.div`
-  width: 250px;
+  width: 276px;
   div {
-    width: 250px;
+    width: 276px;
   }
 `;
 const buttonStyles = {
@@ -207,7 +209,7 @@ export const TransactionForm = (props) => {
           </Select>
         </FormControl>
         <FormControl sx={selectStyles}>
-          <InputLabel id="yearSelect">Category</InputLabel>
+          <InputLabel id="yearSelect">Year</InputLabel>
           <Select
             labelId="yeatSelect"
             label="year"

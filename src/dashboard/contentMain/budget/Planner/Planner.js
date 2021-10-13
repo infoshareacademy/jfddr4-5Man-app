@@ -5,12 +5,14 @@ import { animateForm, animateOpaquePanel } from "../../animations";
 
 const PlannerWrapper = styled.div`
   width: 100%;
-  height: 80%;
   padding: 20px;
   letter-spacing: 1px;
+  background-color: ${(props) => props.theme.contentBackground};
+  border-radius: 25px;
+  height: 100%;
 `;
 const PlannerTitle = styled.h2`
-  font-size: 50px;
+  font-size: 40px;
   margin-bottom: 20px;
 `;
 const PlannerItemWrapper = styled.div`
@@ -18,7 +20,7 @@ const PlannerItemWrapper = styled.div`
   align-items: center;
   padding: 10px;
   margin-bottom: 15px;
-  height: 75px;
+  height: 67.5px;
   justify-content: space-between;
   border-radius: 25px;
   transition: box-shadow 0.2s ease-out;
@@ -29,7 +31,7 @@ const PlannerItemWrapper = styled.div`
   }
 `;
 const PlannerItemTitle = styled.span`
-  font-size: 30px;
+  font-size: 25px;
   font-weight: bold;
   width: 230px;
   margin-left: 15px;
@@ -37,7 +39,7 @@ const PlannerItemTitle = styled.span`
 const PlannerItemAmount = styled.span`
   width: 310px;
   text-align: center;
-  font-size: 25px;
+  font-size: 20px;
   font-weight: bold;
   margin-right: 30px;
 `;

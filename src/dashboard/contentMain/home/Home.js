@@ -10,26 +10,29 @@ const HomeWrapper = styled.div`
   width: 100%;
   height: 100%;
   position: relative;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  min-width: 1080px;
 `;
 
 const HomeUpper = styled.div`
-  height: 60%;
-  min-height: 608px;
-  border-bottom: 1px solid #d0d0d0;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
-  min-width: 1375px;
+  background-color: ${(props) => props.theme.contentBackground};
+  border-radius: 25px;
+  margin-bottom: 20px;
+  max-height: 65%;
+  height: 100%;
+  padding: 10px;
+  min-width: 1400px;
 `;
 const HomeLower = styled.div`
-  height: 40%;
   display: flex;
-`;
-
-const GraphWrapper = styled.div`
-  display: flex;
-  justify-content: center;
+  max-height: 35%;
+  height: 100%;
 `;
 
 export const Home = (props) => {
