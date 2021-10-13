@@ -41,6 +41,7 @@ export const Home = (props) => {
         <GraphNav
           setDateToDisplay={props.setDateToDisplay}
           initialChart={props.initialChart}
+          setDisplayType={props.setDisplayType}
         ></GraphNav>
         <Switch>
           <Route exact path="/main/home">

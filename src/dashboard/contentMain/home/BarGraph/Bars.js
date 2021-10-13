@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import OneBar from "./OneBar";
 import { v4 as uuidv4 } from "uuid";
+import { useContext } from "react";
+import { DisplayContext } from "../../DisplayContext";
 
 const BarsWrapper = styled.div`
   display: flex;
@@ -14,13 +16,29 @@ const Bars = (props) => {
     1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
     22, 23, 24, 25, 26, 27, 28, 29, 30, 31,
   ];
+  const months = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+  const displayType = useContext(DisplayContext);
   return (
     <BarsWrapper>
-      {days.map((data) => {
-        return (
-          <OneBar key={uuidv4()} day={data} database={props.database}></OneBar>
-        );
-      })}
+      {displayType === "monthly"
+        ? days.map((data) => {
+            return (
+              <OneBar
+                key={uuidv4()}
+                day={data}
+                database={props.database}
+              ></OneBar>
+            );
+          })
+        : months.map((data) => {
+            return (
+              <OneBar
+                key={uuidv4()}
+                day={data}
+                database={props.database}
+              ></OneBar>
+            );
+          })}
     </BarsWrapper>
   );
 };

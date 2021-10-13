@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import { useContext, useState } from "react";
 import { DateContext } from "../../DateContext";
+import { DisplayContext } from "../../DisplayContext";
 
 const GraphNavWrapper = styled.div`
   width: fit-content;
@@ -53,6 +54,7 @@ export const GraphNav = (props) => {
   };
 
   const dateToDisplay = useContext(DateContext);
+  const typeToDisplay = useContext(DisplayContext);
 
   const setYearMenuItems = () => {
     const currentYear = new Date().getFullYear();
@@ -127,6 +129,20 @@ export const GraphNav = (props) => {
           >
             <Link to="/main/home/barchart">Bar Chart</Link>
           </MenuItem>
+        </Select>
+      </FormControl>
+      <FormControl sx={selectStyles}>
+        <InputLabel id="typeSelect">Range</InputLabel>
+        <Select
+          labelId="typeSelect"
+          label="Range"
+          value={typeToDisplay}
+          onChange={(event) => {
+            props.setDisplayType(event.target.value);
+          }}
+        >
+          <MenuItem value="monthly">Monthly</MenuItem>
+          <MenuItem value="yearly">Yearly</MenuItem>
         </Select>
       </FormControl>
       <FormControl sx={selectStyles}>
