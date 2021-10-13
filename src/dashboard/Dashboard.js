@@ -57,12 +57,14 @@ export function Dashboard() {
 
   return (
     <ThemeProvider theme={nightmode === "true" ? darkTheme : lightTheme}>
-      <DashboardWrapper>
-        <SidebarMenu userInfo={userInfo} />
-        <ContentMainWrapper className="contentMainWrapper">
-          <ContentMain />
-        </ContentMainWrapper>
-      </DashboardWrapper>
+      {userInfo.length !== 0 && (
+        <DashboardWrapper>
+          <SidebarMenu userInfo={userInfo} />
+          <ContentMainWrapper className="contentMainWrapper">
+            <ContentMain />
+          </ContentMainWrapper>
+        </DashboardWrapper>
+      )}
     </ThemeProvider>
   );
 }

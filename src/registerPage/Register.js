@@ -215,6 +215,15 @@ export function Register() {
           name: "Income",
         });
 
+        // TRANSACTION
+
+        setDoc(doc(db, user.uid + " - transactions", "test"), {
+          amount: 1,
+          category: "Income",
+          date: +new Date(),
+          description: "test",
+        });
+
         // USER DATA
 
         setDoc(doc(db, user.uid + " - data", "Currency"), {
@@ -248,22 +257,6 @@ export function Register() {
         setDoc(doc(db, user.uid + " - data", "AccountSince"), {
           date: +new Date(),
         });
-
-        // TRANSACTION
-
-        setDoc(doc(db, user.uid + " - transactions", "test"), {
-          amount: 1,
-          category: "Income",
-          date: +new Date(),
-          description: "test",
-        });
-
-        setRegisterNickname("");
-        setRegisterEmail("");
-        setRegisterPass("");
-        setRegisterPassRepeat("");
-        setRegisterPicture(0);
-        setErrorMessage("");
       })
       .catch((error) => {
         if (error.message === "Firebase: Error (auth/email-already-in-use).") {

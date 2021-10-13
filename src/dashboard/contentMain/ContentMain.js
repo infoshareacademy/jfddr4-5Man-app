@@ -64,8 +64,6 @@ export function ContentMain() {
     displayType
   );
 
-  console.log(compiledGraphDatabase);
-
   const compiledHistoryDatabase = compileHistoryDatabase(
     filteredCategories,
     transactions
