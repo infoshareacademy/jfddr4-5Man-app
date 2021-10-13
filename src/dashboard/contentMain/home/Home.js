@@ -2,6 +2,7 @@ import { Redirect, Route, Switch } from "react-router";
 import styled from "styled-components";
 import BarGraph from "./BarGraph/BarGraph";
 import { GraphNav } from "./GraphNav/GraphNav";
+import { PieChart } from "./PieChart/PieChart";
 import { Recent } from "./Recent/Recent";
 import { TransactionPanel } from "./TransactionPanel/TransactionPanel";
 
@@ -39,17 +40,19 @@ export const Home = (props) => {
     <HomeWrapper>
       <HomeUpper>
         <GraphNav setDateToDisplay={props.setDateToDisplay}></GraphNav>
-        <Switch>
-          <Route exact path="/main/home">
-            <Redirect to="/main/home/piechart"></Redirect>
-          </Route>
-          <Route exact path="/main/home/piechart">
-            piechart placeholder
-          </Route>
-          <Route exact path="/main/home/barchart">
-            <BarGraph database={props.graphDatabase}></BarGraph>
-          </Route>
-        </Switch>
+        <GraphWrapper>
+          <Switch>
+            <Route exact path="/main/home">
+              <Redirect to="/main/home/piechart"></Redirect>
+            </Route>
+            <Route exact path="/main/home/piechart">
+              <PieChart database={props.graphDatabase}/>
+            </Route>
+            <Route exact path="/main/home/barchart">
+              <BarGraph database={props.graphDatabase}></BarGraph>
+            </Route>
+          </Switch>
+        </GraphWrapper>
       </HomeUpper>
       <HomeLower>
         <Recent database={props.historyDatabase}></Recent>
