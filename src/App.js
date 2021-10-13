@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { UserContext } from "./UserContext";
 import { Redirect, Route, Switch } from "react-router";
 import { Dashboard } from "./dashboard/Dashboard";
@@ -28,22 +28,29 @@ const FixWrapper = styled.div`
 
 const App = () => {
   const [currentUser, changeCurrentUser] = useState("");
-  const auth = getAuth();
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      changeCurrentUser(user.uid);
-      if (
-        window.location.href.includes("login") ||
-        window.location.href.includes("register")
-      ) {
-        window.location.replace("/main");
+
+  useEffect(() => {
+    const auth = getAuth();
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        changeCurrentUser(user.uid);
+        if (
+          window.location.href.includes("login") ||
+          window.location.href.includes("register")
+        ) {
+          setTimeout(() => {
+            window.location.replace("/main");
+          }, 1500);
+        }
+      } else {
+        if (window.location.href.includes("main")) {
+          setTimeout(() => {
+            window.location.replace(window.location.origin);
+          }, 1500);
+        }
       }
-    } else {
-      if (window.location.href.includes("main")) {
-        window.location.replace(window.location.origin);
-      }
-    }
-  });
+    });
+  }, []);
 
   return (
     <UserContext.Provider value={currentUser}>
