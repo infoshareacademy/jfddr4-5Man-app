@@ -14,18 +14,25 @@ function reduceExpenses(element, accumulator){
     return element.y + accumulator;
 }
 
-function mapExpenses(element){
-    return [element.name, element.dataPoints[1].y];
-}
-
 export function PieChart(props) {
 
-    const colors = props.database.map(mapColors);
-    let expenses = props.database.map((element) => {
-        return [element.name, element.dataPoints[0][1]];
-    }, 1)
+    let colors = props.database.map(mapColors);
+    let expenses = props.database.filter((element) => {
+        if(element.name === "Income" || element.dataPoints.length === 0){
+            return false;
+        } else {
+            return true;
+        }
+    }).map((element) => {
+        return [element.name, element.dataPoints[0].y];
+    })
 
     expenses = [["Name", "Amount"], ...expenses];
+
+    // .reduce((accumulator, element) => {
+    //     accumulator += element.y;
+    //     return accumulator;
+    // }, 0)
 
     console.log(props.databse);
     console.log(expenses);
