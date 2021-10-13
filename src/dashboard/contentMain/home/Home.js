@@ -52,7 +52,7 @@ export const Home = (props) => {
             )}
           </Route>
           <Route exact path="/main/home/piechart">
-            piechart placeholder
+            <PieChart database={props.graphDatabase} />
           </Route>
           <Route exact path="/main/home/barchart">
             <BarGraph database={props.graphDatabase}></BarGraph>
