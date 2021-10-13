@@ -73,10 +73,16 @@ export const setYearMenuItems = () => {
   });
 };
 
-export const orderAndFilterData = (database, order, category, date) => {
+export const orderAndFilterData = (
+  database,
+  order,
+  category,
+  date,
+  displayType
+) => {
   if (database.length === 0) {
     return [];
-  } else {
+  } else if (displayType === "monthly") {
     const sortedDatabase = database
       .map((data1) => {
         const date = new Date(data1.date);
@@ -88,6 +94,28 @@ export const orderAndFilterData = (database, order, category, date) => {
       })
       .filter((data2) => data2.year === date.year)
       .filter((data3) => data3.month === date.month)
+      .filter((data4) =>
+        category === "All"
+          ? data4.category.length > 0
+          : data4.category === category
+      )
+      .sort((data5, data6) => {
+        return order === "newest"
+          ? data6.date - data5.date
+          : data5.date - data6.date;
+      });
+    return sortedDatabase;
+  } else {
+    const sortedDatabase = database
+      .map((data1) => {
+        const date = new Date(data1.date);
+        return {
+          ...data1,
+          month: date.getMonth() + 1,
+          year: date.getFullYear(),
+        };
+      })
+      .filter((data2) => data2.year === date.year)
       .filter((data4) =>
         category === "All"
           ? data4.category.length > 0

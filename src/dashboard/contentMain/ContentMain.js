@@ -105,6 +105,7 @@ export function ContentMain() {
                 setDateToDisplay={setDateToDisplay}
                 categories={filteredCategories}
                 totalBudget={totalBudget}
+                setDisplayType={setDisplayType}
               ></History>
             </Route>
             <Route exact path="/main/settings">

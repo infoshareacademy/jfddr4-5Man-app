@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { animateForm, animateOpaquePanel } from "../animations";
 import { CurrencyContext } from "../CurrencyContext";
 import { DateContext } from "../DateContext";
+import { DisplayContext } from "../DisplayContext";
 import { getDate, orderAndFilterData } from "./utils";
 
 const HistoryListWrapper = styled.div`
@@ -74,6 +75,7 @@ const ListItemId = styled.span`
 export const HistoryList = (props) => {
   const currency = useContext(CurrencyContext);
   const date = useContext(DateContext);
+  const typeToDisplay = useContext(DisplayContext);
 
   return (
     <HistoryListWrapper>
@@ -81,7 +83,8 @@ export const HistoryList = (props) => {
         props.database,
         props.sortOrder,
         props.category,
-        date
+        date,
+        typeToDisplay
       ).map((data) => {
         return (
           <ListItem
