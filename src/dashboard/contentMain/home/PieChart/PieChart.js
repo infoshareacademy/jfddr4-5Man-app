@@ -4,13 +4,13 @@ import {
     compileHistoryDatabase,
     filterCategoryColors,
     getTotalBudget,
-  } from "../../utils"
+} from "../../utils"
 
-function mapColors(element){
-    return {color: element.color};
+function mapColors(element) {
+    return { color: element.color };
 }
 
-function reduceExpenses(element, accumulator){
+function reduceExpenses(element, accumulator) {
     return element.y + accumulator;
 }
 
@@ -18,13 +18,16 @@ export function PieChart(props) {
 
     let colors = props.database.map(mapColors);
     let expenses = props.database.filter((element) => {
-        if(element.name === "Income" || element.dataPoints.length === 0){
+        if (element.name === "Income" || element.dataPoints.length === 0) {
             return false;
         } else {
             return true;
         }
     }).map((element) => {
-        return [element.name, element.dataPoints[0].y];
+        return [element.name, element.dataPoints.reduce((accumulator, element) => {
+            accumulator += element.y;
+            return accumulator;
+        }, 0)];
     })
 
     expenses = [["Name", "Amount"], ...expenses];
