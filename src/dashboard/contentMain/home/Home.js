@@ -2,7 +2,7 @@ import { Redirect, Route, Switch } from "react-router";
 import styled from "styled-components";
 import BarGraph from "./BarGraph/BarGraph";
 import { GraphNav } from "./GraphNav/GraphNav";
-import { PieChart } from "./Piechart/Piechart";
+import { PieChart } from "./PieChart/PieChart";
 import { Recent } from "./Recent/Recent";
 import { TransactionPanel } from "./TransactionPanel/TransactionPanel";
 
