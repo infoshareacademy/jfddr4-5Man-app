@@ -61,7 +61,7 @@ export function Dashboard() {
         <DashboardWrapper>
           <SidebarMenu userInfo={userInfo} />
           <ContentMainWrapper className="contentMainWrapper">
-            <ContentMain />
+            <ContentMain nightmode={nightmode} />
           </ContentMainWrapper>
         </DashboardWrapper>
       )}

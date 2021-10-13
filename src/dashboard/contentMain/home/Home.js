@@ -53,7 +53,10 @@ export const Home = (props) => {
             )}
           </Route>
           <Route exact path="/main/home/piechart">
-            <PieChart database={props.graphDatabase} />
+            <PieChart
+              database={props.graphDatabase}
+              nightmode={props.nightmode}
+            />
           </Route>
           <Route exact path="/main/home/barchart">
             <BarGraph database={props.graphDatabase}></BarGraph>
