@@ -21,7 +21,7 @@ const MainWrapper = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  background-color: #b3b2e6;
+  background-color: #2F2F2F;
   position: relative;
 `;
 const MainPanelWrapper = styled.div`
@@ -29,6 +29,7 @@ const MainPanelWrapper = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  background-color: #FCFCFC;
   padding: 20px;
   border-radius: 25px;
   background-color: white;
@@ -53,12 +54,12 @@ const LogoImage = styled.div`
 `;
 const Logo1 = styled.h2`
   font-size: 45px;
-  margin-right: 15px;
+  margin-right: 5px;
   font-weight: bold;
 `;
 const Logo2 = styled.h2`
   font-size: 45px;
-  color: #15810b;
+  color: #5350E9;
   font-weight: bold;
   text-decoration: underline;
 `;
@@ -137,13 +138,13 @@ const textFieldStyles = {
   },
   "& .MuiOutlinedInput-root": {
     "& fieldset": {
-      borderColor: "#5350E9",
+      border: "2px solid #5350E9",
     },
     "&:hover fieldset": {
-      borderColor: "#5350E9",
+      border: "2px solid #5350E9",
     },
     "&.Mui-focused fieldset": {
-      borderColor: "#333193",
+      border: "2px solid #5350E9",
     },
   },
 };
