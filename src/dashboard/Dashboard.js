@@ -18,6 +18,7 @@ const darkTheme = {
   contentBackground: "#4E4E4E",
   sidebarBackground: "#4E4E4E",
   sidebarHover: "#333193",
+  colorLogo: "#5350E9"
 };
 const lightTheme = {
   ///NEW
@@ -31,6 +32,7 @@ const lightTheme = {
   contentBackground: "white",
   sidebarBackground: "white",
   sidebarHover: "#b3b2e6",
+  colorLogo: "white"
 };
 const DashboardWrapper = styled.div`
   width: 100%;
