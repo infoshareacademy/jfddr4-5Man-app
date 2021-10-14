@@ -36,7 +36,6 @@ const ListItemDate = styled.span`
 `;
 const ListItemWrapper = styled.div`
   height: 100%;
-  max-height: 320px;
   overflow-y: auto;
   padding: 0 15px 0 0;
   ::-webkit-scrollbar {
