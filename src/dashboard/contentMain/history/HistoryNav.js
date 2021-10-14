@@ -47,7 +47,7 @@ const selectCategoryStyles = {
     color: "#333193",
   },
   "& .MuiOutlinedInput-root": {
-    width: "100px",
+    width: "150px",
     "& fieldset": {
       borderColor: "#5350E9",
     },
