@@ -8,11 +8,18 @@ const myCustomReduce = (array) => {
       if (sortedArray[i].x === sortedArray[i - 1].x) {
         let reducedItem = {
           x: sortedArray[i].x,
-          y: sortedArray[i].y + sortedArray[i - 1].y,
+          y:
+            sortedArray[i].y +
+            returnArray.find((data) => data.x === sortedArray[i].x).y,
           date: sortedArray[i].date,
         };
-        returnArray.splice(i - 1, 2, reducedItem);
-        i++;
+        returnArray.splice(
+          returnArray.indexOf(
+            returnArray.find((data) => data.x === sortedArray[i].x)
+          ),
+          1,
+          reducedItem
+        );
       } else {
         returnArray.push(sortedArray[i]);
       }
