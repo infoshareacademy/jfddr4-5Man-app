@@ -67,7 +67,7 @@ const Logo1 = styled.h2`
 `;
 const Logo2 = styled.h2`
   font-size: 25px;
-  color: #15810b;
+  color: white;
   text-decoration: underline;
 `;
 const NavigationWrapper = styled.div`
