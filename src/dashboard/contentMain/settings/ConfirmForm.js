@@ -233,7 +233,6 @@ export const ConfirmForm = (props) => {
                       setLoginPass("");
                       setLoginEmail("");
                       goBackHandler("");
-                      window.location.reload();
                     })
                     .catch((error) => {
                       if (

@@ -15,7 +15,7 @@ const MainWrapper = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  background-color: #b3b2e6;
+  background-color: #2F2F2F;
   position: relative;
 `;
 const MainPanelWrapper = styled.div`
@@ -23,11 +23,13 @@ const MainPanelWrapper = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  padding: 20px;
+  padding: 0 20px;
   border-radius: 25px;
-  background-color: white;
+  background-color: #FCFCFC;
   position: relative;
   top: -100px;
+  width:350px;
+  height:450px;
 `;
 const LogoWrapper = styled.div`
   display: flex;
@@ -47,14 +49,16 @@ const LogoImage = styled.div`
 `;
 const Logo1 = styled.h2`
   font-size: 45px;
-  margin-right: 15px;
+  margin-right: 5px;
   font-weight: bold;
+  color: #FCFCFC;
 `;
 const Logo2 = styled.h2`
   font-size: 45px;
-  color: #15810b;
+  color: #5350E9;
   font-weight: bold;
   text-decoration: underline;
+  margin: 0;
 `;
 const RegisterInfo = styled.p`
   text-align: center;
@@ -63,7 +67,7 @@ const RegisterInfo = styled.p`
     text-decoration: underline;
     display: block;
     margin-top: 5px;
-    color: #333193;
+    color: #5350E9;;
   }
 `;
 const ForgotPasswordWrapper = styled.div`
@@ -75,7 +79,7 @@ const ForgotPasswordText1 = styled.p`
   margin-bottom: 5px;
 `;
 const ForgotPasswordText2 = styled.p`
-  color: #333193;
+  color: #5350E9;
   text-decoration: underline;
   cursor: pointer;
   margin-bottom: 5px;
@@ -109,13 +113,13 @@ const textFieldStyles = {
   },
   "& .MuiOutlinedInput-root": {
     "& fieldset": {
-      borderColor: "#5350E9",
+      border: "2px solid #5350E9",
     },
     "&:hover fieldset": {
-      borderColor: "#5350E9",
+      border: "2px solid #5350E9",
     },
     "&.Mui-focused fieldset": {
-      borderColor: "#333193",
+      border: "2px solid #5350E9",
     },
   },
 };

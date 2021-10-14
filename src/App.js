@@ -10,8 +10,6 @@ import styled from "styled-components";
 const MainWrapper = styled.div`
   width: 100vw;
   height: 100vh;
-  max-height: 1080px;
-  max-width: 1920px;
   min-height: 900px;
   display: flex;
   align-items: center;
@@ -19,8 +17,6 @@ const MainWrapper = styled.div`
   background-color: #b3b2e6;
 `;
 const FixWrapper = styled.div`
-  max-height: 1080px;
-  max-width: 1920px;
   min-height: 900px;
   background-color: #b3b2e6;
   overflow: hidden;

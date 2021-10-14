@@ -11,7 +11,8 @@ const myCustomReduce = (array) => {
           y: sortedArray[i].y + sortedArray[i - 1].y,
           date: sortedArray[i].date,
         };
-        returnArray.splice(i - 1, 1, reducedItem);
+        returnArray.splice(i - 1, 2, reducedItem);
+        i++;
       } else {
         returnArray.push(sortedArray[i]);
       }

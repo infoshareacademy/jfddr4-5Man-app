@@ -21,7 +21,7 @@ const MainWrapper = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  background-color: #b3b2e6;
+  background-color: #2F2F2F;
   position: relative;
 `;
 const MainPanelWrapper = styled.div`
@@ -29,16 +29,18 @@ const MainPanelWrapper = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  padding: 20px;
+  background-color: #FCFCFC;
+  padding: 30px 20px;
   border-radius: 25px;
   background-color: white;
   position: relative;
   top: -50px;
+  width:350px;
 `;
 const LogoWrapper = styled.div`
   display: flex;
   align-items: center;
-  margin-bottom: 100px;
+  margin: 40px 0 60px 0;
   position: relative;
   top: -50px;
 `;
@@ -53,12 +55,13 @@ const LogoImage = styled.div`
 `;
 const Logo1 = styled.h2`
   font-size: 45px;
-  margin-right: 15px;
+  margin-right: 5px;
   font-weight: bold;
+  color: #FCFCFC;
 `;
 const Logo2 = styled.h2`
   font-size: 45px;
-  color: #15810b;
+  color: #5350E9;
   font-weight: bold;
   text-decoration: underline;
 `;
@@ -68,7 +71,7 @@ const RegisterInfo = styled.p`
     text-decoration: underline;
     display: block;
     margin-top: 5px;
-    color: #333193;
+    color: #5350E9;
   }
 `;
 const ErrorWrapper = styled.div`
@@ -137,13 +140,13 @@ const textFieldStyles = {
   },
   "& .MuiOutlinedInput-root": {
     "& fieldset": {
-      borderColor: "#5350E9",
+      border: "2px solid #5350E9",
     },
     "&:hover fieldset": {
-      borderColor: "#5350E9",
+      border: "2px solid #5350E9",
     },
     "&.Mui-focused fieldset": {
-      borderColor: "#333193",
+      border: "2px solid #5350E9",
     },
   },
 };
@@ -302,23 +305,6 @@ export function Register() {
           value={registerNickname}
         />
 
-        <ImageWrapper>
-          Image:
-          <ImageChosen
-            onClick={() => {
-              document.querySelector(".opaquePanel").classList.add("displayed");
-              document.querySelector(".coverPanel").classList.add("displayed");
-              document
-                .querySelector(".picturePicker")
-                .classList.add("displayed");
-              animateForm("picturePicker");
-              animateOpaquePanel();
-            }}
-          >
-            {pictures[registerPicture]}
-          </ImageChosen>
-        </ImageWrapper>
-
         <TextField
           sx={textFieldStyles}
           type="password"
@@ -342,6 +328,23 @@ export function Register() {
           label="Repeat Password"
           value={registerPassRepeat}
         />
+
+        <ImageWrapper>
+          Image:
+          <ImageChosen
+            onClick={() => {
+              document.querySelector(".opaquePanel").classList.add("displayed");
+              document.querySelector(".coverPanel").classList.add("displayed");
+              document
+                .querySelector(".picturePicker")
+                .classList.add("displayed");
+              animateForm("picturePicker");
+              animateOpaquePanel();
+            }}
+          >
+            {pictures[registerPicture]}
+          </ImageChosen>
+        </ImageWrapper>
 
         <Button
           sx={buttonStyles}

@@ -8,7 +8,7 @@ import { UserContext } from "../UserContext";
 
 const darkTheme = {
   ///NEW
-  categoriesHover: "#373737",
+  categoriesHover: "#5350E9",
   navBackground: "#b5b5b5",
   opaqueBackground: "#000000",
   formsColor: "black",
@@ -21,7 +21,7 @@ const darkTheme = {
 };
 const lightTheme = {
   ///NEW
-  categoriesHover: "#dfdfdf",
+  categoriesHover: "#5350E9",
   navBackground: "",
   opaqueBackground: "#b5b5b5",
   formsColor: "black",
