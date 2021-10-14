@@ -21,7 +21,7 @@ import { History } from "./history/History";
 import { Budget } from "./budget/Budget";
 import { Setting } from "./settings/Settings";
 
-export function ContentMain() {
+export function ContentMain(props) {
   const [currentCurrency, changeCurrentCurrency] = useState("");
   const [dateToDisplay, setDateToDisplay] = useState({
     month: new Date().getMonth() + 1,
@@ -64,8 +64,6 @@ export function ContentMain() {
     displayType
   );
 
-  console.log(compiledGraphDatabase);
-
   const compiledHistoryDatabase = compileHistoryDatabase(
     filteredCategories,
     transactions
@@ -92,6 +90,7 @@ export function ContentMain() {
                 categories={filteredCategories}
                 initialChart={initialChart}
                 setDisplayType={setDisplayType}
+                nightmode={props.nightmode}
               ></Home>
             </Route>
             <Route exact path="/main/budget">
@@ -107,6 +106,7 @@ export function ContentMain() {
                 setDateToDisplay={setDateToDisplay}
                 categories={filteredCategories}
                 totalBudget={totalBudget}
+                setDisplayType={setDisplayType}
               ></History>
             </Route>
             <Route exact path="/main/settings">

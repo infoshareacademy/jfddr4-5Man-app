@@ -28,26 +28,16 @@ const FixWrapper = styled.div`
 
 const App = () => {
   const [currentUser, changeCurrentUser] = useState("");
+  const [redirectTo, changeRedirectTo] = useState("login");
 
   useEffect(() => {
     const auth = getAuth();
     onAuthStateChanged(auth, (user) => {
       if (user) {
         changeCurrentUser(user.uid);
-        if (
-          window.location.href.includes("login") ||
-          window.location.href.includes("register")
-        ) {
-          setTimeout(() => {
-            window.location.replace("/main");
-          }, 1500);
-        }
+        changeRedirectTo("main");
       } else {
-        if (window.location.href.includes("main")) {
-          setTimeout(() => {
-            window.location.replace(window.location.origin);
-          }, 1500);
-        }
+        changeRedirectTo("login");
       }
     });
   }, []);
@@ -56,20 +46,28 @@ const App = () => {
     <UserContext.Provider value={currentUser}>
       <FixWrapper>
         <MainWrapper className="mainWrapper">
-          <Switch>
-            <Route exact path="/">
-              <Redirect to="/login" />
-            </Route>
-            <Route exact path="/login">
-              <Login />
-            </Route>
-            <Route exact path="/register">
-              <Register />
-            </Route>
-            <Route path="/main">
-              <Dashboard />
-            </Route>
-          </Switch>
+          {redirectTo === "login" ? (
+            <Switch>
+              <Route path="/login">
+                <Login />
+              </Route>
+              <Route path="/register">
+                <Register />
+              </Route>
+              <Route path="/">
+                <Redirect to="/login" />
+              </Route>
+            </Switch>
+          ) : (
+            <Switch>
+              <Route path="/main">
+                <Dashboard />
+              </Route>
+              <Route path="/">
+                <Redirect to="/main" />
+              </Route>
+            </Switch>
+          )}
         </MainWrapper>
       </FixWrapper>
     </UserContext.Provider>

@@ -60,6 +60,7 @@ export const History = (props) => {
           sortOrder={sortOrder}
           category={category}
           chooseCategory={chooseCategory}
+          setDisplayType={props.setDisplayType}
         ></HistoryNav>
         <HistoryList
           database={props.historyDatabase}
