@@ -15,7 +15,7 @@ const MainWrapper = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  background-color: #b3b2e6;
+  background-color: #4E4E4E;
   position: relative;
 `;
 const MainPanelWrapper = styled.div`
@@ -25,7 +25,7 @@ const MainPanelWrapper = styled.div`
   flex-direction: column;
   padding: 20px;
   border-radius: 25px;
-  background-color: white;
+  background-color: #CCCCCC;
   position: relative;
   top: -100px;
 `;
@@ -63,7 +63,7 @@ const RegisterInfo = styled.p`
     text-decoration: underline;
     display: block;
     margin-top: 5px;
-    color: #333193;
+    color: #5350E9;;
   }
 `;
 const ForgotPasswordWrapper = styled.div`
@@ -75,7 +75,7 @@ const ForgotPasswordText1 = styled.p`
   margin-bottom: 5px;
 `;
 const ForgotPasswordText2 = styled.p`
-  color: #333193;
+  color: #5350E9;
   text-decoration: underline;
   cursor: pointer;
   margin-bottom: 5px;
@@ -109,13 +109,13 @@ const textFieldStyles = {
   },
   "& .MuiOutlinedInput-root": {
     "& fieldset": {
-      borderColor: "#5350E9",
+      border: "2px solid #5350E9",
     },
     "&:hover fieldset": {
-      borderColor: "#5350E9",
+      border: "2px solid #5350E9",
     },
     "&.Mui-focused fieldset": {
-      borderColor: "#333193",
+      border: "2px solid #5350E9",
     },
   },
 };
